@@ -22,6 +22,9 @@ if (
 	return;
 }
 
+// Includes composer dependencies
+require __DIR__ . '/vendor/autoload.php';
+
 // Autoloader without namespace
 if ( ! function_exists( 'alg_wc_apva_autoloader' ) ) {
 

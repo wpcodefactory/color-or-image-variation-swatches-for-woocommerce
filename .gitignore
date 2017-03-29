@@ -6,6 +6,7 @@
 tasks/node_modules
 tasks/node_modules/*
 
-vendor/
+vendor/cmb2/languages
+!vendor/cmb2/languages/*.pot
 
 **/*.log
