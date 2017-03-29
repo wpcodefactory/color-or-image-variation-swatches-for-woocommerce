@@ -37,40 +37,41 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 			add_action( "cmb2_after_{$object}_form_{$cmb_id}", array( $this, 'cmb2_custom_style' ), 10, 2 );
 
 			// Custom scripts
-			add_action( 'admin_footer', array( $this, 'add_scripts' ),999 );
+			add_action( 'admin_footer', array( $this, 'add_scripts' ), 999 );
 		}
 
 		/**
 		 * Add scripts on admin.
-         *
-         * For now this function is required to translate type to label on product_page_product_attributes.
-         * After woocommerce 3.0, this function can be removed as it will be fixed by them
+		 *
+		 * For now this function is required to translate type to label on product_page_product_attributes.
+		 * After woocommerce 3.0, this function can be removed as it will be fixed by them
 		 *
 		 * @version 1.0.0
 		 * @since   1.0.0
 		 */
 		public function add_scripts() {
-		    $screen = get_current_screen();
+			$screen = get_current_screen();
 			if ( $screen->id != 'product_page_product_attributes' ) {
 				return;
 			}
 			?>
             <script>
-                jQuery(document).ready(function($){
-	                jQuery.expr[":"].contains = jQuery.expr.createPseudo(function(arg) {
-		                return function( elem ) {
-			                return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
-		                };
-	                })
-                	function alg_wc_civs_translate_type_to_label(){
-		                var types = <?php echo wp_json_encode($this->wc_attribute_types); ?>;
-		                $.each( types, function( key, value ) {
-		                	console.log(key);
-		                	$("td:contains('"+key+"')").html(value);
-		                });
-                    }
-	                alg_wc_civs_translate_type_to_label();
-                })
+				jQuery(document).ready(function ($) {
+					jQuery.expr[":"].contains = jQuery.expr.createPseudo(function (arg) {
+						return function (elem) {
+							return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+						};
+					})
+					function alg_wc_civs_translate_type_to_label() {
+						var types = <?php echo wp_json_encode( $this->wc_attribute_types ); ?>;
+						$.each(types, function (key, value) {
+							console.log(key);
+							$("td:contains('" + key + "')").html(value);
+						});
+					}
+
+					alg_wc_civs_translate_type_to_label();
+				})
             </script>
 			<?php
 		}
@@ -245,7 +246,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 		 * @param $tax
 		 */
 		public function alg_wc_civs_image_fields( $wc_taxes ) {
-			$prefix = 'alg_wc_civs_term_image_';
+			$prefix   = 'alg_wc_civs_term_image_';
 			$cmb_term = new_cmb2_box( array(
 				'id'           => 'alg_wc_civs_term_image',
 				'cmb_styles'   => isset( $_GET['wp_http_referer'] ) ? true : false,
@@ -253,7 +254,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 				'taxonomies'   => $wc_taxes,
 			) );
 			$cmb_term->add_field( array(
-				'name'         => esc_html__( 'Image', 'cmb2' ),
+				'name'         => esc_html__( 'Image', 'color-or-image-variation-swatches-for-woocommerce' ),
 				'id'           => $prefix . 'image',
 				'display_cb'   => array( $this, 'cmb2_image_display' ),
 				'type'         => 'file',
@@ -288,7 +289,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 				'taxonomies'   => $wc_taxes,
 			) );
 			$cmb_term->add_field( array(
-				'name'         => esc_html__( 'Color', 'cmb2' ),
+				'name'         => esc_html__( 'Color', 'color-or-image-variation-swatches-for-woocommerce' ),
 				'id'           => $prefix . 'color',
 				'type'         => 'colorpicker',
 				'display_cb'   => array( $this, 'cmb2_color_display' ),
@@ -322,7 +323,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 				'taxonomies'   => $wc_taxes,
 			) );
 			$cmb_term->add_field( array(
-				'name'       => esc_html__( 'Label', 'cmb2' ),
+				'name'       => esc_html__( 'Label', 'color-or-image-variation-swatches-for-woocommerce' ),
 				'display_cb' => array( $this, 'cmb2_label_display' ),
 				'id'         => $prefix . 'label',
 				'type'       => 'text',
