@@ -1,6 +1,6 @@
 <?php
 /**
- * Appealing variation for WooCommerce - Core Class
+ * Color or Image Variation Swatches for WooCommerce - Core Class
  *
  * @version 1.0.0
  * @since   1.0.0
@@ -11,9 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
-if ( ! class_exists( 'Alg_WC_APVA_Core' ) ) {
+if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 
-	class Alg_WC_APVA_Core {
+	class Alg_WC_CIVS_Core {
 
 		/**
 		 * Plugin version.
@@ -24,20 +24,20 @@ if ( ! class_exists( 'Alg_WC_APVA_Core' ) ) {
 		public $version = '1.0.0';
 
 		/**
-		 * @var   Alg_WC_APVA_Core The single instance of the class
+		 * @var   Alg_WC_CIVS_Core The single instance of the class
 		 * @since 1.0.0
 		 */
 		protected static $_instance = null;
 
 		/**
-		 * Main Alg_WC_APVA_Core Instance
+		 * Main Alg_WC_CIVS_Core Instance
 		 *
-		 * Ensures only one instance of Alg_WC_APVA_Core is loaded or can be loaded.
+		 * Ensures only one instance of Alg_WC_CIVS_Core is loaded or can be loaded.
 		 *
 		 * @version 1.0.0
 		 * @since   1.0.0
 		 * @static
-		 * @return  Alg_WC_APVA_Core - Main instance
+		 * @return  Alg_WC_CIVS_Core - Main instance
 		 */
 		public static function instance() {
 			if ( is_null( self::$_instance ) ) {
@@ -62,7 +62,7 @@ if ( ! class_exists( 'Alg_WC_APVA_Core' ) ) {
 				$this->init_admin();
 			}
 
-			if ( true === filter_var( get_option( Alg_WC_APVA_Settings_General::OPTION_ENABLE_PLUGIN, true ), FILTER_VALIDATE_BOOLEAN ) ) {
+			if ( true === filter_var( get_option( Alg_WC_CIVS_Settings_General::OPTION_ENABLE_PLUGIN, true ), FILTER_VALIDATE_BOOLEAN ) ) {
 				if ( ! is_admin() ) {
 					$this->init_frontend();
 				}
@@ -97,9 +97,9 @@ if ( ! class_exists( 'Alg_WC_APVA_Core' ) ) {
 		 * @since   1.0.0
 		 */
 		public function handle_localization() {
-			$locale = apply_filters( 'plugin_locale', get_locale(), 'appealing-variation-for-woocommerce' );
-			load_textdomain( 'appealing-variation-for-woocommerce', WP_LANG_DIR . dirname( ALG_WC_APVA_BASENAME ) . 'appealing-variation-for-woocommerce' . '-' . $locale . '.mo' );
-			load_plugin_textdomain( 'appealing-variation-for-woocommerce', false, dirname( ALG_WC_APVA_BASENAME ) . '/languages/' );
+			$locale = apply_filters( 'plugin_locale', get_locale(), 'color-or-image-variation-swatches-for-woocommerce' );
+			load_textdomain( 'color-or-image-variation-swatches-for-woocommerce', WP_LANG_DIR . dirname( ALG_WC_CIVS_BASENAME ) . 'color-or-image-variation-swatches-for-woocommerce' . '-' . $locale . '.mo' );
+			load_plugin_textdomain( 'color-or-image-variation-swatches-for-woocommerce', false, dirname( ALG_WC_CIVS_BASENAME ) . '/languages/' );
 		}
 
 		/**
@@ -111,7 +111,7 @@ if ( ! class_exists( 'Alg_WC_APVA_Core' ) ) {
 		protected function create_custom_settings_fields() {
 			$value = 'meta_box';
 			add_action( 'woocommerce_admin_field_' . $value, array(
-				Alg_WC_APVA_CMB::get_class_name(),
+				Alg_WC_CIVS_CMB::get_class_name(),
 				'add_meta_box',
 			), 10, 2 );
 		}
@@ -127,21 +127,21 @@ if ( ! class_exists( 'Alg_WC_APVA_Core' ) ) {
 			add_filter( 'woocommerce_get_settings_pages', array( $this, 'add_woocommerce_settings_tab' ) );
 
 			// Creates action links on plugins page
-			add_filter( 'plugin_action_links_' . ALG_WC_APVA_BASENAME, array( $this, 'action_links' ) );
+			add_filter( 'plugin_action_links_' . ALG_WC_CIVS_BASENAME, array( $this, 'action_links' ) );
 
 			// Create custom settings fields
 			$this->create_custom_settings_fields();
 
 			// Admin setting options inside WooCommerce
-			new Alg_WC_APVA_Settings_General();
+			new Alg_WC_CIVS_Settings_General();
 
 			// Update version
-			if ( is_admin() && get_option( 'alg_wc_apva_version', '' ) !== $this->version ) {
-				update_option( 'alg_wc_apva_version', $this->version );
+			if ( is_admin() && get_option( 'alg_wc_civs_version', '' ) !== $this->version ) {
+				update_option( 'alg_wc_civs_version', $this->version );
 			}
 
 			// Handles the admin part of the new WooCommerce variation types
-			new Alg_WC_APVA_Admin_Types();
+			new Alg_WC_CIVS_Admin_Types();
 		}
 
 		/**
@@ -151,7 +151,7 @@ if ( ! class_exists( 'Alg_WC_APVA_Core' ) ) {
 		 * @since   1.0.0
 		 */
 		function add_woocommerce_settings_tab( $settings ) {
-			$settings[] = new Alg_WC_APVA_Settings();
+			$settings[] = new Alg_WC_CIVS_Settings();
 
 			return $settings;
 		}
@@ -167,7 +167,7 @@ if ( ! class_exists( 'Alg_WC_APVA_Core' ) ) {
 		 * @return  array
 		 */
 		function action_links( $links ) {
-			$custom_links = array( '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_apva' ) . '">' . __( 'Settings', 'woocommerce' ) . '</a>' );
+			$custom_links = array( '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_civs' ) . '">' . __( 'Settings', 'woocommerce' ) . '</a>' );
 
 			return array_merge( $custom_links, $links );
 		}

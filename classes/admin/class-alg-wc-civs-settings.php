@@ -1,6 +1,6 @@
 <?php
 /**
- * Appealing Variation for WooCommerce - Settings
+ * Color or Image Variation Swatches for WooCommerce - Settings
  *
  * @version 1.0.0
  * @since   1.0.0
@@ -11,9 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
-if ( ! class_exists( 'Alg_WC_APVA_Settings' ) ) :
+if ( ! class_exists( 'Alg_WC_CIVS_Settings' ) ) :
 
-	class Alg_WC_APVA_Settings extends WC_Settings_Page {
+	class Alg_WC_CIVS_Settings extends WC_Settings_Page {
 
 		/**
 		 * Constructor.
@@ -22,8 +22,8 @@ if ( ! class_exists( 'Alg_WC_APVA_Settings' ) ) :
 		 * @since   1.0.0
 		 */
 		function __construct() {
-			$this->id    = 'alg_wc_apva';
-			$this->label = __( 'Appealing variation', 'appealing-variation-for-woocommerce' );
+			$this->id    = 'alg_wc_civs';
+			$this->label = __( 'Appealing variation', 'color-or-image-variation-swatches-for-woocommerce' );
 			parent::__construct();
 		}
 

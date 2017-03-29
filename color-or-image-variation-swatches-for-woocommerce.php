@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Appealing variation for WooCommerce by Algoritmika
+Plugin Name: Color or Image Variation Swatches for WooCommerce by Algoritmika
 Description: Provides an appealing variation instead of the native boring one from WooCommerce
 Version: 1.0.0
 Author: Algoritmika Ltd
@@ -26,7 +26,7 @@ if (
 require __DIR__ . '/vendor/autoload.php';
 
 // Autoloader without namespace
-if ( ! function_exists( 'alg_wc_apva_autoloader' ) ) {
+if ( ! function_exists( 'alg_wc_civs_autoloader' ) ) {
 
 	/**
 	 * Autoloads all classes
@@ -35,8 +35,8 @@ if ( ! function_exists( 'alg_wc_apva_autoloader' ) ) {
 	 * @since   1.0.0
 	 * @param   type $class
 	 */
-	function alg_wc_apva_autoloader( $class ) {
-		if ( false !== strpos( $class, 'Alg_WC_APVA' ) ) {
+	function alg_wc_civs_autoloader( $class ) {
+		if ( false !== strpos( $class, 'Alg_WC_CIVS' ) ) {
 			$classes_dir     = array();
 			$plugin_dir_path = realpath( plugin_dir_path( __FILE__ ) );
 			$classes_dir[0]  = $plugin_dir_path . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR;
@@ -54,37 +54,37 @@ if ( ! function_exists( 'alg_wc_apva_autoloader' ) ) {
 		}
 	}
 
-	spl_autoload_register( 'alg_wc_apva_autoloader' );
+	spl_autoload_register( 'alg_wc_civs_autoloader' );
 }
 
 // Constants
-if ( ! defined( 'ALG_WC_APVA_DIR' ) ) {
-	define( 'ALG_WC_APVA_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR );
+if ( ! defined( 'ALG_WC_CIVS_DIR' ) ) {
+	define( 'ALG_WC_CIVS_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR );
 }
 
-if ( ! defined( 'ALG_WC_APVA_URL' ) ) {
-	define( 'ALG_WC_APVA_URL', plugin_dir_url( __FILE__ ) );
+if ( ! defined( 'ALG_WC_CIVS_URL' ) ) {
+	define( 'ALG_WC_CIVS_URL', plugin_dir_url( __FILE__ ) );
 }
 
-if ( ! defined( 'ALG_WC_APVA_BASENAME' ) ) {
-	define( 'ALG_WC_APVA_BASENAME', plugin_basename( __FILE__ ) );
+if ( ! defined( 'ALG_WC_CIVS_BASENAME' ) ) {
+	define( 'ALG_WC_CIVS_BASENAME', plugin_basename( __FILE__ ) );
 }
 
-if ( ! defined( 'ALG_WC_APVA_FOLDER_NAME' ) ) {
-	define( 'ALG_WC_APVA_FOLDER_NAME', untrailingslashit( plugin_dir_path( plugin_basename( __FILE__ ) ) ) );
+if ( ! defined( 'ALG_WC_CIVS_FOLDER_NAME' ) ) {
+	define( 'ALG_WC_CIVS_FOLDER_NAME', untrailingslashit( plugin_dir_path( plugin_basename( __FILE__ ) ) ) );
 }
 
 if ( ! function_exists( 'alg_appealing_variation_for_wc' ) ) {
 	/**
-	 * Returns the main instance of Alg_WC_APVA_Core to prevent the need to use globals.
+	 * Returns the main instance of Alg_WC_CIVS_Core to prevent the need to use globals.
 	 *
 	 * @version 1.0.0
 	 * @since   1.0.0
-	 * @return  Alg_WC_APVA_Core
+	 * @return  Alg_WC_CIVS_Core
 	 */
-	function alg_appealing_variation_for_wc() {
-		return Alg_WC_APVA_Core::instance();
+	function color_or_image_variation_swatches_for_wc() {
+		return Alg_WC_CIVS_Core::instance();
 	}
 }
 
-alg_appealing_variation_for_wc();
+color_or_image_variation_swatches_for_wc();

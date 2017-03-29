@@ -1,6 +1,6 @@
 <?php
 /**
- * Appealing Variation for WooCommerce - Section Settings
+ * Color or Image Variation Swatches for WooCommerce - Section Settings
  *
  * @version 1.0.0
  * @since   1.0.0
@@ -11,9 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
-if ( ! class_exists( 'Alg_WC_APVA_Settings_Section' ) ) :
+if ( ! class_exists( 'Alg_WC_CIVS_Settings_Section' ) ) :
 
-	class Alg_WC_APVA_Settings_Section {
+	class Alg_WC_CIVS_Settings_Section {
 
 		protected $settings;
 		protected $handle_autoload = true;
@@ -30,8 +30,8 @@ if ( ! class_exists( 'Alg_WC_APVA_Settings_Section' ) ) :
 				$this->get_settings( array() );
 				$this->handle_autoload();
 			}
-			add_filter( 'woocommerce_get_sections_alg_wc_apva', array( $this, 'settings_section' ) );
-			add_filter( 'woocommerce_get_settings_alg_wc_apva_' . $this->id, array(
+			add_filter( 'woocommerce_get_sections_alg_wc_civs', array( $this, 'settings_section' ) );
+			add_filter( 'woocommerce_get_settings_alg_wc_civs_' . $this->id, array(
 				$this,
 				'get_settings',
 			), PHP_INT_MAX );

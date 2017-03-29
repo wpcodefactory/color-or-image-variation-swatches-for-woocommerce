@@ -1,4 +1,4 @@
-=== Appealing variation for WooCommerce by Algoritmika ===
+=== Color or Image Variation Swatches for WooCommerce by Algoritmika ===
 Contributors: algoritmika,karzin,anbinder
 Tags: woocommerce,variation,appealing
 Requires at least: 4.4
@@ -11,7 +11,7 @@ Provides an autocomplete feature to search WooCommerce products.
 
 == Description ==
 
-**Appealing variation for WooCommerce** provides an appealing variation instead of the native boring one from WooCommerce
+**Color or Image Variation Swatches for WooCommerce by Algoritmika** provides an appealing variation instead of the native boring one from WooCommerce
 
 = Feedback =
 * We are open to your suggestions and feedback. Thank you for using or trying out one of our plugins!

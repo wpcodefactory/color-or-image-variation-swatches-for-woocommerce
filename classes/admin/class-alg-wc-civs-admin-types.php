@@ -1,6 +1,6 @@
 <?php
 /**
- * Appealing Variation for WooCommerce - Admin Types
+ * Color or Image Variation Swatches for WooCommerce - Admin Types
  *
  * Handles the admin part of the new WooCommerce variation types
  *
@@ -13,9 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
-if ( ! class_exists( 'Alg_WC_APVA_Admin_Types' ) ) {
+if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 
-	class Alg_WC_APVA_Admin_Types {
+	class Alg_WC_CIVS_Admin_Types {
 
 		public $wc_attribute_types = array();
 
@@ -29,11 +29,11 @@ if ( ! class_exists( 'Alg_WC_APVA_Admin_Types' ) ) {
 			// CMB 2
 			add_action( 'cmb2_admin_init', array( $this, 'cmb2_admin_init' ) );
 			$object = 'term';
-			$cmb_id = 'alg_wc_apva_term_label';
+			$cmb_id = 'alg_wc_civs_term_label';
 			add_action( "cmb2_after_{$object}_form_{$cmb_id}", array( $this, 'cmb2_custom_style' ), 10, 2 );
-			$cmb_id = 'alg_wc_apva_term_image';
+			$cmb_id = 'alg_wc_civs_term_image';
 			add_action( "cmb2_after_{$object}_form_{$cmb_id}", array( $this, 'cmb2_custom_style' ), 10, 2 );
-			$cmb_id = 'alg_wc_apva_term_color';
+			$cmb_id = 'alg_wc_civs_term_color';
 			add_action( "cmb2_after_{$object}_form_{$cmb_id}", array( $this, 'cmb2_custom_style' ), 10, 2 );
 
 			// Custom scripts
@@ -62,14 +62,14 @@ if ( ! class_exists( 'Alg_WC_APVA_Admin_Types' ) ) {
 			                return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
 		                };
 	                })
-                	function alg_wc_apva_translate_type_to_label(){
+                	function alg_wc_civs_translate_type_to_label(){
 		                var types = <?php echo wp_json_encode($this->wc_attribute_types); ?>;
 		                $.each( types, function( key, value ) {
 		                	console.log(key);
 		                	$("td:contains('"+key+"')").html(value);
 		                });
                     }
-	                alg_wc_apva_translate_type_to_label();
+	                alg_wc_civs_translate_type_to_label();
                 })
             </script>
 			<?php
@@ -110,19 +110,19 @@ if ( ! class_exists( 'Alg_WC_APVA_Admin_Types' ) ) {
 		public function cmb2_custom_style( $post_id, $cmb ) {
 			?>
             <style type="text/css" media="screen">
-                [id*='alg_wc_apva_term'] .cmb-td {
+                [id*='alg_wc_civs_term'] .cmb-td {
                     margin-bottom: 20px;
                 }
 
-                [id*='alg_wc_apva_term'] .cmb-file-field-image {
+                [id*='alg_wc_civs_term'] .cmb-file-field-image {
                     margin-top: 15px;
                 }
 
-                #cmb2-metabox-alg_wc_apva_term_color .wp-color-result {
+                #cmb2-metabox-alg_wc_civs_term_color .wp-color-result {
                     vertical-align: top;
                 }
 
-                .wp-list-table td[class*='alg_wc_apva_term'] {
+                .wp-list-table td[class*='alg_wc_civs_term'] {
                     vertical-align: middle;
                 }
 
@@ -167,9 +167,9 @@ if ( ! class_exists( 'Alg_WC_APVA_Admin_Types' ) ) {
 		 */
 		public function initialize_types_variable() {
 			$new_types                = array(
-				'alg_wc_apva_color' => __( 'Color (apva)', 'appealing-variation-for-woocommerce' ),
-				'alg_wc_apva_image' => __( 'Image (apva)', 'appealing-variation-for-woocommerce' ),
-				'alg_wc_apva_label' => __( 'Label (apva)', 'appealing-variation-for-woocommerce' ),
+				'alg_wc_civs_color' => __( 'Color', 'color-or-image-variation-swatches-for-woocommerce' ),
+				'alg_wc_civs_image' => __( 'Image', 'color-or-image-variation-swatches-for-woocommerce' ),
+				'alg_wc_civs_label' => __( 'Label', 'color-or-image-variation-swatches-for-woocommerce' ),
 			);
 			$this->wc_attribute_types = $new_types;
 		}
@@ -244,10 +244,10 @@ if ( ! class_exists( 'Alg_WC_APVA_Admin_Types' ) ) {
 		 *
 		 * @param $tax
 		 */
-		public function alg_wc_apva_image_fields( $wc_taxes ) {
-			$prefix = 'alg_wc_apva_term_image_';
+		public function alg_wc_civs_image_fields( $wc_taxes ) {
+			$prefix = 'alg_wc_civs_term_image_';
 			$cmb_term = new_cmb2_box( array(
-				'id'           => 'alg_wc_apva_term_image',
+				'id'           => 'alg_wc_civs_term_image',
 				'cmb_styles'   => isset( $_GET['wp_http_referer'] ) ? true : false,
 				'object_types' => array( 'term' ),
 				'taxonomies'   => $wc_taxes,
@@ -275,14 +275,14 @@ if ( ! class_exists( 'Alg_WC_APVA_Admin_Types' ) ) {
 		 *
 		 * @param $tax
 		 */
-		public function alg_wc_apva_color_fields( $wc_taxes ) {
-			$prefix = 'alg_wc_apva_term_color_';
+		public function alg_wc_civs_color_fields( $wc_taxes ) {
+			$prefix = 'alg_wc_civs_term_color_';
 
 			/**
 			 * Metabox to add fields to categories and tags
 			 */
 			$cmb_term = new_cmb2_box( array(
-				'id'           => 'alg_wc_apva_term_color',
+				'id'           => 'alg_wc_civs_term_color',
 				'cmb_styles'   => isset( $_GET['wp_http_referer'] ) ? true : false,
 				'object_types' => array( 'term' ),
 				'taxonomies'   => $wc_taxes,
@@ -309,14 +309,14 @@ if ( ! class_exists( 'Alg_WC_APVA_Admin_Types' ) ) {
 		 *
 		 * @param $tax
 		 */
-		public function alg_wc_apva_label_fields( $wc_taxes ) {
-			$prefix = 'alg_wc_apva_term_label_';
+		public function alg_wc_civs_label_fields( $wc_taxes ) {
+			$prefix = 'alg_wc_civs_term_label_';
 
 			/**
 			 * Metabox to add fields to categories and tags
 			 */
 			$cmb_term = new_cmb2_box( array(
-				'id'           => 'alg_wc_apva_term_label',
+				'id'           => 'alg_wc_civs_term_label',
 				'cmb_styles'   => isset( $_GET['wp_http_referer'] ) ? true : false,
 				'object_types' => array( 'term' ),
 				'taxonomies'   => $wc_taxes,
