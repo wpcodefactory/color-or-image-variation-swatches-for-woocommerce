@@ -126,7 +126,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
                     vertical-align: middle;
                 }
 
-                .alg-wc-apva-display {
+                .alg-wc-civs-display {
                     -webkit-box-shadow: 3px 3px 9px 0px rgba(0, 0, 0, 0.28);
                     -moz-box-shadow: 3px 3px 9px 0px rgba(0, 0, 0, 0.28);
                     box-shadow: 3px 3px 9px 0px rgba(0, 0, 0, 0.28);
@@ -138,17 +138,17 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
                     line-height: 30px;
                 }
 
-                .alg-wc-apva-color-display {
+                .alg-wc-civs-color-display {
 
                 }
 
-                .alg-wc-apva-label-display {
+                .alg-wc-civs-label-display {
                     padding: 0px 0 0 0;
                     color: #888;
                     font-weight: bold;
                 }
 
-                .alg-wc-apva-image-display {
+                .alg-wc-civs-image-display {
                     width: 38px;
                     height: 38px;
                     padding: 0px 0 0 0;
@@ -195,7 +195,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 
 			?>
             <div class="custom-column-display <?php echo $field->row_classes(); ?>">
-                <div class="alg-wc-apva-display alg-wc-apva-image-display"
+                <div class="alg-wc-civs-display alg-wc-civs-image-display"
                      style="background-image: url(<?php echo $image_src[0]; ?>)"></div>
             </div>
 			<?php
@@ -213,7 +213,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 		public function cmb2_color_display( $field_args, CMB2_Field $field ) {
 			?>
             <div class="custom-column-display <?php echo $field->row_classes(); ?>">
-                <div class="alg-wc-apva-display alg-wc-apva-color-display"
+                <div class="alg-wc-civs-display alg-wc-civs-color-display"
                      style="background:<?php echo $field->escaped_value(); ?>"></div>
             </div>
 			<?php
@@ -231,7 +231,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 		public function cmb2_label_display( $field_args, CMB2_Field $field ) {
 			?>
             <div class="custom-column-display <?php echo $field->row_classes(); ?>">
-                <div class="alg-wc-apva-display alg-wc-apva-label-display"><?php echo $field->escaped_value(); ?></div>
+                <div class="alg-wc-civs-display alg-wc-civs-label-display"><?php echo $field->escaped_value(); ?></div>
             </div>
 			<?php
 		}
