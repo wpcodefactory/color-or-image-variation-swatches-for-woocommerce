@@ -20,8 +20,11 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 		public $wc_attribute_types = array();
 
 		function __construct() {
+			// Initializes $wc_attribute_types variable with types
 			add_action( 'admin_init', array( $this, 'initialize_types_variable' ) );
-			//add_action( 'admin_init', array( $this, 'add_types_fields_and_columns' ) );
+
+			// Adds attribute values on product attribute tab
+			add_action( 'woocommerce_product_option_terms', array( $this, 'add_attribute_values_on_tabs' ), 10, 2 );
 
 			// Adds new type attributes for WooCommerce variations
 			add_filter( 'product_attributes_type_selector', array( $this, 'add_wc_attribute_types' ) );
@@ -38,6 +41,48 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 
 			// Custom scripts
 			add_action( 'admin_footer', array( $this, 'add_scripts' ), 999 );
+		}
+
+		/**
+		 * Adds attribute values on product attribute tab.
+		 *
+		 * @version 1.0.0
+		 * @since   1.0.0
+		 *
+		 * @param $attribute_taxonomy
+		 * @param $i
+		 */
+		public function add_attribute_values_on_tabs( $attribute_taxonomy, $i ) {
+			if ( ! array_key_exists( $attribute_taxonomy->attribute_type, $this->wc_attribute_types ) ) {
+				return;
+			}
+
+			$tax_name = wc_attribute_taxonomy_name( $attribute_taxonomy->attribute_name );
+			global $thepostid;
+
+			?>
+
+            <select multiple="multiple" data-placeholder="<?php esc_attr_e( 'Select terms', 'woocommerce' ); ?>"
+                    class="multiselect attribute_values wc-enhanced-select"
+                    name="attribute_values[<?php echo $i; ?>][]">
+				<?php
+				$args      = array(
+					'orderby'    => 'name',
+					'hide_empty' => 0,
+				);
+				$all_terms = get_terms( $tax_name, apply_filters( 'woocommerce_product_attribute_terms', $args ) );
+				if ( $all_terms ) {
+					foreach ( $all_terms as $term ) {
+						echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( has_term( absint( $term->term_id ), $tax_name, $thepostid ), true, false ) . '>' . esc_attr( apply_filters( 'woocommerce_product_attribute_term_name', $term->name, $term ) ) . '</option>';
+					}
+				}
+				?>
+            </select>
+            <button class="button plus select_all_attributes"><?php _e( 'Select all', 'woocommerce' ); ?></button>
+            <button class="button minus select_no_attributes"><?php _e( 'Select none', 'woocommerce' ); ?></button>
+            <button class="button fr plus add_new_attribute"><?php _e( 'Add new', 'woocommerce' ); ?></button>
+
+			<?php
 		}
 
 		/**
