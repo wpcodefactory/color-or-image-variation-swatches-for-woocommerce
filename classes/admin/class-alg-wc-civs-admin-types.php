@@ -173,15 +173,12 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
                 }
 
                 .alg-wc-civs-display {
-                    -webkit-box-shadow: 3px 3px 9px 0px rgba(0, 0, 0, 0.28);
-                    -moz-box-shadow: 3px 3px 9px 0px rgba(0, 0, 0, 0.28);
-                    box-shadow: 3px 3px 9px 0px rgba(0, 0, 0, 0.28);
                     border: 2px solid #ccc;
-                    width: 32px;
-                    height: 32px;
+                    width: 36px;
+                    height: 36px;
                     text-align: center;
                     text-align: center;
-                    line-height: 30px;
+                    line-height: 34px;
                 }
 
                 .alg-wc-civs-color-display {
@@ -195,8 +192,8 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
                 }
 
                 .alg-wc-civs-image-display {
-                    width: 38px;
-                    height: 38px;
+                    /*width: 38px;
+                    height: 38px;*/
                     padding: 0px 0 0 0;
                     background-size: cover;
                 }
@@ -308,7 +305,9 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 				),
 				'preview_size' => array( 35, 35 ), // Default: array( 50, 50 )
 				'attributes'   => array( 'style' => 'width:95%' ),
-				'column'       => true, // Display field value in the admin post-listing columns
+				'column'       => array(
+					'position' => 1,
+				),
 				'on_front'     => false,
 			) );
 		}
@@ -342,7 +341,9 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 					'url' => false, // Hide the text input for the url
 				),
 				'preview_size' => array( 50, 50 ), // Default: array( 50, 50 )
-				'column'       => true, // Display field value in the admin post-listing columns
+				'column'       => array(
+					'position' => 1,
+				),
 				'on_front'     => false,
 			) );
 		}
@@ -373,7 +374,9 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 				'id'         => $prefix . 'label',
 				'type'       => 'text',
 				'attributes' => array( 'style' => 'width:95%' ),
-				'column'     => true, // Display field value in the admin post-listing columns
+				'column'     => array(
+					'position' => 1,
+				),
 				'on_front'   => false,
 			) );
 		}
