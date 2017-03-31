@@ -20,14 +20,18 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 		public $wc_attribute_types = array();
 
 		function __construct() {
-			// Initializes $wc_attribute_types variable with types
-			add_action( 'admin_init', array( $this, 'initialize_types_variable' ) );
 
-			// Adds attribute values on product attribute tab
-			add_action( 'woocommerce_product_option_terms', array( $this, 'add_attribute_values_on_tabs' ), 10, 2 );
+			// Initializes $wc_attribute_types variable with types
+			$this->initialize_types_variable();
+			add_action( 'admin_init', array( $this, 'initialize_types_variable' ) );
 
 			// Adds new type attributes for WooCommerce variations
 			add_filter( 'product_attributes_type_selector', array( $this, 'add_wc_attribute_types' ) );
+		}
+
+		function init() {
+			// Adds attribute values on product attribute tab
+			add_action( 'woocommerce_product_option_terms', array( $this, 'add_attribute_values_on_tabs' ), 10, 2 );
 
 			// CMB 2
 			add_action( 'cmb2_admin_init', array( $this, 'cmb2_admin_init' ) );
@@ -227,13 +231,13 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 		 * @param  CMB2_Field $field      The field object
 		 */
 		public function cmb2_image_display( $field_args, CMB2_Field $field ) {
-			//debug($field);
-			//$id = CMB2_Utils::image_id_from_url( esc_url_raw( $field->escaped_value()) );
 			$id = $field->get_field_clone( array(
 				'id' => $field->_id() . '_id',
 			) )->escaped_value( 'absint' );
 
+
 			$img_size  = $field->args( 'preview_size' );
+			debug($img_size);
 			$image_src = wp_get_attachment_image_src( $id, $img_size );
 
 			?>

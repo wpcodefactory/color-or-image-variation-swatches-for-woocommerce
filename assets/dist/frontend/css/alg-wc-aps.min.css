@@ -1,0 +1,7 @@
+/*!
+ * Main style of Color or Image Variation Swatches for WooCommerce
+ *
+ * @version 1.0.0
+ * @since   1.0.0
+ * @author  Algoritmika Ltd.
+ */.alg-wc-civs-original-select{display:none}.alg-wc-civs-attribute .alg-wc-civs-term{display:inline-block;width:36px;height:36px;margin:0 15px 0 0;cursor:pointer;opacity:0.5;transition:all 0.3s ease-in-out;border:2px solid #ccc;line-height:31px;font-weight:bold;background-color:fff;background-size:cover}.alg-wc-civs-attribute .alg-wc-civs-term:hover,.alg-wc-civs-attribute .alg-wc-civs-term.active{opacity:1}.alg-wc-civs-attribute .alg-wc-civs-term.active{border-color:#333;box-shadow:5px 5px 10px 0px rgba(0,0,0,0.35)}.alg-wc-civs-attribute.label .alg-wc-civs-term{text-align:center}

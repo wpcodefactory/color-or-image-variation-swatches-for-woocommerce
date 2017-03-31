@@ -15,6 +15,10 @@ if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 
 	class Alg_WC_CIVS_Core {
 
+		public $admin;
+
+		public $wc_functions;
+
 		/**
 		 * Plugin version.
 		 *
@@ -70,24 +74,13 @@ if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 		}
 
 		/**
-		 * Load scripts and styles
-		 *
-		 * @version 1.0.0
-		 * @since   1.0.0
-		 */
-		function enqueue_scripts() {
-			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-
-		}
-
-		/**
 		 * Initialize frontend
 		 *
 		 * @version 1.0.0
 		 * @since   1.0.0
 		 */
 		protected function init_frontend() {
-			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 11 );
+			new Alg_WC_CIVS_Frontend();
 		}
 
 		/**
@@ -141,7 +134,48 @@ if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 			}
 
 			// Handles the admin part of the new WooCommerce variation types
-			new Alg_WC_CIVS_Admin_Types();
+			$this->admin = $this->get_admin();
+			$this->admin->init();
+		}
+
+		/**
+		 * Get admin part
+		 *
+		 * @version 1.0.0
+		 * @since   1.0.0
+		 *
+		 * @param $smart
+		 *
+		 * @return Alg_WC_CIVS_Admin_Types
+		 */
+		function get_admin( $smart = true ) {
+			if ( $smart ) {
+				if ( empty( $this->admin ) ) {
+					$this->admin = new Alg_WC_CIVS_Admin_Types();
+				}
+			}
+
+			return $this->admin;
+		}
+
+		/**
+		 * Get WooCommerce functions
+		 *
+		 * @version 1.0.0
+		 * @since   1.0.0
+		 *
+		 * @param $smart
+		 *
+		 * @return Alg_WC_CIVS_WooCommerce
+		 */
+		function get_wc_functions( $smart = true ) {
+			if ( $smart ) {
+				if ( empty( $this->wc_functions ) ) {
+					$this->wc_functions = new Alg_WC_CIVS_WooCommerce();
+				}
+			}
+
+			return $this->wc_functions;
 		}
 
 		/**

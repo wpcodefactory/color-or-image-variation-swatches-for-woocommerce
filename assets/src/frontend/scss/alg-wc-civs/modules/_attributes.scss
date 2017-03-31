@@ -1,0 +1,40 @@
+.alg-wc-civs-original-select{
+	display:none;
+}
+
+.alg-wc-civs-attribute{
+	.alg-wc-civs-term{
+		display:inline-block;
+		width:36px;
+		height:36px;
+		margin:0 15px 0 0;
+		cursor:pointer;
+		opacity:0.5;
+		transition:all 0.3s ease-in-out;
+		border:2px solid #ccc;
+		line-height:31px;
+		font-weight:bold;
+		background-color:fff;
+		background-size:cover;
+		&:hover, &.active{
+			opacity:1;
+		}
+		&.active{
+			border-color:#333;
+			box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.35);
+		}
+	}
+
+	&.color{
+		.alg-wc-civs-term{
+
+		}
+	}
+
+	&.label{
+		.alg-wc-civs-term{
+			text-align:center;
+
+		}
+	}
+}
