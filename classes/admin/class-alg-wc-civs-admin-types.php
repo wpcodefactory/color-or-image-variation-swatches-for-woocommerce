@@ -237,7 +237,6 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 
 
 			$img_size  = $field->args( 'preview_size' );
-			debug($img_size);
 			$image_src = wp_get_attachment_image_src( $id, $img_size );
 
 			?>
