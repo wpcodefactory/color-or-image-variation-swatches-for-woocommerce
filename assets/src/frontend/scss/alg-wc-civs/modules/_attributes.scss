@@ -2,8 +2,17 @@
 	display:none;
 }
 
+table.variations{
+	tr:last-child{
+		.alg-wc-civs-attribute{
+			margin-bottom:22px;
+		}
+	}
+}
+
 .alg-wc-civs-attribute{
 	font-size:0;
+
 
 	.alg-wc-civs-term{
 		display:inline-block;
