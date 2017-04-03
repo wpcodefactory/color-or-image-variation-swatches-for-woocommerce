@@ -1,6 +1,6 @@
 === Color or Image Variation Swatches for WooCommerce by Algoritmika ===
 Contributors: algoritmika,karzin,anbinder
-Tags: woocommerce,variation,appealing
+Tags: woocommerce,variation,appealing,swatches,color,image,attribute
 Requires at least: 4.4
 Tested up to: 4.7
 Stable tag: 1.0.0
@@ -11,14 +11,14 @@ Provides an autocomplete feature to search WooCommerce products.
 
 == Description ==
 
-**Color or Image Variation Swatches for WooCommerce by Algoritmika** provides an appealing variation instead of the native boring one from WooCommerce
+**Color or Image Variation Swatches for WooCommerce by Algoritmika** provides an appealing variation instead of the native one from WooCommerce
 
 = Feedback =
 * We are open to your suggestions and feedback. Thank you for using or trying out one of our plugins!
 
 == Installation ==
 
-1. Upload the entire 'appealing-variation-for-woocommerce' folder to the '/wp-content/plugins/' directory.
+1. Upload the entire 'color-or-image-variation-swatches-for-woocommerce' folder to the '/wp-content/plugins/' directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Start by visiting plugin settings at WooCommerce > Settings > Ajax Product Search.
 

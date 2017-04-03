@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: Color or Image Variation Swatches for WooCommerce by Algoritmika
-Description: Provides an appealing variation instead of the native boring one from WooCommerce
+Description: provides an appealing variation instead of the native one from WooCommerce
 Version: 1.0.0
 Author: Algoritmika Ltd
 Copyright: © 2017 Algoritmika Ltd.
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
-Text Domain: appealing-variation-for-woocommerce
+Text Domain: color-or-image-variation-swatches-for-woocommerce
 Domain Path: /languages
 */
 

@@ -23,7 +23,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings' ) ) :
 		 */
 		function __construct() {
 			$this->id    = 'alg_wc_civs';
-			$this->label = __( 'Appealing variation', 'color-or-image-variation-swatches-for-woocommerce' );
+			$this->label = __( 'Variation swatches', 'color-or-image-variation-swatches-for-woocommerce' );
 			parent::__construct();
 		}
 
