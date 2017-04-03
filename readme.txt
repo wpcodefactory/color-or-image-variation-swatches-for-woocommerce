@@ -7,11 +7,17 @@ Stable tag: 1.0.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Provides an autocomplete feature to search WooCommerce products.
+Provides new WooCommerce type attributes (color,label,image)
 
 == Description ==
 
-**Color or Image Variation Swatches for WooCommerce by Algoritmika** provides an appealing variation instead of the native one from WooCommerce
+**Color or Image Variation Swatches for WooCommerce by Algoritmika** provides new WooCommerce type attributes (color,label,image)
+
+**Check some of its features:**
+
+* Create a new type attribute for handling colors
+* Create a new type attribute for handling labels
+* Create a new type attribute for handling images
 
 = Feedback =
 * We are open to your suggestions and feedback. Thank you for using or trying out one of our plugins!
@@ -24,9 +30,15 @@ Provides an autocomplete feature to search WooCommerce products.
 
 == Screenshots ==
 
+1. Display appealing attributes on frontend instead of the default select from WooCommerce
+2. Create a color type attribute
+3. Create a label type attribute
+4. Create a image type attribute
+5. Use the new type attributes (color, label and image) at your disposal
+
 == Changelog ==
 
-= 1.0.0 - 31/03/2016 =
+= 1.0.0 - 03/04/2017 =
 * Initial Release.
 
 == Upgrade Notice ==
