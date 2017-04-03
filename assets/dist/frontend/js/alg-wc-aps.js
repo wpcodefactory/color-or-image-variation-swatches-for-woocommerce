@@ -43,7 +43,9 @@ jQuery(function ($) {
 				terms.removeClass('active');
 				var term = $(this).parent().parent().find(term_str + '[data-value="' + value + '"]');
 				term.addClass('active');
-			})
+			});
+
+			$(select_str).trigger('change');
 		}
 	}
 

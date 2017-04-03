@@ -9,9 +9,13 @@
   display: none;
 }
 
+.alg-wc-civs-attribute {
+  font-size: 0;
+}
+
 .alg-wc-civs-attribute .alg-wc-civs-term {
   display: inline-block;
-  width: 36px;
+  min-width: 36px;
   height: 36px;
   margin: 0 15px 0 0;
   cursor: pointer;
@@ -34,7 +38,10 @@
 }
 
 .alg-wc-civs-attribute.label .alg-wc-civs-term {
+  color: #333;
+  font-size: 17px;
   text-align: center;
+  padding: 0 8px;
 }
 
 /*# sourceMappingURL=../maps/alg-wc-aps.css.map */
