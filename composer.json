@@ -1,6 +1,6 @@
 {
 	"name": "algoritmika/color-or-image-variation-swatches-for-woocommerce",
-	"description": "Provides an appealing variation instead of the native boring one from WooCommerce",
+	"description": "Provides new WooCommerce type attributes (color,label,image)",
 	"keywords": [
 		"wordpress",
 		"plugin",
