@@ -41,7 +41,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings_General' ) ) {
 				array(
 					'title'    => __( 'General Options', 'color-or-image-variation-swatches-for-woocommerce' ),
 					'type'     => 'title',
-					'id'       => 'alg_wc_CIVS_opt',
+					'id'       => 'alg_wc_civs_opt',
 				),
 				/*array(
 					'title'       => __( 'Pro', 'color-or-image-variation-swatches-for-woocommerce' ),
@@ -60,7 +60,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings_General' ) ) {
 				),
 				array(
 					'type'     => 'sectionend',
-					'id'       => 'alg_wc_CIVS_opt',
+					'id'       => 'alg_wc_civs_opt',
 				),
 			);
 
