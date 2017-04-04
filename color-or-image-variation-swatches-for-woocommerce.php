@@ -74,7 +74,7 @@ if ( ! defined( 'ALG_WC_CIVS_FOLDER_NAME' ) ) {
 	define( 'ALG_WC_CIVS_FOLDER_NAME', untrailingslashit( plugin_dir_path( plugin_basename( __FILE__ ) ) ) );
 }
 
-if ( ! function_exists( 'alg_appealing_variation_for_wc' ) ) {
+if ( ! function_exists( 'color_or_image_variation_swatches_for_wc' ) ) {
 	/**
 	 * Returns the main instance of Alg_WC_CIVS_Core to prevent the need to use globals.
 	 *
