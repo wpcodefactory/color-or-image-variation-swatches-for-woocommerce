@@ -32,11 +32,11 @@ table.variations tr:last-child .alg-wc-civs-attribute {
   background-size: cover;
 }
 
-.alg-wc-civs-attribute .alg-wc-civs-term:hover, .alg-wc-civs-attribute .alg-wc-civs-term.active {
+.alg-wc-civs-attribute .alg-wc-civs-term:not(.disabled):hover, .alg-wc-civs-attribute .alg-wc-civs-term:not(.disabled).active {
   opacity: 1;
 }
 
-.alg-wc-civs-attribute .alg-wc-civs-term.active {
+.alg-wc-civs-attribute .alg-wc-civs-term:not(.disabled).active {
   border-color: #333;
   box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.35);
 }
