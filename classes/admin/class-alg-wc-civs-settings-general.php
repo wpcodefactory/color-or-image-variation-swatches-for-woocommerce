@@ -38,7 +38,12 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings_General' ) ) {
 		 */
 		function get_settings( $settings = null ) {
 			
-			$new_settings = array(				
+			$new_settings = array(		
+				array(
+					'title'       => __( 'General options', 'color-or-image-variation-swatches-for-woocommerce' ),
+					'type'        => 'title',
+					'id'          => 'alg_wc_civs_opt',
+				),		
 				array(
 					'title'    => __( 'Enable Plugin', 'color-or-image-variation-swatches-for-woocommerce' ),
 					'desc'     => __( 'Enable "Color or Image Variation Swatches for WooCommerce" plugin', 'color-or-image-variation-swatches-for-woocommerce' ),
