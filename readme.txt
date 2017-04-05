@@ -38,10 +38,6 @@ Provides new WooCommerce type attributes (color,label,image)
 
 == Changelog ==
 
-= 1.0.1 - 05/04/2017 =
-* Better documentation for JS
-* Add data-attribute on custom terms
-
 = 1.0.0 - 03/04/2017 =
 * Initial Release.
 
