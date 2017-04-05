@@ -52,8 +52,20 @@ jQuery(function ($) {
 				var terms = $(this).parent().parent().find(term_str);
 				var value = $(this).find('option:selected').attr('value');
 				terms.removeClass('active');
-				var term = $(this).parent().parent().find(term_str + '[data-value="' + value + '"]');
-				term.addClass('active');
+				var term = $(this).parent().parent().find(term_str + '[data-value="' + value + '"]');				
+
+				var event = {
+					type: "alg_wc_civs_term_click",					
+					term: null,
+					active: false,
+				}
+				if(term.length){
+					term.addClass('active');
+					event.active = true;
+					event.term = term;	
+				}
+
+				$("body").trigger(event);
 			});
 
 			$(select_str).trigger('change');
