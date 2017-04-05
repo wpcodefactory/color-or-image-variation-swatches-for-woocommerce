@@ -32,16 +32,18 @@ jQuery(function ($) {
 				var value = $(this).attr('data-value');
 				var opt = select.find('option[value="' + value + '"]');
 
-				if (!$(this).hasClass('active')) {
-					if (opt.length) {
-						opt.attr('selected', 'selected');
-						select.trigger('change');
+				if(!$(this).hasClass('disabled')){
+					if (!$(this).hasClass('active')) {
+						if (opt.length) {
+							opt.attr('selected', 'selected');
+							select.trigger('change');
+						} else {
+							window.alert(wc_add_to_cart_variation_params.i18n_no_matching_variations_text);
+							select.val('').trigger('change');
+						}
 					} else {
-						window.alert(wc_add_to_cart_variation_params.i18n_no_matching_variations_text);
 						select.val('').trigger('change');
 					}
-				} else {
-					select.val('').trigger('change');
 				}
 			});
 
