@@ -61,6 +61,6 @@ jQuery(function ($) {
 	alg_wc_civs.init();
 	$("body").trigger({
 		type: "alg_wc_civs",
-		obj: alg_wc_civs,
+		obj: alg_wc_civs
 	});
 });
