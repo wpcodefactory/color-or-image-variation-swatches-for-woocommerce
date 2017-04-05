@@ -1,7 +1,7 @@
 /**
  * @summary Main JS of Color or Image Variation Swatches for WooCommerce
  *
- * @version   1.0.0
+ * @version   1.0.1
  * @since     1.0.0
  * @requires  jQuery.js
  */
@@ -10,16 +10,24 @@ var alg_wc_civs = {};
 jQuery(function ($) {
 	alg_wc_civs = {
 
+		term_selector: null,
+		original_select_selector: null,
+
 		/**
 		 * Initiate
 		 */
 		init: function () {
-			this.handle_terms('.alg-wc-civs-term', '.alg-wc-civs-original-select select');
+			this.term_selector = '.alg-wc-civs-term';
+			this.original_select_selector = '.alg-wc-civs-original-select select';
+			this.sync_terms_and_selects();
 		},
 
-		handle_terms: function (term_str, select_str) {
+		sync_terms_and_selects: function () {
+			term_str = this.term_selector;
+			select_str = this.original_select_selector;
+
+			// Triggers the corresponding select and show an alert in case the combination does not exist
 			$(term_str).on('click', function () {
-				var index = $(this).index();
 				var select = $(this).parent().parent().find('select');
 				var value = $(this).attr('data-value');
 				var opt = select.find('option[value="' + value + '"]');
@@ -32,11 +40,12 @@ jQuery(function ($) {
 						window.alert(wc_add_to_cart_variation_params.i18n_no_matching_variations_text);
 						select.val('').trigger('change');
 					}
-				}else{
+				} else {
 					select.val('').trigger('change');
 				}
 			});
 
+			// Highlights the corresponding term according to select
 			$('body').on('change', select_str, function () {
 				var terms = $(this).parent().parent().find(term_str);
 				var value = $(this).find('option:selected').attr('value');
@@ -50,4 +59,8 @@ jQuery(function ($) {
 	}
 
 	alg_wc_civs.init();
+	$("body").trigger({
+		type: "alg_wc_civs",
+		obj: alg_wc_civs,
+	});
 });

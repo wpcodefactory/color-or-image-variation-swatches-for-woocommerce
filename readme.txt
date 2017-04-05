@@ -3,7 +3,7 @@ Contributors: algoritmika,karzin,anbinder
 Tags: woocommerce,variation,appealing,swatches,color,image,attribute
 Requires at least: 4.4
 Tested up to: 4.7
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -37,6 +37,10 @@ Provides new WooCommerce type attributes (color,label,image)
 5. Use the new type attributes (color, label and image) at your disposal
 
 == Changelog ==
+
+= 1.0.1 - 05/04/2017 =
+* Better documentation for JS
+* Add data-attribute on custom terms
 
 = 1.0.0 - 03/04/2017 =
 * Initial Release.

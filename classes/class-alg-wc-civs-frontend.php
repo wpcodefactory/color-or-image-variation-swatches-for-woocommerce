@@ -4,7 +4,7 @@
  *
  * Handles the admin part of the new WooCommerce variation types
  *
- * @version 1.0.0
+ * @version 1.0.1
  * @since   1.0.0
  * @author  Algoritmika Ltd.
  */
@@ -34,7 +34,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 		/**
 		 * Adds the Html for the new attributes
 		 *
-		 * @version 1.0.0
+		 * @version 1.0.1
 		 * @since   1.0.0
 		 */
 		public function woocommerce_dropdown_variation_attribute_options_html( $html, $args ) {
@@ -56,6 +56,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 			}
 
 			$options          = $args['options'];
+			$attribute        = $args['attribute'];
 			$product          = $args['product'];
 			$name             = $args['name'] ? $args['name'] : 'attribute_' . sanitize_title( $attribute );
 			$id               = $args['id'] ? $args['id'] : sanitize_title( $attribute );
@@ -76,13 +77,13 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 				break;
 			}
 
-			return '<div class="alg-wc-civs-original-select">' . $html . '</div>' . $custom_html;
+			return '<div data-attribute="'.esc_attr($attribute).'" class="alg-wc-civs-original-select">' . $html . '</div>' . $custom_html;
 		}	
 
 		/**
 		 * Creates the color type attribute
 		 *
-		 * @version 1.0.0
+		 * @version 1.0.1
 		 * @since   1.0.0
 		 */
 		function get_color_html( $args, $attr_taxonomy ) {
@@ -91,7 +92,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 			$options   = $args['options'];
 
 			$terms = wc_get_product_terms( $product->id, $attribute, array( 'fields' => 'all' ) );
-			$html  = '<div class="alg-wc-civs-attribute color ' . esc_attr( $attribute ) . '">';
+			$html  = '<div data-attribute="'.esc_attr($attribute).'" class="alg-wc-civs-attribute color ' . esc_attr( $attribute ) . '">';
 
 			foreach ( $terms as $term ) {
 				if ( in_array( $term->slug, $options ) ) {
@@ -108,7 +109,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 		/**
 		 * Creates the label type attribute
 		 *
-		 * @version 1.0.0
+		 * @version 1.0.1
 		 * @since   1.0.0
 		 */
 		function get_label_html( $args, $attr_taxonomy ) {
@@ -117,7 +118,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 			$options   = $args['options'];
 
 			$terms = wc_get_product_terms( $product->id, $attribute, array( 'fields' => 'all' ) );
-			$html  = '<div class="alg-wc-civs-attribute label ' . esc_attr( $attribute ) . '">';
+			$html  = '<div data-attribute="'.esc_attr($attribute).'" class="alg-wc-civs-attribute label ' . esc_attr( $attribute ) . '">';
 
 			foreach ( $terms as $term ) {
 				if ( in_array( $term->slug, $options ) ) {
@@ -134,7 +135,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 		/**
 		 * Creates the image type attribute
 		 *
-		 * @version 1.0.0
+		 * @version 1.0.1
 		 * @since   1.0.0
 		 */
 		function get_image_html( $args, $attr_taxonomy ) {
@@ -143,7 +144,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 			$options   = $args['options'];
 
 			$terms = wc_get_product_terms( $product->id, $attribute, array( 'fields' => 'all' ) );
-			$html  = '<div class="alg-wc-civs-attribute image ' . esc_attr( $attribute ) . '">';
+			$html  = '<div data-attribute="'.esc_attr($attribute).'" class="alg-wc-civs-attribute image ' . esc_attr( $attribute ) . '">';
 
 			foreach ( $terms as $term ) {
 				if ( in_array( $term->slug, $options ) ) {
@@ -161,7 +162,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 		/**
 		 * Load scripts and styles
 		 *
-		 * @version 1.0.0
+		 * @version 1.0.1
 		 * @since   1.0.0
 		 */
 		function enqueue_scripts() {
