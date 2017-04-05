@@ -57,6 +57,7 @@ jQuery(function ($) {
 				var event = {
 					type: "alg_wc_civs_term_click",					
 					term: null,
+					select: $(this),
 					active: false,
 				}
 				if(term.length){
