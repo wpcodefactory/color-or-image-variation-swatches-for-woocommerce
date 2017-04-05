@@ -26,10 +26,10 @@ var dirs = {
 
 gulp.task('js-frontend-custom', function () {
     return gulp.src([dirs.frontend.src.js + '/*.js'])
-        .pipe(concat('alg-wc-aps.js'))
+        .pipe(concat('alg-wc-civs.js'))
         .pipe(sourcemaps.write('../maps'))
         .pipe(gulp.dest(dirs.frontend.dist.js))
-        .pipe(concat('alg-wc-aps.min.js'))
+        .pipe(concat('alg-wc-civs.min.js'))
         .pipe(uglify({
             preserveComments:'license'
         }).on('error', function(e){
@@ -46,7 +46,7 @@ gulp.task('sass-frontend', function () {
             outputStyle: 'compressed'
         }))
         .on('error', sass.logError)
-        .pipe(rename("alg-wc-aps.min.css"))
+        .pipe(rename("alg-wc-civs.min.css"))
         .pipe(autoprefixer({
             browsers: ['last 3 versions'],
             cascade: false
@@ -59,7 +59,7 @@ gulp.task('sass-frontend', function () {
             outputStyle: 'expanded'
         }))
         .on('error', sass.logError)
-        .pipe(rename("alg-wc-aps.css"))
+        .pipe(rename("alg-wc-civs.css"))
         .pipe(autoprefixer({
             browsers: ['last 3 versions'],
             cascade: false

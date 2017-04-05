@@ -37,20 +37,8 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings_General' ) ) {
 		 * @since   1.0.0
 		 */
 		function get_settings( $settings = null ) {
-			$new_settings = array(
-				array(
-					'title'    => __( 'General Options', 'color-or-image-variation-swatches-for-woocommerce' ),
-					'type'     => 'title',
-					'id'       => 'alg_wc_civs_opt',
-				),
-				/*array(
-					'title'       => __( 'Pro', 'color-or-image-variation-swatches-for-woocommerce' ),
-					'type'        => 'meta_box',
-					'show_in_pro' => false,
-					'title'       => 'Pro version',
-					'description' => $this->get_meta_box_pro_description(),
-					'id'          => self::OPTION_METABOX_PRO,
-				),*/
+			
+			$new_settings = array(				
 				array(
 					'title'    => __( 'Enable Plugin', 'color-or-image-variation-swatches-for-woocommerce' ),
 					'desc'     => __( 'Enable "Color or Image Variation Swatches for WooCommerce" plugin', 'color-or-image-variation-swatches-for-woocommerce' ),
