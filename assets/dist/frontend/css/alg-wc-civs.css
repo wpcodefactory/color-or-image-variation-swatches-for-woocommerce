@@ -37,6 +37,7 @@ table.variations tr:last-child .alg-wc-civs-attribute {
   font-weight: bold;
   background-color: fff;
   background-size: cover;
+  text-align: center;
 }
 
 .alg-wc-civs-term:not(.disabled):hover, .alg-wc-civs-term:not(.disabled).active {
