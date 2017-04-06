@@ -12,21 +12,6 @@ table.variations{
 
 .alg-wc-civs-attribute{
 	font-size:0;
-
-	&.label{
-		.alg-wc-civs-term{
-			color:#333;
-			font-size:17px;
-			text-align:center;
-			padding:0 8px;
-		}
-	}
-
-	&.color{
-		.alg-wc-civs-term{
-
-		}
-	}
 }
 
 .alg-wc-civs-term{
@@ -51,6 +36,21 @@ table.variations{
 			border-color:#333;
 			box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.35);
 		}	
+	}
+
+	&.label{
+		.alg-wc-civs-term{
+			color:#333;
+			font-size:17px;
+			text-align:center;
+			padding:0 8px;
+		}
+	}
+
+	&.color{
+		.alg-wc-civs-term{
+
+		}
 	}
 	
 }

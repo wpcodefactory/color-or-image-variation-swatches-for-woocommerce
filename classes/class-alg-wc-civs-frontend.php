@@ -97,7 +97,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 			foreach ( $terms as $term ) {
 				if ( in_array( $term->slug, $options ) ) {
 					$value = get_term_meta( $term->term_id, 'alg_wc_civs_term_color_color', true );
-					$html  .= '<span data-attribute="'.esc_attr($attribute).'" style="background-color:' . esc_html( $value ) . '" class="alg-wc-civs-term" data-value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . '</span>';
+					$html  .= '<span data-attribute="'.esc_attr($attribute).'" style="background-color:' . esc_html( $value ) . '" class="alg-wc-civs-term color" data-value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . '</span>';
 				}
 			}
 
@@ -123,7 +123,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 			foreach ( $terms as $term ) {
 				if ( in_array( $term->slug, $options ) ) {
 					$value = get_term_meta( $term->term_id, 'alg_wc_civs_term_label_label', true );
-					$html  .= '<span data-attribute="'.esc_attr($attribute).'" class="alg-wc-civs-term" data-value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' .esc_html( $value ). '</span>';
+					$html  .= '<span data-attribute="'.esc_attr($attribute).'" class="alg-wc-civs-term label" data-value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' .esc_html( $value ). '</span>';
 				}
 			}
 
@@ -150,7 +150,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 				if ( in_array( $term->slug, $options ) ) {
 					$value = get_term_meta( $term->term_id, 'alg_wc_civs_term_image_image_id', true );
 					$image_src = wp_get_attachment_image_src( $value, array(36,36) );
-					$html  .= '<span data-attribute="'.esc_attr($attribute).'" style="background-image: url('.esc_attr($image_src[0]).')" class="alg-wc-civs-term" data-value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . '</span>';
+					$html  .= '<span data-attribute="'.esc_attr($attribute).'" style="background-image: url('.esc_attr($image_src[0]).')" class="alg-wc-civs-term image" data-value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . '</span>';
 				}
 			}
 
