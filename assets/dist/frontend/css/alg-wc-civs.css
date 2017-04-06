@@ -42,7 +42,7 @@ table.variations tr:last-child .alg-wc-civs-attribute {
   box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.35);
 }
 
-.alg-wc-civs-term.label .alg-wc-civs-term {
+.alg-wc-civs-term.label {
   color: #333;
   font-size: 17px;
   text-align: center;
