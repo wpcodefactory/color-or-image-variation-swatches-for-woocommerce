@@ -17,13 +17,6 @@ table.variations tr:last-child .alg-wc-civs-attribute {
   font-size: 0;
 }
 
-.alg-wc-civs-attribute.label .alg-wc-civs-term {
-  color: #333;
-  font-size: 17px;
-  text-align: center;
-  padding: 0 8px;
-}
-
 .alg-wc-civs-term {
   display: inline-block;
   min-width: 36px;
@@ -38,6 +31,13 @@ table.variations tr:last-child .alg-wc-civs-attribute {
   background-color: fff;
   background-size: cover;
   text-align: center;
+}
+
+.alg-wc-civs-term.label .alg-wc-civs-term {
+  color: #333;
+  font-size: 17px;
+  text-align: center;
+  padding: 0 8px;
 }
 
 .alg-wc-civs-term:not(.disabled):hover, .alg-wc-civs-term:not(.disabled).active {
