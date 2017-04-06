@@ -17,7 +17,14 @@ table.variations tr:last-child .alg-wc-civs-attribute {
   font-size: 0;
 }
 
-.alg-wc-civs-attribute .alg-wc-civs-term {
+.alg-wc-civs-attribute.label .alg-wc-civs-term {
+  color: #333;
+  font-size: 17px;
+  text-align: center;
+  padding: 0 8px;
+}
+
+.alg-wc-civs-term {
   display: inline-block;
   min-width: 36px;
   height: 36px;
@@ -32,20 +39,13 @@ table.variations tr:last-child .alg-wc-civs-attribute {
   background-size: cover;
 }
 
-.alg-wc-civs-attribute .alg-wc-civs-term:not(.disabled):hover, .alg-wc-civs-attribute .alg-wc-civs-term:not(.disabled).active {
+.alg-wc-civs-term:not(.disabled):hover, .alg-wc-civs-term:not(.disabled).active {
   opacity: 1;
 }
 
-.alg-wc-civs-attribute .alg-wc-civs-term:not(.disabled).active {
+.alg-wc-civs-term:not(.disabled).active {
   border-color: #333;
   box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.35);
-}
-
-.alg-wc-civs-attribute.label .alg-wc-civs-term {
-  color: #333;
-  font-size: 17px;
-  text-align: center;
-  padding: 0 8px;
 }
 
 /*# sourceMappingURL=../maps/alg-wc-civs.css.map */
