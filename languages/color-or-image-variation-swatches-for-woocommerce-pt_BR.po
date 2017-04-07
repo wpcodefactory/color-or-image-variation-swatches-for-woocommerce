@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Alg - Color or Image Variation Swatches for WooCommerce\n"
-"POT-Creation-Date: 2017-04-03 14:38-0300\n"
-"PO-Revision-Date: 2017-04-03 14:38-0300\n"
+"POT-Creation-Date: 2017-04-07 17:42-0300\n"
+"PO-Revision-Date: 2017-04-07 17:45-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -31,17 +31,17 @@ msgid "Add new"
 msgstr "Adicionar novo"
 
 #: classes/admin/class-alg-wc-civs-admin-types.php:217
-#: classes/admin/class-alg-wc-civs-admin-types.php:340
+#: classes/admin/class-alg-wc-civs-admin-types.php:339
 msgid "Color"
 msgstr "Cor"
 
 #: classes/admin/class-alg-wc-civs-admin-types.php:218
-#: classes/admin/class-alg-wc-civs-admin-types.php:303
+#: classes/admin/class-alg-wc-civs-admin-types.php:302
 msgid "Image"
 msgstr "Imagem"
 
 #: classes/admin/class-alg-wc-civs-admin-types.php:219
-#: classes/admin/class-alg-wc-civs-admin-types.php:376
+#: classes/admin/class-alg-wc-civs-admin-types.php:375
 msgid "Label"
 msgstr "Legenda"
 
@@ -49,22 +49,78 @@ msgstr "Legenda"
 msgid "General"
 msgstr "Geral"
 
-#: classes/admin/class-alg-wc-civs-settings-general.php:42
-msgid "General Options"
+#: classes/admin/class-alg-wc-civs-settings-general.php:43
+#: classes/admin/class-alg-wc-civs-settings-general.php:48
+msgid "General options"
 msgstr "Opções gerais"
 
-#: classes/admin/class-alg-wc-civs-settings-general.php:55
+#: classes/admin/class-alg-wc-civs-settings-general.php:56
 msgid "Enable Plugin"
 msgstr "Ativar plugin"
 
-#: classes/admin/class-alg-wc-civs-settings-general.php:56
+#: classes/admin/class-alg-wc-civs-settings-general.php:57
 msgid "Enable \"Color or Image Variation Swatches for WooCommerce\" plugin"
 msgstr "Ativar plugin  \"Color or Image Variation Swatches for WooCommerce\""
+
+#: classes/admin/class-alg-wc-civs-settings-general.php:80
+msgid ""
+"Do you like the free version of this plugin? Imagine what the Pro version "
+"can do for you!"
+msgstr ""
+"Você gosta da versão gratuita desse plugin? Imagine o que a versão Pro pode "
+"fazer por você!"
+
+#: classes/admin/class-alg-wc-civs-settings-general.php:82
+#, php-format
+msgid ""
+"Check it out <a target=\"_blank\" href=\"%s\">here</a> or on this link: <a "
+"target=\"_blank\" href=\"%s\">%s</a>"
+msgstr ""
+"Confira <a target=\"_blank\" href=\"%s\">aqui</a> ou nesse link: <a target="
+"\"_blank\" href=\"%s\">%s</a>"
+
+#: classes/admin/class-alg-wc-civs-settings-general.php:83
+msgid "Take a look on some of its features:"
+msgstr "Confira alguns dos recursos"
+
+#: classes/admin/class-alg-wc-civs-settings-general.php:86
+msgid ""
+"Display only the possible term combinations, so your user does not have to "
+"guess the right ones"
+msgstr ""
+"Mostre apenas as combinações de termos possíveis, para que seus usuários não "
+"tenham que ficar adivinhando"
+
+#: classes/admin/class-alg-wc-civs-settings-general.php:90
+msgid ""
+"Display your attributes on frontend using Select2, an enhanced version of "
+"the select element. It works great when you have a big amount of variations"
+msgstr ""
+"Mostre os atributos no frontend usando o Select2, uma versão melhorada do "
+"elemento Select. Essa opção funciona bem principalmente se você possui "
+"muitas variações"
+
+#: classes/admin/class-alg-wc-civs-settings-general.php:94
+msgid "Add attribute images of a variable product on its own gallery"
+msgstr ""
+"Adicione imagens de atributo de um produto variável na sua própria galeria"
+
+#: classes/admin/class-alg-wc-civs-settings-general.php:106
+#, php-format
+msgid ""
+"<a target=\"_blank\" style=\"margin:9px 0 15px 0;\" class=\"button-primary\" "
+"href=\"%s\">Upgrade to Pro version now</a> "
+msgstr ""
+"<a target=\"_blank\" style=\"margin:9px 0 15px 0;\" class=\"button-primary\" "
+"href=\"%s\">Comprar a versão Pro agora</a> "
 
 #: classes/admin/class-alg-wc-civs-settings.php:26
 msgid "Variation swatches"
 msgstr "Variation swatches"
 
-#: classes/class-alg-wc-civs-core.php:204
+#: classes/class-alg-wc-civs-core.php:202
 msgid "Settings"
 msgstr "Ajustes"
+
+#~ msgid "General Options"
+#~ msgstr "Opções gerais"
