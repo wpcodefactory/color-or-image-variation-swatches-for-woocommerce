@@ -102,11 +102,9 @@ if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 		 * @since   1.0.0
 		 */
 		protected function create_custom_settings_fields() {
-			$value = 'meta_box';
-			add_action( 'woocommerce_admin_field_' . $value, array(
-				Alg_WC_CIVS_CMB::get_class_name(),
-				'add_meta_box',
-			), 10, 2 );
+
+			// New setting field for a custom CMB
+			new Alg_WC_CIVS_Custom_Settings_CMB();
 		}
 
 		/**
