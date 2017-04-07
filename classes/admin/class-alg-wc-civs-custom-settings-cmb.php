@@ -35,7 +35,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Custom_Settings_CMB' ) ) {
 		public static function add_meta_box( $value ) {
 			// Doesn't show metabox if show_in_pro = false and it's loading from pro
 			if ( ! $value['show_in_pro'] ) {
-				if ( defined(ALG_WC_CIVS_PRO_DIR) ) {
+				if ( defined('ALG_WC_CIVS_PRO_DIR') ) {
 					return;
 				}
 			}
