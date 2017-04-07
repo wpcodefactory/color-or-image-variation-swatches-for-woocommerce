@@ -91,7 +91,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 			$product   = $args['product'];
 			$options   = $args['options'];
 
-			$terms = wc_get_product_terms( $product->id, $attribute, array( 'fields' => 'all' ) );
+			$terms = wc_get_product_terms( $product->get_id(), $attribute, array( 'fields' => 'all' ) );
 			$html  = '<div data-attribute="'.esc_attr($attribute).'" class="alg-wc-civs-attribute color ' . esc_attr( $attribute ) . '">';
 
 			foreach ( $terms as $term ) {
@@ -117,7 +117,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 			$product   = $args['product'];
 			$options   = $args['options'];
 
-			$terms = wc_get_product_terms( $product->id, $attribute, array( 'fields' => 'all' ) );
+			$terms = wc_get_product_terms( $product->get_id(), $attribute, array( 'fields' => 'all' ) );
 			$html  = '<div data-attribute="'.esc_attr($attribute).'" class="alg-wc-civs-attribute label ' . esc_attr( $attribute ) . '">';
 
 			foreach ( $terms as $term ) {
@@ -143,7 +143,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 			$product   = $args['product'];
 			$options   = $args['options'];
 
-			$terms = wc_get_product_terms( $product->id, $attribute, array( 'fields' => 'all' ) );
+			$terms = wc_get_product_terms( $product->get_id(), $attribute, array( 'fields' => 'all' ) );
 			$html  = '<div data-attribute="'.esc_attr($attribute).'" class="alg-wc-civs-attribute image ' . esc_attr( $attribute ) . '">';
 
 			foreach ( $terms as $term ) {

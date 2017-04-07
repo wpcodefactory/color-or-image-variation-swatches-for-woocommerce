@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Color or Image Variation Swatches for WooCommerce by Algoritmika
-Description: Provides new WooCommerce type attributes (color,label,image)
+Description: Provides new WooCommerce type attributes (color,label,image) for creating beautiful variations
 Version: 1.0.1
 Author: Algoritmika Ltd
 Copyright: © 2017 Algoritmika Ltd.
@@ -13,13 +13,6 @@ Domain Path: /languages
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-// Disable this plugin if Pro version is activated
-if ( defined( 'ALG_WC_CIVS_PRO_DIR' ) ) {
-	add_action( 'admin_init', function() {
-		deactivate_plugins( plugin_basename( __FILE__ ) );
-	} );
-}
-
 // Check if WooCommerce is active
 $plugin = 'woocommerce/woocommerce.php';
 if (
@@ -29,8 +22,26 @@ if (
 	return;
 }
 
-// Includes composer dependencies
-require __DIR__ . '/vendor/autoload.php';
+// Check Pro version and load dependencies
+add_action( 'plugins_loaded', 'alg_wc_civs_plugins_loaded' );
+
+/**
+ * Check for Pro version and load dependencies
+ *
+ * @version 1.0.1
+ * @since   1.0.1 
+ */
+function alg_wc_civs_plugins_loaded() {
+	if ( defined( 'ALG_WC_CIVS_PRO_BASENAME' ) ) {
+		// Disable free version
+		add_action( 'admin_init', function () {
+			deactivate_plugins( __FILE__ );
+		} );
+	} else {
+		// Includes composer dependencies
+		require __DIR__ . '/vendor/autoload.php';
+	}
+}
 
 // Autoloader without namespace
 if ( ! function_exists( 'alg_wc_civs_autoloader' ) ) {
@@ -94,4 +105,15 @@ if ( ! function_exists( 'color_or_image_variation_swatches_for_wc' ) ) {
 	}
 }
 
-color_or_image_variation_swatches_for_wc();
+// Start plugin
+add_action( 'plugins_loaded', 'alg_wc_civs_start_plugin' );
+
+/**
+ * Starts the plugin
+ *
+ * @version 1.0.1
+ * @since   1.0.1 
+ */
+function alg_wc_civs_start_plugin(){
+	color_or_image_variation_swatches_for_wc();	
+}

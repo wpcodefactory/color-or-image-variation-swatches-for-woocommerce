@@ -7,11 +7,11 @@ Stable tag: 1.0.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Provides new WooCommerce type attributes (color,label,image)
+Provides new WooCommerce type attributes (color,label,image) for creating beautiful variations
 
 == Description ==
 
-**Color or Image Variation Swatches for WooCommerce by Algoritmika** provides new WooCommerce type attributes (color,label,image)
+**Color or Image Variation Swatches for WooCommerce by Algoritmika** provides new WooCommerce type attributes (color,label,image) for creating beautiful variations
 
 **Check some of its features:**
 
@@ -38,7 +38,9 @@ Provides new WooCommerce type attributes (color,label,image)
 
 == Changelog ==
 
-= 1.0.1 - 05/04/2017 =
+= 1.0.1 - 07/04/2017 =
+* Remove warning from old version of WooCommerce where product id was being called incorrectly
+* Disable plugin if Pro is enabled
 * Better documentation for JS
 * Add data-attribute on custom terms
 
@@ -46,6 +48,12 @@ Provides new WooCommerce type attributes (color,label,image)
 * Initial Release.
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+* Remove warning from old version of WooCommerce where product id was being called incorrectly
+* Disable plugin if Pro is enabled
+* Better documentation for JS
+* Add data-attribute on custom terms
 
 = 1.0.0 =
 Initial Release
