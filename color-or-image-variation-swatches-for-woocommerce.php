@@ -29,17 +29,19 @@ add_action( 'plugins_loaded', 'alg_wc_civs_plugins_loaded' );
  * Check for Pro version and load dependencies
  *
  * @version 1.0.1
- * @since   1.0.1 
+ * @since   1.0.1
  */
-function alg_wc_civs_plugins_loaded() {
-	if ( defined( 'ALG_WC_CIVS_PRO_BASENAME' ) ) {
-		// Disable free version
-		add_action( 'admin_init', function () {
-			deactivate_plugins( __FILE__ );
-		} );
-	} else {
-		// Includes composer dependencies
-		require __DIR__ . '/vendor/autoload.php';
+if ( ! function_exists( 'alg_wc_civs_plugins_loaded' ) ) {
+	function alg_wc_civs_plugins_loaded() {
+		if ( defined( 'ALG_WC_CIVS_PRO_BASENAME' ) ) {
+			// Disable free version
+			add_action( 'admin_init', function () {
+				deactivate_plugins( __FILE__ );
+			} );
+		} else {
+			// Includes composer dependencies
+			require __DIR__ . '/vendor/autoload.php';
+		}
 	}
 }
 
@@ -107,13 +109,14 @@ if ( ! function_exists( 'color_or_image_variation_swatches_for_wc' ) ) {
 
 // Start plugin
 add_action( 'plugins_loaded', 'alg_wc_civs_start_plugin' );
-
-/**
- * Starts the plugin
- *
- * @version 1.0.1
- * @since   1.0.1 
- */
-function alg_wc_civs_start_plugin(){
-	color_or_image_variation_swatches_for_wc();	
+	if ( ! function_exists( 'alg_wc_civs_start_plugin' ) ) {
+	/**
+	 * Starts the plugin
+	 *
+	 * @version 1.0.1
+	 * @since   1.0.1 
+	 */
+	function alg_wc_civs_start_plugin(){
+		color_or_image_variation_swatches_for_wc();	
+	}
 }
