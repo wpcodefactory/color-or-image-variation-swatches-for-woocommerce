@@ -1,4 +1,4 @@
-=== Color or Image Variation Swatches for WooCommerce by Algoritmika ===
+=== Color or Image Variation Swatches for WooCommerce ===
 Contributors: algoritmika,karzin,anbinder
 Tags: woocommerce,variation,appealing,swatches,color,image,attribute
 Requires at least: 4.4
@@ -11,7 +11,7 @@ Provides new WooCommerce type attributes (color,label,image) for creating beauti
 
 == Description ==
 
-**Color or Image Variation Swatches for WooCommerce by Algoritmika** provides new WooCommerce type attributes (color,label,image) for creating beautiful variations
+**Color or Image Variation Swatches for WooCommerce** provides new WooCommerce type attributes (color,label,image) for creating beautiful variations
 
 **Check some of its features:**
 

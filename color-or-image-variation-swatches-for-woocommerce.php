@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Color or Image Variation Swatches for WooCommerce by Algoritmika
+Plugin Name: Color or Image Variation Swatches for WooCommerce
 Description: Provides new WooCommerce type attributes (color,label,image) for creating beautiful variations
 Version: 1.0.1
 Author: Algoritmika Ltd
