@@ -72,7 +72,6 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 				$all_terms = get_terms( $tax_name, apply_filters( 'woocommerce_product_attribute_terms', $args ) );
 				if ( $all_terms ) {
 					foreach ( $all_terms as $term ) {
-						error_log( print_r( $term, true ) );
 						echo '<option value="' . esc_attr( $term->term_id ) . '" ' . selected( has_term( absint( $term->term_id ), $tax_name, $thepostid ), true, false ) . '>' . esc_attr( apply_filters( 'woocommerce_product_attribute_term_name', $term->name, $term ) ) . '</option>';
 					}
 				}
