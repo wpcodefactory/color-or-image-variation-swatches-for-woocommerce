@@ -42,9 +42,6 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 			add_action( "cmb2_after_{$object}_form_{$cmb_id}", array( $this, 'cmb2_custom_style' ), 10, 2 );
 			$cmb_id = 'alg_wc_civs_term_color';
 			add_action( "cmb2_after_{$object}_form_{$cmb_id}", array( $this, 'cmb2_custom_style' ), 10, 2 );
-
-			// Custom scripts
-			add_action( 'admin_footer', array( $this, 'add_scripts' ), 999 );
 		}
 
 		/**
@@ -66,18 +63,17 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 
 			?>
 
-            <select multiple="multiple" data-placeholder="<?php esc_attr_e( 'Select terms', 'woocommerce' ); ?>"
-                    class="multiselect attribute_values wc-enhanced-select"
-                    name="attribute_values[<?php echo $i; ?>][]">
+            <select multiple="multiple" data-placeholder="<?php esc_attr_e( 'Select terms', 'woocommerce' ); ?>" class="multiselect attribute_values wc-enhanced-select" name="attribute_values[<?php echo $i; ?>][]">
 				<?php
-				$args      = array(
+				$args = array(
 					'orderby'    => 'name',
 					'hide_empty' => 0,
 				);
 				$all_terms = get_terms( $tax_name, apply_filters( 'woocommerce_product_attribute_terms', $args ) );
 				if ( $all_terms ) {
 					foreach ( $all_terms as $term ) {
-						echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( has_term( absint( $term->term_id ), $tax_name, $thepostid ), true, false ) . '>' . esc_attr( apply_filters( 'woocommerce_product_attribute_term_name', $term->name, $term ) ) . '</option>';
+						error_log( print_r( $term, true ) );
+						echo '<option value="' . esc_attr( $term->term_id ) . '" ' . selected( has_term( absint( $term->term_id ), $tax_name, $thepostid ), true, false ) . '>' . esc_attr( apply_filters( 'woocommerce_product_attribute_term_name', $term->name, $term ) ) . '</option>';
 					}
 				}
 				?>
@@ -86,42 +82,6 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
             <button class="button minus select_no_attributes"><?php _e( 'Select none', 'woocommerce' ); ?></button>
             <button class="button fr plus add_new_attribute"><?php _e( 'Add new', 'woocommerce' ); ?></button>
 
-			<?php
-		}
-
-		/**
-		 * Add scripts on admin.
-		 *
-		 * For now this function is required to translate type to label on product_page_product_attributes.
-		 * After woocommerce 3.0, this function can be removed as it will be fixed by them
-		 *
-		 * @version 1.0.0
-		 * @since   1.0.0
-		 */
-		public function add_scripts() {
-			$screen = get_current_screen();
-			if ( $screen->id != 'product_page_product_attributes' ) {
-				return;
-			}
-			?>
-            <script>
-				jQuery(document).ready(function ($) {
-					jQuery.expr[":"].contains = jQuery.expr.createPseudo(function (arg) {
-						return function (elem) {
-							return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
-						};
-					})
-					function alg_wc_civs_translate_type_to_label() {
-						var types = <?php echo wp_json_encode( $this->wc_attribute_types ); ?>;
-						$.each(types, function (key, value) {
-							console.log(key);
-							$("td:contains('" + key + "')").html(value);
-						});
-					}
-
-					alg_wc_civs_translate_type_to_label();
-				})
-            </script>
 			<?php
 		}
 
