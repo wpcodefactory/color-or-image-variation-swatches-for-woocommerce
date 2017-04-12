@@ -38,7 +38,7 @@ Provides new WooCommerce type attributes (color,label,image) for creating beauti
 
 == Changelog ==
 
-= 1.0.1 - 10/04/2017 =
+= 1.0.1 - 12/04/2017 =
 * Replace term name by term id on product edit page because of WooCommerce 3.0
 * Remove warning from old version of WooCommerce where product id was being called incorrectly
 * Disable plugin if Pro is enabled
