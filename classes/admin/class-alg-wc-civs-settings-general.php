@@ -18,6 +18,8 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings_General' ) ) {
 		const OPTION_ENABLE_PLUGIN = 'alg_wc_civs_enable';
 		const OPTION_METABOX_PRO   = 'alg_wc_civs_cmb_pro';
 
+		protected $pro_version_url = 'https://coder.fm/item/color-or-image-variation-swatches-for-woocommerce/';
+
 		/**
 		 * Constructor.
 		 *
@@ -45,12 +47,34 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings_General' ) ) {
 					'id'    => 'alg_wc_civs_opt',
 				),
 				array(
-					'title'       => __( 'General options', 'color-or-image-variation-swatches-for-woocommerce' ),
-					'type'        => 'meta_box',
-					'show_in_pro' => false,
-					'title'       => 'Pro version',
-					'description' => $this->get_meta_box_pro_description(),
-					'id'          => self::OPTION_METABOX_PRO,
+					'title'          => 'Pro version',
+					'type'           => 'wccso_metabox',
+					'show_in_pro'    => false,
+					'accordion'      => array(
+						'title' => __( 'Take a look on some of its features:', 'color-or-image-variation-swatches-for-woocommerce' ),
+						'items' => array(
+							array(
+								'trigger' => __( 'Display only the possible term combinations, so your user does not have to guess the right ones', 'color-or-image-variation-swatches-for-woocommerce' ),
+								'img_src' => plugin_dir_url( __FILE__ ) . '../../assets/images/combination.gif',
+							),
+							array(
+								'trigger'     => __( 'Display your attributes on frontend using Select2, an enhanced version of the select element.', 'color-or-image-variation-swatches-for-woocommerce' ),
+								'description' => __( 'It works great when you have a big amount of variations', 'color-or-image-variation-swatches-for-woocommerce' ),
+								'img_src'     => plugin_dir_url( __FILE__ ) . '../../assets/images/select2.gif',
+							),
+							array(
+								'trigger' => __( 'Add attribute images of a variable product on its own gallery', 'color-or-image-variation-swatches-for-woocommerce', 'color-or-image-variation-swatches-for-woocommerce' ),
+								'img_src' => plugin_dir_url( __FILE__ ) . '../../assets/images/images-on-gallery.gif',
+							),
+
+						),
+					),
+					'call_to_action' => array(
+						'href'  => $this->pro_version_url,
+						'label' => 'Upgrade to Pro version now',
+					),
+					'description'    => __( 'Do you like the free version of this plugin? Imagine what the Pro version can do for you!', 'color-or-image-variation-swatches-for-woocommerce' ) . '<br />' . sprintf( __( 'Check it out <a target="_blank" href="%1$s">here</a> or on this link: <a target="_blank" href="%1$s">%1$s</a>', 'color-or-image-variation-swatches-for-woocommerce' ), esc_url( $this->pro_version_url ) ),
+					'id'             => self::OPTION_METABOX_PRO,
 				),
 				array(
 					'title'   => __( 'Enable Plugin', 'color-or-image-variation-swatches-for-woocommerce' ),

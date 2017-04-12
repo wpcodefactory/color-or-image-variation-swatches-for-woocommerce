@@ -102,9 +102,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 		 * @since   1.0.0
 		 */
 		protected function create_custom_settings_fields() {
-
-			// New setting field for a custom CMB
-			new Alg_WC_CIVS_Custom_Settings_CMB();
+			WCCSO_Metabox::get_instance();
 		}
 
 		/**

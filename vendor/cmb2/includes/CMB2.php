@@ -4,9 +4,9 @@
  *
  * @category  WordPress_Plugin
  * @package   CMB2
- * @author    WebDevStudios
+ * @author    CMB2 team
  * @license   GPL-2.0+
- * @link      http://webdevstudios.com
+ * @link      https://cmb2.io
  *
  * @property-read string $cmb_id
  * @property-read array $meta_box
@@ -81,13 +81,20 @@ class CMB2 extends CMB2_Base {
 		'cmb_styles'       => true, // Include CMB2 stylesheet.
 		'enqueue_js'       => true, // Include CMB2 JS.
 		'fields'           => array(),
+
+		/*
+		 * Handles hooking CMB2 forms/metaboxes into the post/attachement/user screens
+ 		 * and handles hooking in and saving those fields.
+		 */
 		'hookup'           => true,
 		'save_fields'      => true, // Will not save during hookup if false.
-		'closed'           => false, // Default to metabox being closed?
+		'closed'           => false, // Default metabox to being closed.
 		'taxonomies'       => array(),
 		'new_user_section' => 'add-new-user', // or 'add-existing-user'.
 		'new_term_section' => true,
 		'show_in_rest'     => false,
+		'classes'          => null, // Optionally add classes to the CMB2 wrapper
+		'classes_cb'       => '', // Optionally add classes to the CMB2 wrapper (via a callback)
 	);
 
 	/**
@@ -143,12 +150,12 @@ class CMB2 extends CMB2_Base {
 			wp_die( esc_html__( 'Metabox configuration is required to have an ID parameter.', 'cmb2' ) );
 		}
 
+		$this->cmb_id = $config['id'];
 		$this->meta_box = wp_parse_args( $config, $this->mb_defaults );
 		$this->meta_box['fields'] = array();
 
 		$this->object_id( $object_id );
 		$this->mb_object_type();
-		$this->cmb_id = $config['id'];
 
 		if ( ! empty( $config['fields'] ) && is_array( $config['fields'] ) ) {
 			$this->add_fields( $config['fields'] );
@@ -427,7 +434,7 @@ class CMB2 extends CMB2_Base {
 		}
 
 		if ( $field_group->args( 'repeatable' ) ) {
-			echo '<div class="cmb-row"><div class="cmb-td"><p class="cmb-add-row"><button type="button" data-selector="', esc_attr( $field_group->id() ), '_repeat" data-grouptitle="', esc_attr( $field_group->options( 'group_title' ) ), '" class="cmb-add-group-row button">', $field_group->options( 'add_button' ), '</button></p></div></div>';
+			echo '<div class="cmb-row"><div class="cmb-td"><p class="cmb-add-row"><button type="button" data-selector="', esc_attr( $field_group->id() ), '_repeat" data-grouptitle="', esc_attr( $field_group->options( 'group_title' ) ), '" class="cmb-add-group-row button-secondary">', $field_group->options( 'add_button' ), '</button></p></div></div>';
 		}
 
 		echo '</div></div></div>';
@@ -467,7 +474,16 @@ class CMB2 extends CMB2_Base {
 		 */
 		$group_wrap_attributes = apply_filters( 'cmb2_group_wrap_attributes', $group_wrap_attributes, $field_group );
 
-		return CMB2_Utils::concat_attrs( $group_wrap_attributes );
+		$atts = array();
+		foreach ( $group_wrap_attributes as $att => $att_value ) {
+			if ( ! CMB2_Utils::is_data_attribute( $att ) ) {
+				$att_value = htmlspecialchars( $att_value );
+			}
+
+			$atts[ sanitize_html_class( $att ) ] = sanitize_text_field( strip_tags( $att_value ) );
+		}
+
+		return CMB2_Utils::concat_attrs( $atts );
 	}
 
 	/**
@@ -513,7 +529,7 @@ class CMB2 extends CMB2_Base {
 			echo '
 					<div class="cmb-row cmb-remove-field-row">
 						<div class="cmb-remove-row">
-							<button type="button" ', $remove_disabled, 'data-selector="', $field_group->id(), '_repeat" class="button cmb-remove-group-row alignright">', $field_group->options( 'remove_button' ), '</button>
+							<button type="button" ', $remove_disabled, 'data-selector="', $field_group->id(), '_repeat" class="cmb-remove-group-row cmb-remove-group-row-button alignright button-secondary">', $field_group->options( 'remove_button' ), '</button>
 						</div>
 					</div>
 					';
@@ -838,10 +854,10 @@ class CMB2 extends CMB2_Base {
 				// Add to `$saved` array.
 				$saved[ $field_group->index ][ $sub_id ] = $new_val;
 
-			}
+			}// End foreach().
 
 			$saved[ $field_group->index ] = CMB2_Utils::filter_empty( $saved[ $field_group->index ] );
-		}
+		}// End foreach().
 
 		$saved = CMB2_Utils::filter_empty( $saved );
 

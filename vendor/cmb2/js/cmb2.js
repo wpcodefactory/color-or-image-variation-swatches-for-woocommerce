@@ -1,8 +1,8 @@
 /**
  * Controls the behaviours of custom metabox fields.
  *
- * @author WebDevStudios
- * @see    https://github.com/WebDevStudios/CMB2
+ * @author CMB2 team
+ * @see    https://github.com/CMB2/CMB2
  */
 
  // TODO: fix this.
@@ -64,7 +64,7 @@ window.CMB2 = window.CMB2 || {};
 		cmb.initPickers( $metabox.find('input[type="text"].cmb2-timepicker'), $metabox.find('input[type="text"].cmb2-datepicker'), $metabox.find('input[type="text"].cmb2-colorpicker') );
 
 		// Insert toggle button into DOM wherever there is multicheck. credit: Genesis Framework
-		$( '<p><span class="button cmb-multicheck-toggle">' + l10n.strings.check_toggle + '</span></p>' ).insertBefore( '.cmb2-checkbox-list:not(.no-select-all)' );
+		$( '<p><span class="button-secondary cmb-multicheck-toggle">' + l10n.strings.check_toggle + '</span></p>' ).insertBefore( '.cmb2-checkbox-list:not(.no-select-all)' );
 
 		// Make File List drag/drop sortable:
 		cmb.makeListSortable();
@@ -94,7 +94,7 @@ window.CMB2 = window.CMB2 || {};
 			$repeatGroup
 				.filter('.sortable').each( function() {
 					// Add sorting arrows
-					$( this ).find( '.button.cmb-remove-group-row' ).before( '<a class="button cmb-shift-rows move-up alignleft" href="#"><span class="'+ l10n.up_arrow_class +'"></span></a> <a class="button cmb-shift-rows move-down alignleft" href="#"><span class="'+ l10n.down_arrow_class +'"></span></a>' );
+					$( this ).find( '.cmb-remove-group-row-button' ).before( '<a class="button-secondary cmb-shift-rows move-up alignleft" href="#"><span class="'+ l10n.up_arrow_class +'"></span></a> <a class="button-secondary cmb-shift-rows move-down alignleft" href="#"><span class="'+ l10n.down_arrow_class +'"></span></a>' );
 				})
 				.on( 'click', '.cmb-shift-rows', cmb.shiftRows )
 				.on( 'cmb2_add_row', cmb.emptyValue );
@@ -114,15 +114,20 @@ window.CMB2 = window.CMB2 || {};
 		}
 
 		// Loop repeatable group tables
-		$( '.cmb-repeatable-group' ).each( function() {
+		$( '.cmb-repeatable-group.repeatable' ).each( function() {
 			var $table = $( this );
+			var groupTitle = $table.find( '.cmb-add-group-row' ).data( 'grouptitle' );
+
 			// Loop repeatable group table rows
 			$table.find( '.cmb-repeatable-grouping' ).each( function( rowindex ) {
 				var $row = $( this );
+				var $rowTitle = $row.find( 'h3.cmb-group-title' );
 				// Reset rows iterator
 				$row.data( 'iterator', rowindex );
 				// Reset rows title
-				$row.find( '.cmb-group-title h4' ).text( $table.find( '.cmb-add-group-row' ).data( 'grouptitle' ).replace( '{#}', ( rowindex + 1 ) ) );
+				if ( $rowTitle.length ) {
+					$rowTitle.text( groupTitle.replace( '{#}', ( rowindex + 1 ) ) );
+				}
 			});
 		});
 	};
@@ -206,7 +211,7 @@ window.CMB2 = window.CMB2 || {};
 			multiple: isList ? 'add' : false
 		} );
 
-		// Enable the additional media filters: https://github.com/WebDevStudios/CMB2/issues/873
+		// Enable the additional media filters: https://github.com/CMB2/CMB2/issues/873
 		modal.states.first().set( 'filterable', 'all' );
 
 		cmb.trigger( 'cmb_media_modal_init', media );

@@ -6,9 +6,9 @@
  *
  * @category  WordPress_Plugin
  * @package   CMB2
- * @author    WebDevStudios
+ * @author    CMB2 team
  * @license   GPL-2.0+
- * @link      http://webdevstudios.com
+ * @link      https://cmb2.io
  */
 class CMB2_Type_File_List extends CMB2_Type_File_Base {
 
@@ -37,7 +37,7 @@ class CMB2_Type_File_List extends CMB2_Type_File_Base {
 
 		$output .= parent::render( array(
 			'type'  => 'button',
-			'class' => 'cmb2-upload-button button cmb2-upload-list',
+			'class' => 'cmb2-upload-button button-secondary cmb2-upload-list',
 			'value' => esc_attr( $this->_text( 'add_upload_files_text', esc_html__( 'Add or Upload Files', 'cmb2' ) ) ),
 			'name'  => '',
 			'id'  => '',

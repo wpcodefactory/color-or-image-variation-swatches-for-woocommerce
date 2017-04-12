@@ -6,9 +6,9 @@
  *
  * @category  WordPress_Plugin
  * @package   CMB2
- * @author    WebDevStudios
+ * @author    CMB2 team
  * @license   GPL-2.0+
- * @link      http://webdevstudios.com
+ * @link      https://cmb2.io
  */
 class CMB2_Utils {
 
@@ -176,7 +176,7 @@ class CMB2_Utils {
 			}
 		} elseif ( ! empty( $image_sizes[ $size ] ) ) {
 			$data = $size;
-		}
+		}// End if().
 
 		// If we still don't have a match at this point, return false.
 		if ( empty( $data ) ) {
@@ -208,7 +208,6 @@ class CMB2_Utils {
 			} catch ( Exception $e ) {
 				self::log_if_debug( __METHOD__, __LINE__, $e->getMessage() );
 			}
-
 		}
 
 		return $tz_offset;
@@ -566,11 +565,24 @@ class CMB2_Utils {
 			$empty    = false === $val && 'value' !== $attr;
 			if ( ! $excluded && ! $empty ) {
 				// if data attribute, use single quote wraps, else double
-				$quotes = false !== stripos( $attr, 'data-' ) ? "'" : '"';
+				$quotes = self::is_data_attribute( $attr, 'data-' ) ? "'" : '"';
 				$attributes .= sprintf( ' %1$s=%3$s%2$s%3$s', $attr, $val, $quotes );
 			}
 		}
 		return $attributes;
+	}
+
+	/**
+	 * Check if given attribute is a data attribute.
+	 *
+	 * @since  2.2.5
+	 *
+	 * @param  string  $att HTML attribute
+	 *
+	 * @return boolean
+	 */
+	public static function is_data_attribute( $att ) {
+		return 0 === stripos( $att, 'data-' );
 	}
 
 	/**

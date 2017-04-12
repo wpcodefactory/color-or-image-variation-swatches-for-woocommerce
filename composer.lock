@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9482185f1e98cb692bd855df6a17c130",
-    "content-hash": "ab0c4b5d8b4b68e66ba532a9aa6c94f7",
+    "hash": "d6d148bce8a0890cdd70f9ac47f9b5e0",
+    "content-hash": "b99ec78334bc9902e7a5f18155fef0c0",
     "packages": [
         {
             "name": "composer/installers",
@@ -115,17 +115,61 @@
             "time": "2016-08-13 20:53:52"
         },
         {
+            "name": "pablo-pacheco/wc-custom-settings-options",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pablo-pacheco/wc-custom-settings-options.git",
+                "reference": "a7f76fe7c47508eb0da632ee798eec0e106b35e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pablo-pacheco/wc-custom-settings-options/zipball/a7f76fe7c47508eb0da632ee798eec0e106b35e7",
+                "reference": "a7f76fe7c47508eb0da632ee798eec0e106b35e7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPLv2"
+            ],
+            "authors": [
+                {
+                    "name": "Pablo S G Pacheco",
+                    "email": "pablo.sg.pacheco@gmail.com",
+                    "role": "Web Developer"
+                }
+            ],
+            "description": "Custom settings options for WooCommerce",
+            "homepage": "https://github.com/pablo-pacheco/wc-custom-settings-options",
+            "keywords": [
+                "settings-api",
+                "woocommerce",
+                "wordpress",
+                "wp"
+            ],
+            "time": "2017-04-12 22:05:19"
+        },
+        {
             "name": "webdevstudios/cmb2",
             "version": "dev-trunk",
             "source": {
                 "type": "git",
-                "url": "https://github.com/WebDevStudios/CMB2.git",
-                "reference": "4bf36294c5ca864cc1a94784f8602ae7cb857e32"
+                "url": "https://github.com/CMB2/CMB2.git",
+                "reference": "4225cc8986c92bedf6a142078c2840eef97bbe99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WebDevStudios/CMB2/zipball/4bf36294c5ca864cc1a94784f8602ae7cb857e32",
-                "reference": "4bf36294c5ca864cc1a94784f8602ae7cb857e32",
+                "url": "https://api.github.com/repos/CMB2/CMB2/zipball/4225cc8986c92bedf6a142078c2840eef97bbe99",
+                "reference": "4225cc8986c92bedf6a142078c2840eef97bbe99",
                 "shasum": ""
             },
             "require": {
@@ -148,23 +192,36 @@
                     "email": "contact@webdevstudios.com",
                     "homepage": "https://github.com/WebDevStudios",
                     "role": "Developer"
+                },
+                {
+                    "name": "Justin Sternberg",
+                    "email": "justin@dsgnwrks.pro",
+                    "homepage": "https://dsgnwrks.pro",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Zao",
+                    "email": "office@zao.com",
+                    "homepage": "http://zao.is",
+                    "role": "Developer"
                 }
             ],
             "description": "CMB2 is a metabox, custom fields, and forms library for WordPress that will blow your mind.",
-            "homepage": "https://github.com/WebDevStudios/CMB2",
+            "homepage": "https://github.com/CMB2/CMB2",
             "keywords": [
                 "metabox",
                 "plugin",
                 "wordpress"
             ],
-            "time": "2017-03-23 14:49:15"
+            "time": "2017-04-12 21:01:23"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "webdevstudios/cmb2": 20
+        "webdevstudios/cmb2": 20,
+        "pablo-pacheco/wc-custom-settings-options": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

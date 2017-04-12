@@ -7,7 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInit07b9e0e879723b72c64ba35809d40667
 {
     public static $files = array (
-        'dfade7f789b24184fcf4a7e7abbd6fb5' => __DIR__ . '/..' . '/cmb2/init.php',
+        'fca22dcdaaf8ac35c04e74137b9d678e' => __DIR__ . '/..' . '/cmb2/init.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -24,11 +24,17 @@ class ComposerStaticInit07b9e0e879723b72c64ba35809d40667
         ),
     );
 
+    public static $classMap = array (
+        'WCCSO_Metabox' => __DIR__ . '/..' . '/pablo-pacheco/wc-custom-settings-options/src/class-wccso-metabox.php',
+        'WCCSO_Singleton' => __DIR__ . '/..' . '/pablo-pacheco/wc-custom-settings-options/src/class-wccso-singleton.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit07b9e0e879723b72c64ba35809d40667::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit07b9e0e879723b72c64ba35809d40667::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit07b9e0e879723b72c64ba35809d40667::$classMap;
 
         }, null, ClassLoader::class);
     }
