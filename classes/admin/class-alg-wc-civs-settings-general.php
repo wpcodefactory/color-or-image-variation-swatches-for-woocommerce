@@ -48,6 +48,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings_General' ) ) {
 				),
 				array(
 					'title'          => 'Pro version',
+					'enabled'        => !class_exists('Alg_WC_CIVS_Settings_General'),
 					'type'           => 'wccso_metabox',
 					'show_in_pro'    => false,
 					'accordion'      => array(
