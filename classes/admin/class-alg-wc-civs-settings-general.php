@@ -48,7 +48,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings_General' ) ) {
 				),
 				array(
 					'title'          => 'Pro version',
-					'enabled'        => !class_exists('Alg_WC_CIVS_Settings_General'),
+					'enabled'        => !class_exists('Alg_WC_CIVS_Pro_Core'),
 					'type'           => 'wccso_metabox',
 					'show_in_pro'    => false,
 					'accordion'      => array(
@@ -92,52 +92,5 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings_General' ) ) {
 
 			return parent::get_settings( array_merge( $settings, $new_settings ) );
 		}
-
-		/**
-		 * Gets meta box description.
-		 *
-		 * The description is about the pro version of the plugin
-		 *
-		 * @version 1.0.1
-		 * @since   1.0.1
-		 */
-		function get_meta_box_pro_description() {
-			$presentation   = __( 'Do you like the free version of this plugin? Imagine what the Pro version can do for you!', 'color-or-image-variation-swatches-for-woocommerce' );
-			$url            = 'https://coder.fm/item/color-or-image-variation-swatches-for-woocommerce-pro/';
-			$links          = sprintf( wp_kses( __( 'Check it out <a target="_blank" href="%s">here</a> or on this link: <a target="_blank" href="%s">%s</a>', 'color-or-image-variation-swatches-for-woocommerce' ), array( 'a' => array( 'href' => array() ) ) ), esc_url( $url ), esc_url( $url ), esc_url( $url ) );
-			$features_title = __( 'Take a look on some of its features:', 'color-or-image-variation-swatches-for-woocommerce' );
-			$features       = array(
-				array(
-					'desc'  => __( 'Display only the possible term combinations, so your user does not have to guess the right ones', 'color-or-image-variation-swatches-for-woocommerce' ),
-					'image' => plugin_dir_url( __FILE__ ) . '../../assets/images/combination.gif',
-				),
-				array(
-					'desc'  => __( 'Display your attributes on frontend using Select2, an enhanced version of the select element. It works great when you have a big amount of variations', 'color-or-image-variation-swatches-for-woocommerce' ),
-					'image' => plugin_dir_url( __FILE__ ) . '../../assets/images/select2.gif',
-				),
-				array(
-					'desc'  => __( 'Add attribute images of a variable product on its own gallery', 'color-or-image-variation-swatches-for-woocommerce' ),
-					'image' => plugin_dir_url( __FILE__ ) . '../../assets/images/images-on-gallery.gif',
-				),
-			);
-
-			$features_str = "<ul class='alg-admin-accordion'>";
-			foreach ( $features as $feature ) {
-				$img          = ! empty( $feature['image'] ) ? '<br /><div class="details-container"><img src="' . esc_attr( $feature['image'] ) . '"></div>' : '';
-				$li_class     = ! empty( $feature['image'] ) ? 'accordion-item item' : 'item';
-				$features_str .= "<li class='{$li_class}'>{$feature['desc']}{$img}</li>";
-			}
-			$features_str   .= "</ul>";
-			$call_to_action = sprintf( __( '<a target="_blank" style="margin:9px 0 15px 0;" class="button-primary" href="%s">Upgrade to Pro version now</a> ', 'color-or-image-variation-swatches-for-woocommerce' ), esc_url( $url ) );
-
-			return "
-				<p>{$presentation}<br/>
-				{$links}</p>
-				<strong>{$features_title}</strong>
-				{$features_str}
-				{$call_to_action}
-			";
-		}
-
 	}
 }
