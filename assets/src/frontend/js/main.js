@@ -63,6 +63,7 @@ jQuery(function ($) {
 						select.val('').trigger('change');
 					}
 				//}
+				alg_wc_civs.remove_invalid_attributes();
 			});
 
 			// Highlights the corresponding term according to select
