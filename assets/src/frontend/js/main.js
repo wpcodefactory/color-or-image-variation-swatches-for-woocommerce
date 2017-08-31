@@ -83,6 +83,7 @@ jQuery(function ($) {
 					event.term = term;	
 				}
 				$("body").trigger(event);
+				alg_wc_civs.remove_invalid_attributes();
 			});
 
 			$(select_str).trigger('change');
