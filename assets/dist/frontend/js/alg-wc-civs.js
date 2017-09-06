@@ -1,7 +1,7 @@
 /**
  * @summary Main JS of Color or Image Variation Swatches for WooCommerce
  *
- * @version   1.0.2
+ * @version   1.0.3
  * @since     1.0.0
  * @requires  jQuery.js
  */
@@ -45,7 +45,7 @@ jQuery(function ($) {
 			select_str = this.original_select_selector;
 
 			// Triggers the corresponding select and show an alert in case the combination does not exist
-			$(term_str).on('click', function () {
+			$('body').on('click', term_str, function () {
 				var select = $(this).parent().parent().find('select');
 				var value = $(this).attr('data-value');
 				var opt = select.find('option[value="' + value + '"]');
