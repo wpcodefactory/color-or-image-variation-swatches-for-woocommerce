@@ -83,7 +83,7 @@ class CMB2 extends CMB2_Base {
 		'fields'           => array(),
 
 		/*
-		 * Handles hooking CMB2 forms/metaboxes into the post/attachement/user screens
+		 * Handles hooking CMB2 forms/metaboxes into the post/attachement/user/options-page screens
  		 * and handles hooking in and saving those fields.
 		 */
 		'hookup'           => true,
@@ -95,6 +95,31 @@ class CMB2 extends CMB2_Base {
 		'show_in_rest'     => false,
 		'classes'          => null, // Optionally add classes to the CMB2 wrapper
 		'classes_cb'       => '', // Optionally add classes to the CMB2 wrapper (via a callback)
+
+		/*
+		 * The following parameter is for post alternate-context metaboxes only.
+		 *
+		 * To output the fields 'naked' (without a postbox wrapper/style), then
+		 * add a `'remove_box_wrap' => true` to your metabox registration array.
+		 */
+		'remove_box_wrap' => false,
+
+		/*
+		 * The following parameters are for options-page metaboxes,
+		 * and several are passed along to add_menu_page()/add_submenu_page()
+		 */
+
+		// 'menu_title'    => null, // Falls back to 'title' (above). Do not define here so we can set a fallback.
+		'option_key'       => '', // The actual option key and admin menu page slug.
+		'parent_slug'      => '', // Used as first param in add_submenu_page().
+		'capability'       => 'manage_options', // Cap required to view options-page.
+		'icon_url'         => '', // Menu icon. Only applicable if 'parent_slug' is left empty.
+		'position'         => null, // Menu position. Only applicable if 'parent_slug' is left empty.
+
+		'admin_menu_hook'  => 'admin_menu', // Alternately 'network_admin_menu' to add network-level options page.
+		'display_cb'       => false, // Override the options-page form output (CMB2_Hookup::options_page_output()).
+		'save_button'      => '', // The text for the options-page save button. Defaults to 'Save'.
+		'disable_settings_errors' => false, // On settings pages (not options-general.php sub-pages), allows disabling.
 	);
 
 	/**
@@ -154,7 +179,14 @@ class CMB2 extends CMB2_Base {
 		$this->meta_box = wp_parse_args( $config, $this->mb_defaults );
 		$this->meta_box['fields'] = array();
 
+		// Ensures object_types is an array.
+		$this->set_prop( 'object_types', $this->box_types() ) ;
 		$this->object_id( $object_id );
+
+		if ( $this->is_options_page_mb() ) {
+			$this->init_options_mb();
+		}
+
 		$this->mb_object_type();
 
 		if ( ! empty( $config['fields'] ) && is_array( $config['fields'] ) ) {
@@ -171,6 +203,12 @@ class CMB2 extends CMB2_Base {
 		 * @param array $cmb This CMB2 object
 		 */
 		do_action( "cmb2_init_{$this->cmb_id}", $this );
+
+		// Hook in the hookup... how meta.
+		add_action( "cmb2_init_hookup_{$this->cmb_id}", array( 'CMB2_hookup', 'maybe_init_and_hookup' ) );
+
+		// Hook in the rest api functionality.
+		add_action( "cmb2_init_hookup_{$this->cmb_id}", array( 'CMB2_REST', 'maybe_init_and_hookup' ) );
 	}
 
 	/**
@@ -179,6 +217,8 @@ class CMB2 extends CMB2_Base {
 	 * @since 1.0.0
 	 * @param int    $object_id   Object ID.
 	 * @param string $object_type Type of object being saved. (e.g., post, user, or comment).
+	 *
+	 * @return CMB2
 	 */
 	public function show_form( $object_id = 0, $object_type = '' ) {
 		$this->render_form_open( $object_id, $object_type );
@@ -187,7 +227,7 @@ class CMB2 extends CMB2_Base {
 			$this->render_field( $field_args );
 		}
 
-		$this->render_form_close( $object_id, $object_type );
+		return $this->render_form_close( $object_id, $object_type );
 	}
 
 	/**
@@ -197,7 +237,8 @@ class CMB2 extends CMB2_Base {
 	 * @since  2.2.0
 	 * @param  integer $object_id   Object ID.
 	 * @param  string  $object_type Object type.
-	 * @return void
+	 *
+	 * @return CMB2
 	 */
 	public function render_form_open( $object_id = 0, $object_type = '' ) {
 		$object_type = $this->object_type( $object_type );
@@ -236,6 +277,7 @@ class CMB2 extends CMB2_Base {
 
 		echo '<div class="', esc_attr( $this->box_classes() ), '"><div id="cmb2-metabox-', sanitize_html_class( $this->cmb_id ), '" class="cmb2-metabox cmb-field-list">';
 
+		return $this;
 	}
 
 	/**
@@ -311,7 +353,8 @@ class CMB2 extends CMB2_Base {
 	 * @since  2.2.0
 	 * @param  integer $object_id   Object ID.
 	 * @param  string  $object_type Object type.
-	 * @return void
+	 *
+	 * @return CMB2
 	 */
 	public function render_form_close( $object_id = 0, $object_type = '' ) {
 		$object_type = $this->object_type( $object_type );
@@ -320,18 +363,6 @@ class CMB2 extends CMB2_Base {
 		echo '</div></div>';
 
 		$this->render_hidden_fields();
-
-		/**
-		 * Hook after form form has been rendered
-		 *
-		 * @param array  $cmb_id      The current box ID.
-		 * @param int    $object_id   The ID of the current object.
-		 * @param string $object_type The type of object you are working with.
-		 *	                           Usually `post` (this applies to all post-types).
-		 *	                           Could also be `comment`, `user` or `options-page`.
-		 * @param array  $cmb         This CMB2 object.
-		 */
-		do_action( 'cmb2_after_form', $this->cmb_id, $object_id, $object_type, $this );
 
 		/**
 		 * Hook after form form has been rendered
@@ -347,8 +378,21 @@ class CMB2 extends CMB2_Base {
 		 */
 		do_action( "cmb2_after_{$object_type}_form_{$this->cmb_id}", $object_id, $this );
 
+		/**
+		 * Hook after form form has been rendered
+		 *
+		 * @param array  $cmb_id      The current box ID.
+		 * @param int    $object_id   The ID of the current object.
+		 * @param string $object_type The type of object you are working with.
+		 *	                           Usually `post` (this applies to all post-types).
+		 *	                           Could also be `comment`, `user` or `options-page`.
+		 * @param array  $cmb         This CMB2 object.
+		 */
+		do_action( 'cmb2_after_form', $this->cmb_id, $object_id, $object_type, $this );
+
 		echo "\n<!-- End CMB2 Fields -->\n";
 
+		return $this;
 	}
 
 	/**
@@ -405,7 +449,6 @@ class CMB2 extends CMB2_Base {
 		$desc            = $field_group->args( 'description' );
 		$label           = $field_group->args( 'name' );
 		$group_val       = (array) $field_group->value();
-		$remove_disabled = count( $group_val ) <= 1 ? 'disabled="disabled" ' : '';
 		$field_group->index = 0;
 
 		$field_group->peform_param_callback( 'before_group' );
@@ -426,11 +469,11 @@ class CMB2 extends CMB2_Base {
 
 		if ( ! empty( $group_val ) ) {
 			foreach ( $group_val as $group_key => $field_id ) {
-				$this->render_group_row( $field_group, $remove_disabled );
+				$this->render_group_row( $field_group );
 				$field_group->index++;
 			}
 		} else {
-			$this->render_group_row( $field_group, $remove_disabled );
+			$this->render_group_row( $field_group );
 		}
 
 		if ( $field_group->args( 'repeatable' ) ) {
@@ -491,9 +534,10 @@ class CMB2 extends CMB2_Base {
 	 *
 	 * @since  1.0.2
 	 * @param  CMB2_Field $field_group     CMB2_Field group field object.
-	 * @param  string     $remove_disabled Attribute string to disable the remove button.
+	 *
+	 * @return CMB2
 	 */
-	public function render_group_row( $field_group, $remove_disabled ) {
+	public function render_group_row( $field_group ) {
 
 		$field_group->peform_param_callback( 'before_group_row' );
 		$closed_class = $field_group->options( 'closed' ) ? ' closed' : '';
@@ -502,7 +546,7 @@ class CMB2 extends CMB2_Base {
 		<div class="postbox cmb-row cmb-repeatable-grouping', $closed_class, '" data-iterator="', $field_group->index, '">';
 
 		if ( $field_group->args( 'repeatable' ) ) {
-			echo '<button type="button" ', $remove_disabled, 'data-selector="', $field_group->id(), '_repeat" class="dashicons-before dashicons-no-alt cmb-remove-group-row" title="', esc_attr( $field_group->options( 'remove_button' ) ), '"></button>';
+			echo '<button type="button" data-selector="', $field_group->id(), '_repeat" class="dashicons-before dashicons-no-alt cmb-remove-group-row" title="', esc_attr( $field_group->options( 'remove_button' ) ), '"></button>';
 		}
 
 			echo '
@@ -529,7 +573,7 @@ class CMB2 extends CMB2_Base {
 			echo '
 					<div class="cmb-row cmb-remove-field-row">
 						<div class="cmb-remove-row">
-							<button type="button" ', $remove_disabled, 'data-selector="', $field_group->id(), '_repeat" class="cmb-remove-group-row cmb-remove-group-row-button alignright button-secondary">', $field_group->options( 'remove_button' ), '</button>
+							<button type="button" data-selector="', $field_group->id(), '_repeat" class="cmb-remove-group-row cmb-remove-group-row-button alignright button-secondary">', $field_group->options( 'remove_button' ), '</button>
 						</div>
 					</div>
 					';
@@ -540,6 +584,8 @@ class CMB2 extends CMB2_Base {
 		';
 
 		$field_group->peform_param_callback( 'after_group_row' );
+
+		return $this;
 	}
 
 	/**
@@ -572,6 +618,8 @@ class CMB2 extends CMB2_Base {
 	 * Loop through and output hidden fields
 	 *
 	 * @since  2.0.0
+	 *
+	 * @return CMB2
 	 */
 	public function render_hidden_fields() {
 		if ( ! empty( $this->hidden_fields ) ) {
@@ -579,6 +627,8 @@ class CMB2 extends CMB2_Base {
 				$hidden->render();
 			}
 		}
+
+		return $this;
 	}
 
 	/**
@@ -625,6 +675,8 @@ class CMB2 extends CMB2_Base {
 	 * @param  int    $object_id    Object ID.
 	 * @param  string $object_type  Type of object being saved. (e.g., post, user, or comment).
 	 * @param  array  $data_to_save Array of key => value data for saving. Likely $_POST data.
+	 *
+	 * @return CMB2
 	 */
 	public function save_fields( $object_id = 0, $object_type = '', $data_to_save = array() ) {
 
@@ -640,13 +692,15 @@ class CMB2 extends CMB2_Base {
 			cmb2_options( $object_id )->set();
 		}
 
-		$this->after_save();
+		return $this->after_save();
 	}
 
 	/**
 	 * Process and save form fields
 	 *
 	 * @since  2.0.0
+	 *
+	 * @return CMB2
 	 */
 	public function process_fields() {
 
@@ -661,6 +715,8 @@ class CMB2 extends CMB2_Base {
 		foreach ( $this->prop( 'fields' ) as $field_args ) {
 			$this->process_field( $field_args );
 		}
+
+		return $this;
 	}
 
 	/**
@@ -668,6 +724,8 @@ class CMB2 extends CMB2_Base {
 	 *
 	 * @since  2.0.0
 	 * @param  array $field_args Array of field arguments.
+	 *
+	 * @return CMB2
 	 */
 	public function process_field( $field_args ) {
 
@@ -695,6 +753,7 @@ class CMB2 extends CMB2_Base {
 				break;
 		}
 
+		return $this;
 	}
 
 	/**
@@ -702,7 +761,7 @@ class CMB2 extends CMB2_Base {
 	 *
 	 * @since  2.x.x
 	 *
-	 * @return void
+	 * @return CMB2
 	 */
 	public function pre_process() {
 		/**
@@ -718,6 +777,8 @@ class CMB2 extends CMB2_Base {
 		 * @param int   $object_id The ID of the current object
 		 */
 		do_action( "cmb2_{$this->object_type()}_process_fields_{$this->cmb_id}", $this, $this->object_id() );
+
+		return $this;
 	}
 
 	/**
@@ -726,7 +787,7 @@ class CMB2 extends CMB2_Base {
 	 *
 	 * @since  2.x.x
 	 *
-	 * @return void
+	 * @return CMB2
 	 */
 	public function after_save() {
 		$object_type = $this->object_type();
@@ -762,6 +823,8 @@ class CMB2 extends CMB2_Base {
 		 * @param array  $cmb         This CMB2 object
 		 */
 		do_action( "cmb2_save_{$object_type}_fields_{$this->cmb_id}", $object_id, $this->updated, $this );
+
+		return $this;
 	}
 
 	/**
@@ -899,6 +962,13 @@ class CMB2 extends CMB2_Base {
 				$object_id = isset( $_REQUEST['tag_ID'] ) ? wp_unslash( $_REQUEST['tag_ID'] ) : $object_id;
 				break;
 
+			case 'options-page':
+				$key = $this->doing_options_page();
+				if ( ! empty( $key ) ) {
+					$object_id = $key;
+				}
+				break;
+
 			default:
 				$object_id = isset( $GLOBALS['post']->ID ) ? $GLOBALS['post']->ID : $object_id;
 				$object_id = isset( $_REQUEST['post'] ) ? wp_unslash( $_REQUEST['post'] ) : $object_id;
@@ -962,10 +1032,64 @@ class CMB2 extends CMB2_Base {
 	 * Gets the box 'object_types' array based on box settings.
 	 *
 	 * @since  2.2.3
+	 * @param  array $fallback Fallback value.
+	 *
 	 * @return array Object types.
 	 */
-	public function box_types() {
-		return CMB2_Utils::ensure_array( $this->prop( 'object_types' ), array( 'post' ) );
+	public function box_types( $fallback = array() ) {
+		return CMB2_Utils::ensure_array( $this->prop( 'object_types' ), $fallback );
+	}
+
+	/**
+	 * Initates the object types and option key for an options page metabox.
+	 *
+	 * @since  2.2.5
+	 *
+	 * @return void
+	 */
+	public function init_options_mb() {
+		$keys  = $this->options_page_keys();
+		$types = $this->box_types();
+
+		if ( empty( $keys ) ) {
+			$keys = '';
+			$types = $this->deinit_options_mb( $types );
+		} else {
+
+			// Make sure 'options-page' is one of the object types.
+			$types[] = 'options-page';
+		}
+
+		// Set/Reset the option_key property.
+		$this->set_prop( 'option_key', $keys );
+
+		// Reset the object types.
+		$this->set_prop( 'object_types', array_unique( $types ) ) ;
+	}
+
+	/**
+	 * If object-page initiation failed, remove traces options page setup.
+	 *
+	 * @since  2.2.5
+	 *
+	 * @return void
+	 */
+	protected function deinit_options_mb( $types ) {
+		if ( isset( $this->meta_box['show_on']['key'] ) && 'options-page' === $this->meta_box['show_on']['key'] ) {
+			unset( $this->meta_box['show_on']['key'] );
+		}
+
+		if ( array_key_exists( 'options-page', $this->meta_box['show_on'] ) ) {
+			unset( $this->meta_box['show_on']['options-page'] );
+		}
+
+		$index = array_search( 'options-page', $types );
+
+		if ( false !== $index ) {
+			unset( $types[ $index ] );
+		}
+
+		return $types;
 	}
 
 	/**
@@ -975,7 +1099,83 @@ class CMB2 extends CMB2_Base {
 	 * @return boolean True/False.
 	 */
 	public function is_options_page_mb() {
-		return ( isset( $this->meta_box['show_on']['key'] ) && 'options-page' === $this->meta_box['show_on']['key'] || array_key_exists( 'options-page', $this->meta_box['show_on'] ) );
+		return (
+			// 'show_on' values checked for back-compatibility.
+			$this->is_old_school_options_page_mb()
+			|| in_array( 'options-page', $this->box_types() )
+		);
+	}
+
+	/**
+	 * Determines if metabox uses old-schoold options page config.
+	 *
+	 * @since  2.2.5
+	 * @return boolean True/False.
+	 */
+	public function is_old_school_options_page_mb() {
+		return (
+			// 'show_on' values checked for back-compatibility.
+			isset( $this->meta_box['show_on']['key'] ) && 'options-page' === $this->meta_box['show_on']['key']
+			|| array_key_exists( 'options-page', $this->meta_box['show_on'] )
+		);
+	}
+
+	/**
+	 * Determine if we are on an options page (or saving the options page).
+	 *
+	 * @since  2.2.5
+	 *
+	 * @return bool
+	 */
+	public function doing_options_page() {
+		$found_key = false;
+		$keys = $this->options_page_keys();
+
+		if ( empty( $keys ) ) {
+			return $found_key;
+		}
+
+		if ( ! empty( $_GET['page'] ) && in_array( $_GET['page'], $keys ) ) {
+			$found_key = $_GET['page'];
+		}
+
+		if ( ! empty( $_POST['action'] ) && in_array( $_POST['action'], $keys ) ) {
+			$found_key = $_POST['action'];
+		}
+
+		return $found_key ? $found_key : false;
+	}
+
+	/**
+	 * Get the options page key.
+	 *
+	 * @since  2.2.5
+	 * @return string|array
+	 */
+	public function options_page_keys() {
+		$key = '';
+		if ( ! $this->is_options_page_mb() ) {
+			return $key;
+		}
+
+		$values = null;
+		if ( ! empty( $this->meta_box['show_on']['value'] ) ) {
+			$values = $this->meta_box['show_on']['value'];
+		} elseif ( ! empty( $this->meta_box['show_on']['options-page'] ) ) {
+			$values = $this->meta_box['show_on']['options-page'];
+		} elseif ( $this->prop( 'option_key') ) {
+			$values = $this->prop( 'option_key');
+		}
+
+		if ( $values ) {
+			$key = $values;
+		}
+
+		if ( ! is_array( $key ) ) {
+			$key = array( $key );
+		}
+
+		return $key;
 	}
 
 	/**
@@ -1024,6 +1224,13 @@ class CMB2 extends CMB2_Base {
 
 		if ( defined( 'DOING_AJAX' ) && isset( $_POST['action'] ) && 'add-tag' === $_POST['action'] ) {
 			$type = 'term';
+		}
+
+		if (
+			in_array( $pagenow, array( 'admin.php', 'admin-post.php' ), true )
+			&& $this->doing_options_page()
+		) {
+			$type = 'options-page';
 		}
 
 		return $type;
@@ -1148,23 +1355,13 @@ class CMB2 extends CMB2_Base {
 	}
 
 	/**
-	 * Get a new field object specific to this CMB2 object.
-	 *
-	 * @since  2.2.0
-	 * @param  array      $field_args  Metabox field config array.
-	 * @param  CMB2_Field $field_group (optional) CMB2_Field object (group parent).
-	 * @return CMB2_Field CMB2_Field object.
-	 */
-	protected function get_new_field( $field_args, $field_group = null ) {
-		return new CMB2_Field( $this->get_default_args( $field_args, $field_group ) );
-	}
-
-	/**
 	 * When fields are added in the old-school way, intitate them as they should be
 	 *
 	 * @since 2.1.0
 	 * @param array $fields          Array of fields to add.
 	 * @param mixed $parent_field_id Parent field id or null.
+ 	 *
+	 * @return CMB2
 	 */
 	protected function add_fields( $fields, $parent_field_id = null ) {
 		foreach ( $fields as $field ) {
@@ -1183,6 +1380,8 @@ class CMB2 extends CMB2_Base {
 				$this->add_fields( $sub_fields, $field_id );
 			}
 		}
+
+		return $this;
 	}
 
 	/**
@@ -1330,6 +1529,7 @@ class CMB2 extends CMB2_Base {
 		if ( isset( $this->meta_box['fields'][ $field_id ]['fields'][ $sub_field_id ] ) ) {
 			unset( $this->meta_box['fields'][ $field_id ]['fields'][ $sub_field_id ] );
 		}
+
 		return true;
 	}
 
@@ -1439,11 +1639,22 @@ class CMB2 extends CMB2_Base {
 	 * @return string unique nonce string.
 	 */
 	public function nonce() {
-		if ( $this->generated_nonce ) {
-			return $this->generated_nonce;
+		if ( ! $this->generated_nonce ) {
+			$this->generated_nonce = sanitize_html_class( 'nonce_' . basename( __FILE__ ) . $this->cmb_id );
 		}
-		$this->generated_nonce = sanitize_html_class( 'nonce_' . basename( __FILE__ ) . $this->cmb_id );
+
 		return $this->generated_nonce;
+	}
+
+	/**
+	 * Checks if field-saving updated any fields.
+	 *
+	 * @since  2.2.5
+	 *
+	 * @return bool
+	 */
+	public function was_updated() {
+		return ! empty( $this->updated );
 	}
 
 	/**

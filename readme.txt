@@ -3,7 +3,7 @@ Contributors: algoritmika,karzin,anbinder
 Tags: woocommerce,variation,appealing,swatches,color,image,attribute
 Requires at least: 4.4
 Tested up to: 4.7
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -58,6 +58,9 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 
 == Changelog ==
 
+= 1.0.4 - 01/12/2017 =
+* Improve javascript
+
 = 1.0.3 - 06/09/2017 =
 * Improve term click (Now it works even when reinserted to DOM)
 
@@ -77,5 +80,5 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 
 == Upgrade Notice ==
 
-= 1.0.3 =
-* Improve term click (Now it works even when reinserted to DOM)
+= 1.0.4 =
+* Improve javascript

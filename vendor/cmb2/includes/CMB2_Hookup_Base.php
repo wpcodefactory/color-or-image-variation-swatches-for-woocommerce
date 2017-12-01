@@ -9,6 +9,9 @@
  * @author    CMB2 team
  * @license   GPL-2.0+
  * @link      https://cmb2.io
+ *
+ * @property-read string $object_type
+ * @property-read CMB2   $cmb
  */
 abstract class CMB2_Hookup_Base {
 
@@ -25,6 +28,19 @@ abstract class CMB2_Hookup_Base {
 	 * @since 2.0.9
 	 */
 	protected $object_type = 'post';
+
+	/**
+	 * A functionalized constructor, used for the hookup action callbacks.
+	 *
+	 * @since  2.2.6
+	 *
+	 * @param  CMB2 $cmb The CMB2 object to hookup
+	 *
+	 * @return CMB2_Hookup_Base $hookup The hookup object.
+	 */
+	public static function maybe_init_and_hookup( CMB2 $cmb ) {
+		throw new Exception( sprintf( esc_html__( '%1$s should be implemented by the extended class.', 'cmb2' ), __FUNCTION__ ) );
+	}
 
 	/**
 	 * Constructor
@@ -68,4 +84,20 @@ abstract class CMB2_Hookup_Base {
 		}
 	}
 
+	/**
+	 * Magic getter for our object.
+	 *
+	 * @param string $field
+	 * @throws Exception Throws an exception if the field is invalid.
+	 * @return mixed
+	 */
+	public function __get( $field ) {
+		switch ( $field ) {
+			case 'object_type':
+			case 'cmb':
+				return $this->{$field};
+			default:
+				throw new Exception( sprintf( esc_html__( 'Invalid %1$s property: %2$s', 'cmb2' ), __CLASS__, $field ) );
+		}
+	}
 }

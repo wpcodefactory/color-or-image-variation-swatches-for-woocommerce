@@ -1,7 +1,7 @@
 /**
  * @summary Main JS of Color or Image Variation Swatches for WooCommerce
  *
- * @version   1.0.3
+ * @version   1.0.4
  * @since     1.0.0
  * @requires  jQuery.js
  */
@@ -26,13 +26,13 @@ jQuery(function ($) {
 		},
 
 		remove_invalid_attributes:function(){
-			select = $(this.original_select_selector);
-			all_terms = $(this.term_selector);
+			var select = $(this.original_select_selector);
+			var all_terms = $(this.term_selector);
 			all_terms.addClass('disabled');
 
-			select.each(function (index) {
+			select.each(function () {
 				var options = $(this).find('option:not([disabled])');
-				options.each(function (index) {
+				options.each(function () {
 					var value = $(this).attr('value');
 					var term = $(this).parent().parent().parent().find(alg_wc_civs.term_selector + '[data-value="' + value + '"]');
 					term.removeClass('disabled');
@@ -41,8 +41,8 @@ jQuery(function ($) {
 		},
 
 		sync_terms_and_selects: function () {
-			term_str = this.term_selector;
-			select_str = this.original_select_selector;
+			var term_str = this.term_selector;
+			var select_str = this.original_select_selector;
 
 			// Triggers the corresponding select and show an alert in case the combination does not exist
 			$('body').on('click', term_str, function () {
@@ -73,7 +73,7 @@ jQuery(function ($) {
 				terms.removeClass('active');
 				var term = $(this).parent().parent().find(term_str + '[data-value="' + value + '"]');
 				var event = {
-					type: "alg_wc_civs_term_click",					
+					type: 'alg_wc_civs_term_click',
 					term: null,
 					select: $(this),
 					active: false
@@ -83,17 +83,17 @@ jQuery(function ($) {
 					event.active = true;
 					event.term = term;	
 				}
-				$("body").trigger(event);
+				$('body').trigger(event);
 				alg_wc_civs.remove_invalid_attributes();
 			});
 
 			$(select_str).trigger('change');
 		}
-	}
+	};
 
 	alg_wc_civs.init();
-	$("body").trigger({
-		type: "alg_wc_civs",
+	$('body').trigger({
+		type: 'alg_wc_civs',
 		obj: alg_wc_civs
 	});
 });

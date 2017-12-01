@@ -623,15 +623,20 @@ class CMB2_Field extends CMB2_Base {
 		// These types cannot be repeatable.
 		$internal_fields = array(
 			// Use file_list instead
-			'file'                => 1,
-			'radio'               => 1,
-			'title'               => 1,
-			'wysiwyg'             => 1,
-			'checkbox'            => 1,
-			'radio_inline'        => 1,
-			'taxonomy_radio'      => 1,
-			'taxonomy_select'     => 1,
-			'taxonomy_multicheck' => 1,
+			'file'                             => 1,
+			'radio'                            => 1,
+			'title'                            => 1,
+			'wysiwyg'                          => 1,
+			'checkbox'                         => 1,
+			'radio_inline'                     => 1,
+			'taxonomy_radio'                   => 1,
+			'taxonomy_radio_inline'            => 1,
+			'taxonomy_radio_hierarchical'      => 1,
+			'taxonomy_select'                  => 1,
+			'taxonomy_multicheck'              => 1,
+			'taxonomy_multicheck_inline'       => 1,
+			'taxonomy_multicheck_hierarchical' => 1,
+
 		);
 
 		/**
@@ -1034,21 +1039,32 @@ class CMB2_Field extends CMB2_Base {
 	}
 
 	/**
-	 * Retrieve options args. Calls options_cb if it exists.
+	 * Retrieve options args.
 	 *
 	 * @since  2.0.0
 	 * @param  string $key Specific option to retrieve
 	 * @return array        Array of options
 	 */
 	public function options( $key = '' ) {
-		if ( ! empty( $this->field_options ) ) {
-			if ( $key ) {
-				return array_key_exists( $key, $this->field_options ) ? $this->field_options[ $key ] : false;
-			}
-
-			return $this->field_options;
+		if ( empty( $this->field_options ) ) {
+			$this->set_options();
 		}
 
+		if ( $key ) {
+			return array_key_exists( $key, $this->field_options ) ? $this->field_options[ $key ] : false;
+		}
+
+		return $this->field_options;
+	}
+
+	/**
+	 * Generates/sets options args. Calls options_cb if it exists.
+	 *
+	 * @since  2.2.5
+	 *
+	 * @return array Array of options
+	 */
+	public function set_options() {
 		$this->field_options = (array) $this->args['options'];
 
 		if ( is_callable( $this->args['options_cb'] ) ) {
@@ -1057,10 +1073,6 @@ class CMB2_Field extends CMB2_Base {
 			if ( $options && is_array( $options ) ) {
 				$this->field_options = $options + $this->field_options;
 			}
-		}
-
-		if ( $key ) {
-			return array_key_exists( $key, $this->field_options ) ? $this->field_options[ $key ] : false;
 		}
 
 		return $this->field_options;
@@ -1177,7 +1189,7 @@ class CMB2_Field extends CMB2_Base {
 			$args['options']['textarea_name'] = $args['_name'];
 		}
 
-		$option_types = apply_filters( 'cmb2_all_or_nothing_types', array( 'select', 'radio', 'radio_inline', 'taxonomy_select', 'taxonomy_radio', 'taxonomy_radio_inline' ), $this );
+		$option_types = apply_filters( 'cmb2_all_or_nothing_types', array( 'select', 'radio', 'radio_inline', 'taxonomy_select', 'taxonomy_radio', 'taxonomy_radio_inline', 'taxonomy_radio_hierarchical',  ), $this );
 
 		if ( in_array( $args['type'], $option_types, true ) ) {
 
@@ -1225,7 +1237,7 @@ class CMB2_Field extends CMB2_Base {
 	}
 
 	/**
-	 * Returns a cloned version of this field object with, but with
+	 * Returns a cloned version of this field object, but with
 	 * modified/overridden field arguments.
 	 *
 	 * @since  2.2.2

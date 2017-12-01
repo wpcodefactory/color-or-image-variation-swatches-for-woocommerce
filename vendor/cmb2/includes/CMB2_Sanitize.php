@@ -37,7 +37,7 @@ class CMB2_Sanitize {
 	 */
 	public function __construct( CMB2_Field $field, $value ) {
 		$this->field = $field;
-		$this->value = stripslashes_deep( $value ); // get rid of those evil magic quotes
+		$this->value = $value;
 	}
 
 	/**
@@ -84,9 +84,11 @@ class CMB2_Sanitize {
 			case 'taxonomy_select':
 			case 'taxonomy_radio':
 			case 'taxonomy_radio_inline':
+			case 'taxonomy_radio_hierarchical':
 			case 'taxonomy_multicheck':
+			case 'taxonomy_multicheck_hierarchical':
 			case 'taxonomy_multicheck_inline':
-				$sanitized_value = $this->_taxonomy();
+				$sanitized_value = $this->taxonomy();
 				break;
 			case 'multicheck':
 			case 'multicheck_inline':
@@ -122,7 +124,7 @@ class CMB2_Sanitize {
 	 * @since  2.2.4
 	 * @return mixed  Blank value, or sanitized term values if "cmb2_return_taxonomy_values_{$cmb_id}" is true.
 	 */
-	protected function _taxonomy() {
+	public function taxonomy() {
 		$sanitized_value = '';
 
 		if ( ! $this->field->args( 'taxonomy' ) ) {
@@ -243,6 +245,10 @@ class CMB2_Sanitize {
 		$search = array( $wp_locale->number_format['thousands_sep'], $wp_locale->number_format['decimal_point'] );
 		$replace = array( '', '.' );
 
+		// Strip slashes. Example: 2\'180.00.
+		// See https://github.com/CMB2/CMB2/issues/1014
+		$this->value = wp_unslash( $this->value );
+
 		// for repeatable
 		if ( is_array( $this->value ) ) {
 			foreach ( $this->value as $key => $val ) {
@@ -264,6 +270,9 @@ class CMB2_Sanitize {
 	 * @return string Timestring
 	 */
 	public function text_date_timestamp() {
+		// date_create_from_format if there is a slash in the value.
+		$this->value = wp_unslash( $this->value );
+
 		return is_array( $this->value )
 			? array_map( array( $this->field, 'get_timestamp_from_value' ), $this->value )
 			: $this->field->get_timestamp_from_value( $this->value );
@@ -276,6 +285,8 @@ class CMB2_Sanitize {
 	 * @return string|array Timestring
 	 */
 	public function text_datetime_timestamp( $repeat = false ) {
+		// date_create_from_format if there is a slash in the value.
+		$this->value = wp_unslash( $this->value );
 
 		$test = is_array( $this->value ) ? array_filter( $this->value ) : '';
 		if ( empty( $test ) ) {
@@ -311,6 +322,9 @@ class CMB2_Sanitize {
 		if ( empty( $test ) ) {
 			return '';
 		}
+
+		// date_create_from_format if there is a slash in the value.
+		$this->value = wp_unslash( $this->value );
 
 		$utc_key = $this->field->_id() . '_utc';
 
@@ -472,6 +486,10 @@ class CMB2_Sanitize {
 		// If there is no ID saved yet, try to get it from the url
 		if ( $this->value && ! $id_val ) {
 			$id_val = CMB2_Utils::image_id_from_url( $this->value );
+
+		// If there is an ID but user emptied the input value, remove the ID.
+		} elseif ( ! $this->value && $id_val ) {
+			$id_val = null;
 		}
 
 		return $id_field->save_field( $id_val );

@@ -46,14 +46,32 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 	protected $columns = array();
 
 	/**
-	 * Constructor
+	 * Array of CMB2_Options_Hookup instances if options page metabox.
 	 *
-	 * @since 2.0.0
-	 * @param CMB2 $cmb The CMB2 object to hookup
+	 * @var   CMB2_Options_Hookup[]|null
+	 * @since 2.2.5
 	 */
-	public function __construct( CMB2 $cmb ) {
-		$this->cmb = $cmb;
-		$this->object_type = $this->cmb->mb_object_type();
+	protected $options_hookup = null;
+
+	/**
+	 * A functionalized constructor, used for the hookup action callbacks.
+	 *
+	 * @since  2.2.6
+	 *
+	 * @param  CMB2 $cmb The CMB2 object to hookup
+	 *
+	 * @return CMB2_Hookup_Base $hookup The hookup object.
+	 */
+	public static function maybe_init_and_hookup( CMB2 $cmb ) {
+		if ( $cmb->prop( 'hookup' ) ) {
+
+			$hookup = new self( $cmb );
+
+			// Hook in the hookup... how meta.
+			return $hookup->universal_hooks();
+		}
+
+		return false;
 	}
 
 	public function universal_hooks() {
@@ -77,8 +95,12 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 					return $this->user_hooks();
 				case 'term':
 					return $this->term_hooks();
+				case 'options-page':
+					return $this->options_page_hooks();
 			}
 		}
+
+		return $this;
 	}
 
 	public function post_hooks() {
@@ -114,11 +136,13 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 		add_action( 'save_post', array( $this, 'save_post' ), 10, 2 );
 
 		if ( $this->cmb->has_columns ) {
-			foreach ( $this->cmb->prop( 'object_types' ) as $post_type ) {
+			foreach ( $this->cmb->box_types() as $post_type ) {
 				add_filter( "manage_{$post_type}_posts_columns", array( $this, 'register_column_headers' ) );
 				add_action( "manage_{$post_type}_posts_custom_column", array( $this, 'column_display' ), 10, 2 );
 			}
 		}
+
+		return $this;
 	}
 
 	public function comment_hooks() {
@@ -129,6 +153,8 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 			add_filter( 'manage_edit-comments_columns', array( $this, 'register_column_headers' ) );
 			add_action( 'manage_comments_custom_column', array( $this, 'column_display' ), 10, 3 );
 		}
+
+		return $this;
 	}
 
 	public function user_hooks() {
@@ -146,6 +172,8 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 			add_filter( 'manage_users_columns', array( $this, 'register_column_headers' ) );
 			add_filter( 'manage_users_custom_column', array( $this, 'return_column_display' ), 10, 3 );
 		}
+
+		return $this;
 	}
 
 	public function term_hooks() {
@@ -169,6 +197,14 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 				? in_array( $taxonomy, $show_on_term_add )
 				: (bool) $show_on_term_add;
 
+			/**
+			 * Filter to determine if the term's fields should show in the "Add term" section.
+			 *
+			 * The dynamic portion of the hook name, $cmb_id, is the metabox id.
+			 *
+			 * @param bool   $show_on_add Default is the value of the new_term_section cmb parameter.
+			 * @param object $cmb         The CMB2 instance
+			 */
 			$show_on_add = apply_filters( "cmb2_show_on_term_add_form_{$this->cmb->cmb_id}", $show_on_add, $this->cmb );
 
 			// Display form in add-new section (unless specified not to)
@@ -186,6 +222,20 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 		add_action( 'edited_terms', array( $this, 'save_term' ), 10, 2 );
 		add_action( 'delete_term', array( $this, 'delete_term' ), 10, 3 );
 
+		return $this;
+	}
+
+	public function options_page_hooks() {
+		$option_keys = $this->cmb->options_page_keys();
+
+		if ( ! empty( $option_keys ) ) {
+			foreach ( $option_keys as $option_key ) {
+				$this->options_hookup[ $option_key ] = new CMB2_Options_Hookup( $this->cmb, $option_key );
+				$this->options_hookup[ $option_key ]->hooks();
+			}
+		}
+
+		return $this;
 	}
 
 	/**
@@ -203,7 +253,11 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 		$front = is_admin() ? '' : '-front';
 		$rtl   = is_rtl() ? '-rtl' : '';
 
-		// Filter required styles and register stylesheet
+		/**
+		 * Filters the registered style dependencies for the cmb2 stylesheet.
+		 *
+		 * @param array $dependencies The registered style dependencies for the cmb2 stylesheet.
+		 */
 		$dependencies = apply_filters( 'cmb2_style_dependencies', array() );
 		wp_register_style( 'cmb2-styles', CMB2_Utils::url( "css/cmb2{$front}{$rtl}{$min}.css" ), $dependencies );
 		wp_register_style( 'cmb2-display-styles', CMB2_Utils::url( "css/cmb2-display{$rtl}{$min}.css" ), $dependencies );
@@ -344,7 +398,7 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 
 		$page = get_current_screen()->id;
 
-		foreach ( $this->cmb->prop( 'object_types' ) as $object_type ) {
+		foreach ( $this->cmb->box_types() as $object_type ) {
 			$screen = convert_to_screen( $object_type );
 
 			// If we're on the right post-type/object...
@@ -453,7 +507,7 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 		$page = get_current_screen()->id;
 		add_filter( "postbox_classes_{$page}_{$this->cmb->cmb_id}", array( $this, 'postbox_classes' ) );
 
-		foreach ( $this->cmb->prop( 'object_types' ) as $object_type ) {
+		foreach ( $this->cmb->box_types() as $object_type ) {
 			if ( count( $this->cmb->tax_metaboxes_to_remove ) ) {
 				$this->remove_default_tax_metaboxes( $object_type );
 			}
@@ -550,7 +604,7 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 	}
 
 	/**
-	 * Display metaboxes for a user object
+	 * Display metaboxes for a user object.
 	 *
 	 * @since  1.0.0
 	 */
@@ -559,7 +613,7 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 	}
 
 	/**
-	 * Display metaboxes for a taxonomy term object
+	 * Display metaboxes for a taxonomy term object.
 	 *
 	 * @since  2.2.0
 	 */
@@ -568,14 +622,14 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 	}
 
 	/**
-	 * Display metaboxes for an object type
+	 * Display metaboxes for an object type.
 	 *
 	 * @since  2.2.0
 	 * @param  string $type Object type
 	 * @return void
 	 */
 	public function show_form_for_type( $type ) {
-		if ( $type != $this->cmb->mb_object_type() ) {
+		if ( $type != $this->object_type ) {
 			return;
 		}
 
@@ -651,7 +705,7 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 	 * @since  1.0.0
 	 * @param  int   $post_id Post ID
 	 * @param  mixed $post    Post object
-	 * @return null
+	 * @return void
 	 */
 	public function save_post( $post_id, $post = false ) {
 
@@ -678,7 +732,7 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 	 *
 	 * @since  2.0.9
 	 * @param  int $comment_id Comment ID
-	 * @return null
+	 * @return void
 	 */
 	public function save_comment( $comment_id ) {
 
@@ -694,7 +748,7 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 	 *
 	 * @since  1.0.x
 	 * @param  int $user_id  User ID
-	 * @return null
+	 * @return void
 	 */
 	public function save_user( $user_id ) {
 		// check permissions
@@ -710,7 +764,7 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 	 * @param  int    $term_id  Term ID
 	 * @param  int    $tt_id    Term Taxonomy ID
 	 * @param  string $taxonomy Taxonomy
-	 * @return null
+	 * @return void
 	 */
 	public function save_term( $term_id, $tt_id, $taxonomy = '' ) {
 		$taxonomy = $taxonomy ? $taxonomy : $tt_id;
@@ -728,7 +782,7 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 	 * @param  int    $term_id  Term ID
 	 * @param  int    $tt_id    Term Taxonomy ID
 	 * @param  string $taxonomy Taxonomy
-	 * @return null
+	 * @return void
 	 */
 	public function delete_term( $term_id, $tt_id, $taxonomy = '' ) {
 		if ( $this->taxonomy_can_save( $taxonomy ) ) {
@@ -746,11 +800,12 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 	 * Determines if the current object is able to be saved
 	 *
 	 * @since  2.0.9
-	 * @param  string $type Current post_type or comment_type
-	 * @return bool          Whether object can be saved
+	 * @param  string $type Current object type.
+	 * @return bool         Whether object can be saved
 	 */
 	public function can_save( $type = '' ) {
-		return apply_filters( 'cmb2_can_save', (
+
+		$can_save = (
 			$this->cmb->prop( 'save_fields' )
 			// check nonce
 			&& isset( $_POST[ $this->cmb->nonce() ] )
@@ -758,10 +813,18 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 			// check if autosave
 			&& ! ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
 			// get the metabox types & compare it to this type
-			&& ( $type && in_array( $type, $this->cmb->prop( 'object_types' ) ) )
+			&& ( $type && in_array( $type, $this->cmb->box_types() ) )
 			// Don't do updates during a switch-to-blog instance.
 			&& ! ( is_multisite() && ms_is_switched() )
-		) );
+		);
+
+		/**
+		 * Filter to determine if metabox is allowed to save.
+		 *
+		 * @param bool   $can_save Whether the current metabox can save.
+		 * @param object $cmb      The CMB2 instance
+		 */
+		return apply_filters( 'cmb2_can_save', $can_save, $this->cmb );
 	}
 
 	/**
@@ -808,6 +871,12 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 	 * @since  2.0.0
 	 */
 	public static function enqueue_cmb_css( $handle = 'cmb2-styles' ) {
+
+		/**
+		 * Filter to determine if CMB2'S css should be enqueued.
+		 *
+		 * @param bool $enqueue_css Default is true.
+		 */
 		if ( ! apply_filters( 'cmb2_enqueue_css', true ) ) {
 			return false;
 		}
@@ -827,6 +896,12 @@ class CMB2_hookup extends CMB2_Hookup_Base {
 	 * @since  2.0.0
 	 */
 	public static function enqueue_cmb_js() {
+
+		/**
+		 * Filter to determine if CMB2'S JS should be enqueued.
+		 *
+		 * @param bool $enqueue_js Default is true.
+		 */
 		if ( ! apply_filters( 'cmb2_enqueue_js', true ) ) {
 			return false;
 		}
