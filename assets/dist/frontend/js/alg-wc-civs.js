@@ -1,7 +1,7 @@
 /**
  * @summary Main JS of Color or Image Variation Swatches for WooCommerce
  *
- * @version   1.0.4
+ * @version   1.0.5
  * @since     1.0.0
  * @requires  jQuery.js
  */
@@ -25,7 +25,7 @@ jQuery(function ($) {
 			});
 		},
 
-		remove_invalid_attributes:function(){
+		remove_invalid_attributes: function () {
 			var select = $(this.original_select_selector);
 			var all_terms = $(this.term_selector);
 			all_terms.addClass('disabled');
@@ -34,7 +34,7 @@ jQuery(function ($) {
 				var options = $(this).find('option:not([disabled])');
 				options.each(function () {
 					var value = $(this).attr('value');
-					var term = $(this).parent().parent().parent().find(alg_wc_civs.term_selector + '[data-value="' + value + '"]');
+					var term = $(this).closest('td.value').find(alg_wc_civs.term_selector + '[data-value="' + value + '"]');
 					term.removeClass('disabled');
 				});
 			});
@@ -50,38 +50,37 @@ jQuery(function ($) {
 				var value = $(this).attr('data-value');
 				var opt = select.find('option[value="' + value + '"]');
 
-				//if(!$(this).hasClass('disabled')){
-					if (!$(this).hasClass('active')) {
-						if (opt.length || !$(this).hasClass('disabled')) {
-							opt.attr('selected', 'selected');
-							select.trigger('change');
-						} else {
-							window.alert(wc_add_to_cart_variation_params.i18n_no_matching_variations_text);
-							select.val('').trigger('change');
-						}
+				if (!$(this).hasClass('active')) {
+					if (opt.length || !$(this).hasClass('disabled')) {
+						opt.prop('selected', 'selected');
+						select.trigger('change');
 					} else {
+						window.alert(wc_add_to_cart_variation_params.i18n_no_matching_variations_text);
 						select.val('').trigger('change');
 					}
-				//}
+				} else {
+					select.val('').trigger('change');
+				}
+
 				alg_wc_civs.remove_invalid_attributes();
 			});
 
 			// Highlights the corresponding term according to select
 			$('body').on('change', select_str, function () {
-				var terms = $(this).parent().parent().find(term_str);
+				var terms = $(this).closest('td.value').find(term_str);
 				var value = $(this).find('option:selected').attr('value');
 				terms.removeClass('active');
-				var term = $(this).parent().parent().find(term_str + '[data-value="' + value + '"]');
+				var term = $(this).closest('td.value').find(term_str + '[data-value="' + value + '"]');
 				var event = {
 					type: 'alg_wc_civs_term_click',
 					term: null,
 					select: $(this),
 					active: false
 				};
-				if(term.length){
+				if (term.length) {
 					term.addClass('active');
 					event.active = true;
-					event.term = term;	
+					event.term = term;
 				}
 				$('body').trigger(event);
 				alg_wc_civs.remove_invalid_attributes();
