@@ -58,7 +58,7 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 
 == Changelog ==
 
-= 1.0.5 - 15/01/2017 =
+= 1.0.5 - 15/01/2018 =
 * Update CMB2
 * Fix jQuery conflict
 
