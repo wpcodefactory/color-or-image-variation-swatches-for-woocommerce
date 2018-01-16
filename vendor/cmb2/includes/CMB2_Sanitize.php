@@ -371,8 +371,8 @@ class CMB2_Sanitize {
 			if ( ! is_object( $datetime ) ) {
 				$this->value = $utc_stamp = '';
 			} else {
-				$timestamp   = $datetime->setTimezone( new DateTimeZone( $tzstring ) )->getTimestamp();
-				$utc_stamp   = $timestamp - $offset;
+				$datetime->setTimezone( new DateTimeZone( $tzstring ) );
+				$utc_stamp   = date_timestamp_get( $datetime ) - $offset;
 				$this->value = serialize( $datetime );
 			}
 

@@ -1,7 +1,7 @@
 /**
  * @summary Main JS of Color or Image Variation Swatches for WooCommerce
  *
- * @version   1.0.4
+ * @version   1.0.6
  * @since     1.0.0
  * @requires  jQuery.js
  */
@@ -45,15 +45,15 @@ jQuery(function ($) {
 			var select_str = this.original_select_selector;
 
 			// Triggers the corresponding select and show an alert in case the combination does not exist
-			$('body').on('click', term_str, function () {
-				var select = $(this).parent().parent().find('select');
+			jQuery('body').on('click', term_str, function () {
+                var data_attribute = $(this).attr('data-attribute');
+				var select = jQuery(this).parent().parent().find('select');
 				var value = $(this).attr('data-value');
 				var opt = select.find('option[value="' + value + '"]');
 
 				if (!$(this).hasClass('active')) {
 					if (opt.length || !$(this).hasClass('disabled')) {
-						opt.prop('selected', 'selected');
-						select.trigger('change');
+                        select.val(value).trigger('change');
 					} else {
 						window.alert(wc_add_to_cart_variation_params.i18n_no_matching_variations_text);
 						select.val('').trigger('change');
@@ -66,7 +66,7 @@ jQuery(function ($) {
 			});
 
 			// Highlights the corresponding term according to select
-			$('body').on('change', select_str, function () {
+            jQuery('body').on('change', select_str, function () {
 				var terms = $(this).closest('td.value').find(term_str);
 				var value = $(this).find('option:selected').attr('value');
 				terms.removeClass('active');
