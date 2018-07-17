@@ -5,6 +5,7 @@
 **/.sass-cache/*
 tasks/node_modules
 tasks/node_modules/*
+tasks/package-lock.json
 
 vendor/cmb2/languages
 vendor/cmb2/tests

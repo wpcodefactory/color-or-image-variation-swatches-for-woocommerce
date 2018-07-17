@@ -60,6 +60,8 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 
 = 1.0.6 - 17/07/2018 =
 * Fix click on Safari
+* Improve the detection mechanism of the original variations dropdown
+* Remove package-lock.json
 
 = 1.0.5 - 15/01/2018 =
 * Update CMB2
@@ -90,3 +92,5 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 
 = 1.0.6 =
 * Fix click on Safari
+* Improve the detection mechanism of the original variations dropdown
+* Remove package-lock.json
