@@ -53,6 +53,8 @@ jQuery(function ($) {
 
 				if (!$(this).hasClass('active')) {
 					if (opt.length || !$(this).hasClass('disabled')) {
+						opt.prop('selected', true);
+						select.trigger('change');
                         select.val(value).trigger('change');
 					} else {
 						window.alert(wc_add_to_cart_variation_params.i18n_no_matching_variations_text);
