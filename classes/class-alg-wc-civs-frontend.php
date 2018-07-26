@@ -4,7 +4,7 @@
  *
  * Handles the admin part of the new WooCommerce variation types
  *
- * @version 1.0.1
+ * @version 1.0.7
  * @since   1.0.0
  * @author  Algoritmika Ltd.
  */
@@ -34,7 +34,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 		/**
 		 * Adds the Html for the new attributes
 		 *
-		 * @version 1.0.1
+		 * @version 1.0.7
 		 * @since   1.0.0
 		 */
 		public function woocommerce_dropdown_variation_attribute_options_html( $html, $args ) {
@@ -50,8 +50,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 
 			$attr_taxonomy = $wc_functions->get_attribute_taxonomy_by_attribute( $attribute );
 
-
-			if ( ! $attr_taxonomy->valid ) {
+			if ( empty( $attr_taxonomy ) || ! $attr_taxonomy->valid ) {
 				return $html;
 			}
 
