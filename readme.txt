@@ -20,7 +20,8 @@ Provides new WooCommerce type attributes (color,label,image) for creating beauti
 * Create a new type attribute for handling **images**
 
 = Getting Started =
-Once you install and enable the plugin, three new options will be available at **Product > Attributes > Types**
+Once you install and enable the plugin, three new options will be available at **Product > Attributes > Types** :
+
 * Color
 * Image
 * Label
