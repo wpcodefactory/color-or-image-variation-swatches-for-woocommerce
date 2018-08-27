@@ -2,7 +2,7 @@
 Contributors: algoritmika,karzin,anbinder
 Tags: woocommerce,variation,appealing,swatches,color,image,attribute
 Requires at least: 4.4
-Tested up to: 4.7
+Tested up to: 4.9
 Stable tag: 1.0.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -19,8 +19,11 @@ Provides new WooCommerce type attributes (color,label,image) for creating beauti
 * Create a new type attribute for handling **labels**
 * Create a new type attribute for handling **images**
 
-= Feedback =
-* We are open to your suggestions and feedback. Thank you for using or trying out one of our plugins!
+= Get Started =
+Once you install and enable the plugin, three new options will be available at **Product > Attributes > Types**
+* Color
+* Image
+* Label
 
 == Frequently Asked Questions ==
 
@@ -58,8 +61,11 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 
 == Changelog ==
 
-= 1.0.7 - 26/07/2018 =
+= 1.0.7 - 27/08/2018 =
 * Fix php warning
+* Update tested up to
+* Add WooCommerce requirements
+* Improve plugin's description
 
 = 1.0.6 - 17/07/2018 =
 * Fix click on Safari
@@ -95,3 +101,6 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 
 = 1.0.7 =
 * Fix php warning
+* Update tested up to
+* Add WooCommerce requirements
+* Improve plugin's description
