@@ -25,6 +25,8 @@ Once you install and enable the plugin, three new options will be available at *
 * Image
 * Label
 
+Please take a look at the screenshots to understand it better
+
 == Frequently Asked Questions ==
 
 = What does this plugin do? =
