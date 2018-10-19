@@ -1,63 +1,17 @@
 [
     {
-        "name": "pablo-pacheco/wc-custom-settings-options",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/pablo-pacheco/wc-custom-settings-options.git",
-            "reference": "1f8c1a2a3bfb7a443649dd950362d039ceb1b50f"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/pablo-pacheco/wc-custom-settings-options/zipball/1f8c1a2a3bfb7a443649dd950362d039ceb1b50f",
-            "reference": "1f8c1a2a3bfb7a443649dd950362d039ceb1b50f",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.4"
-        },
-        "time": "2017-04-13T21:11:46+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "GPLv2"
-        ],
-        "authors": [
-            {
-                "name": "Pablo S G Pacheco",
-                "email": "pablo.sg.pacheco@gmail.com",
-                "role": "Web Developer"
-            }
-        ],
-        "description": "Custom settings options for WooCommerce",
-        "homepage": "https://github.com/pablo-pacheco/wc-custom-settings-options",
-        "keywords": [
-            "settings-api",
-            "woocommerce",
-            "wordpress",
-            "wp"
-        ]
-    },
-    {
         "name": "composer/installers",
-        "version": "v1.5.0",
-        "version_normalized": "1.5.0.0",
+        "version": "v1.6.0",
+        "version_normalized": "1.6.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/composer/installers.git",
-            "reference": "049797d727261bf27f2690430d935067710049c2"
+            "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/installers/zipball/049797d727261bf27f2690430d935067710049c2",
-            "reference": "049797d727261bf27f2690430d935067710049c2",
+            "url": "https://api.github.com/repos/composer/installers/zipball/cfcca6b1b60bc4974324efb5783c13dca6932b5b",
+            "reference": "cfcca6b1b60bc4974324efb5783c13dca6932b5b",
             "shasum": ""
         },
         "require": {
@@ -71,7 +25,7 @@
             "composer/composer": "1.0.*@dev",
             "phpunit/phpunit": "^4.8.36"
         },
-        "time": "2017-12-29T09:13:20+00:00",
+        "time": "2018-08-27T06:10:37+00:00",
         "type": "composer-plugin",
         "extra": {
             "class": "Composer\\Installers\\Plugin",
@@ -168,18 +122,64 @@
         ]
     },
     {
+        "name": "pablo-pacheco/wc-custom-settings-options",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pablo-pacheco/wc-custom-settings-options.git",
+            "reference": "1f8c1a2a3bfb7a443649dd950362d039ceb1b50f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pablo-pacheco/wc-custom-settings-options/zipball/1f8c1a2a3bfb7a443649dd950362d039ceb1b50f",
+            "reference": "1f8c1a2a3bfb7a443649dd950362d039ceb1b50f",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.4"
+        },
+        "time": "2017-04-13T21:11:46+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPLv2"
+        ],
+        "authors": [
+            {
+                "name": "Pablo S G Pacheco",
+                "email": "pablo.sg.pacheco@gmail.com",
+                "role": "Web Developer"
+            }
+        ],
+        "description": "Custom settings options for WooCommerce",
+        "homepage": "https://github.com/pablo-pacheco/wc-custom-settings-options",
+        "keywords": [
+            "settings-api",
+            "woocommerce",
+            "wordpress",
+            "wp"
+        ]
+    },
+    {
         "name": "webdevstudios/cmb2",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
             "url": "https://github.com/CMB2/CMB2.git",
-            "reference": "a1778c2ffccf2fdd11c9d2006eaa72192bdce9e9"
+            "reference": "853d48d2f52371ac927ea6302d4e04668f1067b3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/CMB2/CMB2/zipball/a1778c2ffccf2fdd11c9d2006eaa72192bdce9e9",
-            "reference": "a1778c2ffccf2fdd11c9d2006eaa72192bdce9e9",
+            "url": "https://api.github.com/repos/CMB2/CMB2/zipball/853d48d2f52371ac927ea6302d4e04668f1067b3",
+            "reference": "853d48d2f52371ac927ea6302d4e04668f1067b3",
             "shasum": ""
         },
         "require": {
@@ -191,12 +191,12 @@
         "suggest": {
             "composer/installers": "~1.0"
         },
-        "time": "2017-12-20T14:18:52+00:00",
+        "time": "2018-05-29T14:42:34+00:00",
         "type": "wordpress-plugin",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "GPL-2.0+"
+            "GPL-2.0-or-later"
         ],
         "authors": [
             {
