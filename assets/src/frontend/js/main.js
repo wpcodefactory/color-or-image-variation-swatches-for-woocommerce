@@ -34,7 +34,7 @@ jQuery(function ($) {
 				var options = $(this).find('option:not([disabled])');
 				options.each(function () {
 					var value = $(this).attr('value');
-					var term = $(this).closest('td.value').find(alg_wc_civs.term_selector + '[data-value="' + value + '"]');
+					var term = $(this).closest('td').find(alg_wc_civs.term_selector + '[data-value="' + value + '"]');
 					term.removeClass('disabled');
 				});
 			});
@@ -68,10 +68,10 @@ jQuery(function ($) {
 
 			// Highlights the corresponding term according to select
             jQuery('body').on('change', select_str, function () {
-				var terms = $(this).closest('td.value').find(term_str);
+				var terms = $(this).closest('td').find(term_str);
 				var value = $(this).find('option:selected').attr('value');
 				terms.removeClass('active');
-				var term = $(this).closest('td.value').find(term_str + '[data-value="' + value + '"]');
+				var term = $(this).closest('td').find(term_str + '[data-value="' + value + '"]');
 				var event = {
 					type: 'alg_wc_civs_term_click',
 					term: null,

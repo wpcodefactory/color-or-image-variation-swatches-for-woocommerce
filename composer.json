@@ -27,7 +27,7 @@
 	"require": {
 		"php": ">=5.3.2",
 		"composer/installers": ">=v1.2.0",
-		"webdevstudios/cmb2": "dev-master",
+		"cmb2/cmb2": "dev-master",
 		"pablo-pacheco/wc-custom-settings-options": "dev-master"
 	},
 	"autoload": {
@@ -38,7 +38,7 @@
 	"extra": {
 		"installer-paths": {
 			"vendor/{$name}/": [
-				"webdevstudios/cmb2"
+				"cmb2/cmb2"
 			]
 		}
 	}

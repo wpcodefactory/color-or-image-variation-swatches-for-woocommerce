@@ -66,6 +66,8 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 
 = 1.1.0 - 23/10/2018 =
 * Fix 'woocommerce_update_variation_values' js event trigger
+* Replace td.value by td on main.js avoiding possible conflicts
+* Update CMB2 library address
 
 = 1.0.9 - 19/10/2018 =
 * Update CMB2
@@ -112,4 +114,6 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 == Upgrade Notice ==
 
 = 1.1.0 =
-* Update CMB2
+* Fix 'woocommerce_update_variation_values' js event trigger
+* Replace td.value by td on main.js avoiding possible conflicts
+* Update CMB2 library address
