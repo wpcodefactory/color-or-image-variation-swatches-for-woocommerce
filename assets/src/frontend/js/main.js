@@ -1,7 +1,7 @@
 /**
  * @summary Main JS of Color or Image Variation Swatches for WooCommerce
  *
- * @version   1.0.6
+ * @version   1.1.0
  * @since     1.0.0
  * @requires  jQuery.js
  */
@@ -20,7 +20,7 @@ jQuery(function ($) {
 			this.term_selector = '.alg-wc-civs-term';
 			this.original_select_selector = '.alg-wc-civs-original-select select';
 			this.sync_terms_and_selects();
-			jQuery(document).bind('woocommerce_update_variation_values', function () {
+			$('.variations_form').bind('woocommerce_update_variation_values', function () {
 				alg_wc_civs.remove_invalid_attributes();
 			});
 		},
