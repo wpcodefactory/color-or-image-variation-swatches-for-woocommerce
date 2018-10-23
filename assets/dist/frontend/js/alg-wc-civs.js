@@ -1,7 +1,7 @@
 /**
  * @summary Main JS of Color or Image Variation Swatches for WooCommerce
  *
- * @version   1.1.0
+ * @version   1.0.9
  * @since     1.0.0
  * @requires  jQuery.js
  */
