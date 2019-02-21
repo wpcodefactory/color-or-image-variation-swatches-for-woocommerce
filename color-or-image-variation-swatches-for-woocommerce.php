@@ -2,9 +2,9 @@
 /*
 Plugin Name: Color or Image Variation Swatches for WooCommerce
 Description: Provides new WooCommerce type attributes (color,label,image) for creating beautiful variations
-Version: 1.0.9
+Version: 1.1.0
 WC requires at least: 3.0.0
-WC tested up to: 3.4
+WC tested up to: 3.5
 Author: Algoritmika Ltd
 Copyright: © 2017 Algoritmika Ltd.
 License: GNU General Public License v3.0

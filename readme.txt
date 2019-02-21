@@ -2,8 +2,8 @@
 Contributors: algoritmika,karzin,anbinder
 Tags: woocommerce,variation,appealing,swatches,color,image,attribute
 Requires at least: 4.4
-Tested up to: 4.9
-Stable tag: 1.0.9
+Tested up to: 5.0
+Stable tag: 1.1.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -64,6 +64,10 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 
 == Changelog ==
 
+= 1.1.0 - 21/02/2019 =
+* Update WC tested up to: 3.5
+* Update WordPress Tested up to: 5.0
+
 = 1.0.9 - 23/10/2018 =
 * Update CMB2
 * Fix 'woocommerce_update_variation_values' js event trigger
@@ -111,8 +115,6 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 
 == Upgrade Notice ==
 
-= 1.0.9 =
-* Update CMB2
-* Fix 'woocommerce_update_variation_values' js event trigger
-* Replace td.value by td on main.js avoiding possible conflicts
-* Update CMB2 library address
+= 1.1.0 =
+* Update WC tested up to: 3.5
+* Update WordPress Tested up to: 5.0
