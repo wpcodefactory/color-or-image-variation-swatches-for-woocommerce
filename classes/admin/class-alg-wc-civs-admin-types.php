@@ -4,7 +4,7 @@
  *
  * Handles the admin part of the new WooCommerce variation types
  *
- * @version 1.0.0
+ * @version 1.1.1
  * @since   1.0.0
  * @author  Algoritmika Ltd.
  */
@@ -47,8 +47,10 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 		/**
 		 * Adds attribute values on product attribute tab.
 		 *
-		 * @version 1.0.0
+		 * @version 1.1.1
 		 * @since   1.0.0
+		 *
+		 * @see   woocommerce/includes/admin/meta-boxes/views/html-product-attribute.php
 		 *
 		 * @param $attribute_taxonomy
 		 * @param $i
@@ -60,19 +62,21 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 
 			$tax_name = wc_attribute_taxonomy_name( $attribute_taxonomy->attribute_name );
 			global $thepostid;
-
+			$product = wc_get_product( $thepostid );
+			$options = wc_get_product_terms( $product->get_id(), 'pa_' . $attribute_taxonomy->attribute_name, array( 'fields' => 'ids' ) );
 			?>
 
             <select multiple="multiple" data-placeholder="<?php esc_attr_e( 'Select terms', 'woocommerce' ); ?>" class="multiselect attribute_values wc-enhanced-select" name="attribute_values[<?php echo $i; ?>][]">
 				<?php
-				$args = array(
+				$args      = array(
 					'orderby'    => 'name',
 					'hide_empty' => 0,
 				);
 				$all_terms = get_terms( $tax_name, apply_filters( 'woocommerce_product_attribute_terms', $args ) );
 				if ( $all_terms ) {
 					foreach ( $all_terms as $term ) {
-						echo '<option value="' . esc_attr( $term->term_id ) . '" ' . selected( has_term( absint( $term->term_id ), $tax_name, $thepostid ), true, false ) . '>' . esc_attr( apply_filters( 'woocommerce_product_attribute_term_name', $term->name, $term ) ) . '</option>';
+						$options = ! empty( $options ) ? $options : array();
+						echo '<option value="' . esc_attr( $term->term_id ) . '"' . wc_selected( $term->term_id, $options ) . '>' . esc_attr( apply_filters( 'woocommerce_product_attribute_term_name', $term->name, $term ) ) . '</option>';
 					}
 				}
 				?>
