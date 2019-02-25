@@ -62,8 +62,11 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 
 			$tax_name = wc_attribute_taxonomy_name( $attribute_taxonomy->attribute_name );
 			global $thepostid;
-			$product = wc_get_product( $thepostid );
-			$options = wc_get_product_terms( $product->get_id(), 'pa_' . $attribute_taxonomy->attribute_name, array( 'fields' => 'ids' ) );
+			$post_id = ! empty( $thepostid ) ? $thepostid : false;
+			$post_id = $_REQUEST && array_key_exists( 'post_id', $_REQUEST ) ? $_REQUEST['post_id'] : false;
+			if ( ! empty( $post_id ) ) {
+				$options = wc_get_product_terms( $post_id, 'pa_' . $attribute_taxonomy->attribute_name, array( 'fields' => 'ids' ) );
+			}
 			?>
 
             <select multiple="multiple" data-placeholder="<?php esc_attr_e( 'Select terms', 'woocommerce' ); ?>" class="multiselect attribute_values wc-enhanced-select" name="attribute_values[<?php echo $i; ?>][]">
