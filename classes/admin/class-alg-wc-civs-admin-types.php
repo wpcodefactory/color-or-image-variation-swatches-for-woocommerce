@@ -63,9 +63,12 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 			$tax_name = wc_attribute_taxonomy_name( $attribute_taxonomy->attribute_name );
 			global $thepostid;
 			$post_id = ! empty( $thepostid ) ? $thepostid : false;
-			$post_id = $_REQUEST && array_key_exists( 'post_id', $_REQUEST ) ? $_REQUEST['post_id'] : false;
+			$post_id = empty( $post_id ) && $_REQUEST && array_key_exists( 'post_id', $_REQUEST ) ? $_REQUEST['post_id'] : false;
+			$post_id = empty( $post_id ) && $_REQUEST && array_key_exists( 'post', $_REQUEST ) ? $_REQUEST['post'] : false;
 			if ( ! empty( $post_id ) ) {
 				$options = wc_get_product_terms( $post_id, 'pa_' . $attribute_taxonomy->attribute_name, array( 'fields' => 'ids' ) );
+			} else {
+				error_log( print_r( $_REQUEST, true ) );
 			}
 			?>
 
