@@ -1,8 +1,8 @@
 === Color or Image Variation Swatches for WooCommerce ===
-Contributors: algoritmika,karzin,anbinder
-Tags: woocommerce,variation,appealing,swatches,color,image,attribute
+Contributors: karzin
+Tags: woocommerce,variation,swatches,color,image,attribute
 Requires at least: 4.4
-Tested up to: 5.1
+Tested up to: 5.3
 Stable tag: 1.1.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -64,6 +64,12 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 
 == Changelog ==
 
+= 1.1.2 - 16/01/2020 =
+* WC tested up to: 3.8
+* Tested up to: 5.3
+* Add option to load scripts only on product page
+* Update CMB2
+
 = 1.1.1 - 26/03/2019 =
 * Improve function that displays attributes on product edit page
 * Tested up to: 5.1
@@ -119,6 +125,8 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 
 == Upgrade Notice ==
 
-= 1.1.1 =
-* Improve function that displays attributes on product edit page
-* Tested up to: 5.1
+= 1.1.2 =
+* WC tested up to: 3.8
+* Tested up to: 5.3
+* Add option to load scripts only on product page
+* Update CMB2

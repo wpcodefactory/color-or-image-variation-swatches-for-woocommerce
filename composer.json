@@ -1,5 +1,5 @@
 {
-	"name": "algoritmika/color-or-image-variation-swatches-for-woocommerce",
+	"name": "thanks-to-it/color-or-image-variation-swatches-for-woocommerce",
 	"description": "Provides new WooCommerce type attributes (color,label,image)",
 	"keywords": [
 		"wordpress",
@@ -11,10 +11,6 @@
 	],
 	"license": "MIT",
 	"authors": [
-		{
-			"name": "Tomas Anbinderis",
-			"email": "anbinderis@gmail.com"
-		},
 		{
 			"name": "Pablo Pacheco",
 			"email": "pablo.sg.pacheco@gmail.com"

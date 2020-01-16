@@ -4,7 +4,7 @@
  *
  * @version 1.0.1
  * @since   1.0.0
- * @author  Algoritmika Ltd.
+ * @author  Thanks to IT.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -16,7 +16,8 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings_General' ) ) {
 	class Alg_WC_CIVS_Settings_General extends Alg_WC_CIVS_Settings_Section {
 
 		const OPTION_ENABLE_PLUGIN = 'alg_wc_civs_enable';
-		const OPTION_METABOX_PRO   = 'alg_wc_civs_cmb_pro';
+		const OPTION_METABOX_PRO = 'alg_wc_civs_cmb_pro';
+		const OPTION_SCRIPTS_ON_PRODUCT_PAGE = 'alg_wc_civs_scripts_on_product_page';
 
 		protected $pro_version_url = 'https://coder.fm/item/color-or-image-variation-swatches-for-woocommerce/';
 
@@ -81,6 +82,14 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings_General' ) ) {
 					'title'   => __( 'Enable Plugin', 'color-or-image-variation-swatches-for-woocommerce' ),
 					'desc'    => __( 'Enable "Color or Image Variation Swatches for WooCommerce" plugin', 'color-or-image-variation-swatches-for-woocommerce' ),
 					'id'      => self::OPTION_ENABLE_PLUGIN,
+					'default' => 'yes',
+					'type'    => 'checkbox',
+				),
+				array(
+					'title'   => __( 'Scripts Only on Product Page', 'color-or-image-variation-swatches-for-woocommerce' ),
+					'desc'    => __( 'Enable', 'color-or-image-variation-swatches-for-woocommerce' ),
+					'desc_tip'=> __( 'Load Javascript and CSS on Product Page only.', 'color-or-image-variation-swatches-for-woocommerce' ),
+					'id'      => self::OPTION_SCRIPTS_ON_PRODUCT_PAGE,
 					'default' => 'yes',
 					'type'    => 'checkbox',
 				),

@@ -4,9 +4,9 @@
  *
  * Handles the admin part of the new WooCommerce variation types
  *
- * @version 1.0.7
+ * @version 1.1.2
  * @since   1.0.0
- * @author  Algoritmika Ltd.
+ * @author  Thanks to IT.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -20,15 +20,12 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 		/**
 		 * Constructor.
 		 *
-		 * @version 1.0.0
+		 * @version 1.1.2
 		 * @since   1.0.0
 		 */
 		function __construct() {
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 11 );
-			add_filter( 'woocommerce_dropdown_variation_attribute_options_html', array(
-				$this,
-				'woocommerce_dropdown_variation_attribute_options_html',
-			), 999, 2 );
+			add_filter( 'woocommerce_dropdown_variation_attribute_options_html', array( $this, 'woocommerce_dropdown_variation_attribute_options_html', ), 999, 2 );
 		}	
 
 		/**
@@ -161,10 +158,16 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 		/**
 		 * Load scripts and styles
 		 *
-		 * @version 1.0.1
+		 * @version 1.1.2
 		 * @since   1.0.0
 		 */
 		function enqueue_scripts() {
+			if (
+				'yes' === get_option( Alg_WC_CIVS_Settings_General::OPTION_SCRIPTS_ON_PRODUCT_PAGE, 'yes' ) &&
+				! is_product()
+			) {
+				return;
+			}
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 			// Main js file
