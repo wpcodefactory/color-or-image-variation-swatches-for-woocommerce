@@ -69,6 +69,7 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 * Tested up to: 5.3
 * Add option to load scripts only on product page
 * Update CMB2
+* Config auto deploy with travis
 
 = 1.1.1 - 26/03/2019 =
 * Improve function that displays attributes on product edit page
@@ -130,3 +131,4 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 * Tested up to: 5.3
 * Add option to load scripts only on product page
 * Update CMB2
+* Config auto deploy with travis
