@@ -43,7 +43,7 @@ if ( ! function_exists( 'alg_wc_civs_plugins_loaded' ) ) {
 			} );
 		} else {
 			// Includes composer dependencies
-			require __DIR__ . '/vendor/autoload.php';
+			require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 		}
 	}
 }

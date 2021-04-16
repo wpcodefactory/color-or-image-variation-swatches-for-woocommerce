@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '7ab778beabc99fccded56e4bd1992c4977992ae6',
+    'reference' => '0e547d0d95ea2710533c68c17c7f7bb92c47c0f0',
     'name' => 'thanks-to-it/color-or-image-variation-swatches-for-woocommerce',
   ),
   'versions' => 
@@ -37,7 +37,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '7ab778beabc99fccded56e4bd1992c4977992ae6',
+      'reference' => '0e547d0d95ea2710533c68c17c7f7bb92c47c0f0',
     ),
   ),
 );

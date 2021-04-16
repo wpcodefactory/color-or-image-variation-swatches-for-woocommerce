@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    '570fb149d2cb691b083e98ff6bc5c154' => $vendorDir . '/cmb2/init.php',
+    '8b8aa66d2a1b65e8ea48d816f368e326' => $vendorDir . '/cmb2/cmb2/init.php',
 );
