@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '30568a6a2dbe16a7d68ff0f30cedb726f91256ee',
+    'reference' => '7ab778beabc99fccded56e4bd1992c4977992ae6',
     'name' => 'thanks-to-it/color-or-image-variation-swatches-for-woocommerce',
   ),
   'versions' => 
@@ -20,15 +20,6 @@
       ),
       'reference' => 'cacbc8cedbfdf8ffe0e840858e6860f9333c33f2',
     ),
-    'composer/installers' => 
-    array (
-      'pretty_version' => 'v1.10.0',
-      'version' => '1.10.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '1a0357fccad9d1cc1ea0c9a05b8847fbccccb78d',
-    ),
     'pablo-pacheco/wc-custom-settings-options' => 
     array (
       'pretty_version' => 'dev-master',
@@ -39,20 +30,6 @@
       ),
       'reference' => '1f8c1a2a3bfb7a443649dd950362d039ceb1b50f',
     ),
-    'roundcube/plugin-installer' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '*',
-      ),
-    ),
-    'shama/baton' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '*',
-      ),
-    ),
     'thanks-to-it/color-or-image-variation-swatches-for-woocommerce' => 
     array (
       'pretty_version' => 'dev-master',
@@ -60,7 +37,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '30568a6a2dbe16a7d68ff0f30cedb726f91256ee',
+      'reference' => '7ab778beabc99fccded56e4bd1992c4977992ae6',
     ),
   ),
 );
