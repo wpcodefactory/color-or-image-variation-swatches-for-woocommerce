@@ -67,6 +67,7 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 = 1.1.3 - 16/04/2021 =
 * Tested up to: 5.7.
 * WC tested up to: 5.2.
+* Update CMB
 
 = 1.1.2 - 16/01/2020 =
 * WC tested up to: 3.8
