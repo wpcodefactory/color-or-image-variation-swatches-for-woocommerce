@@ -3,7 +3,7 @@ Contributors: karzin
 Tags: woocommerce,variation,swatches,color,image,attribute
 Requires at least: 4.4
 Tested up to: 5.7
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -63,6 +63,10 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 5. Use the new type attributes (color, label and image) at your disposal
 
 == Changelog ==
+
+= 1.1.4 - 17/04/2021 =
+* Update composer setup.
+* Update deploy process.
 
 = 1.1.3 - 16/04/2021 =
 * Tested up to: 5.7.
