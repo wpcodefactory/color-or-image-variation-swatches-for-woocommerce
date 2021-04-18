@@ -25,6 +25,8 @@ if (
 	return;
 }
 
+require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
+
 // Autoloader without namespace
 if ( ! function_exists( 'alg_wc_civs_autoloader' ) ) {
 
