@@ -25,29 +25,6 @@ if (
 	return;
 }
 
-// Check Pro version and load dependencies
-add_action( 'plugins_loaded', 'alg_wc_civs_plugins_loaded' );
-
-/**
- * Check for Pro version and load dependencies
- *
- * @version 1.0.1
- * @since   1.0.1
- */
-if ( ! function_exists( 'alg_wc_civs_plugins_loaded' ) ) {
-	function alg_wc_civs_plugins_loaded() {
-		if ( defined( 'ALG_WC_CIVS_PRO_BASENAME' ) ) {
-			// Disable free version
-			add_action( 'admin_init', function () {
-				deactivate_plugins( __FILE__ );
-			} );
-		} else {
-			// Includes composer dependencies
-			require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
-		}
-	}
-}
-
 // Autoloader without namespace
 if ( ! function_exists( 'alg_wc_civs_autoloader' ) ) {
 
