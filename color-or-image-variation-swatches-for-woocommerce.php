@@ -1,13 +1,14 @@
 <?php
 /*
 Plugin Name: Color or Image Variation Swatches for WooCommerce
-Description: Provides new WooCommerce type attributes (color,label,image) for creating beautiful variations
-Version: 1.1.4
+Plugin URI: https://wordpress.org/plugins/color-or-image-variation-swatches-for-woocommerce/
+Description: Provides new WooCommerce type attributes (color,label,image) for creating beautiful variations.
+Version: 1.1.5
 WC requires at least: 3.0.0
-WC tested up to: 5.2
-Author: Thanks to IT
-Author URI: https://github.com/thanks-to-it
-Copyright: © 2021 Thanks to IT.
+WC tested up to: 7.3
+Author: WPFactory
+Author URI: https://wpfactory.com
+Copyright: © 2023 WPFactory
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Text Domain: color-or-image-variation-swatches-for-woocommerce

@@ -4,7 +4,7 @@
  *
  * @version 1.0.1
  * @since   1.0.1
- * @author  Thanks to IT.
+ * @author  WPFactory.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

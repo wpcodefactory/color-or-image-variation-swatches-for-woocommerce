@@ -1,2 +1,6 @@
 .wordpress-org/ export-ignore
 .gitignore export-ignore
+.github export-ignore
+README.md export-ignore
+# GIT - Release version
+/git-tag.sh export-ignore
