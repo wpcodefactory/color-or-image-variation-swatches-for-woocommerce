@@ -1,9 +1,9 @@
-=== Color or Image Variation Swatches for WooCommerce ===
-Contributors: wpcodefactory, karzin, omardabbas, kousikmukherjeeli
+=== Variation Swatches for WooCommerce – Color & Image Swatches ===
+Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmukherjeeli
 Tags: woocommerce,variation,swatches,color,image,attribute
 Requires at least: 4.4
-Tested up to: 6.2
-Stable tag: 1.1.6
+Tested up to: 6.3
+Stable tag: 1.1.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -11,7 +11,7 @@ Provides new WooCommerce type attributes (color,label,image) for creating beauti
 
 == Description ==
 
-**Color or Image Variation Swatches for WooCommerce** provides new WooCommerce type attributes (color,label,image) for creating beautiful variations
+**Variation Swatches for WooCommerce – Color & Image Swatches** provides new WooCommerce type attributes (color,label,image) for creating beautiful variations
 
 **Check some of its features:**
 
@@ -35,7 +35,7 @@ It creates new WooCommerce type attributes (color, label and image). They are lo
 With these attributes you can turn your native WooCommerce variations into something more beautiful and appealing.
 
 = How can i contribute? Is there a github repository? =
-If you are interested in contributing - head over to the [Color or Image Variation Swatches for WooCommerce](https://github.com/algoritmika/color-or-image-variation-swatches-for-woocommerce) github repository to find out how you can pitch in.
+If you are interested in contributing - head over to the [Variation Swatches for WooCommerce – Color & Image Swatches](https://github.com/algoritmika/color-or-image-variation-swatches-for-woocommerce) github repository to find out how you can pitch in.
 
 = Is there a Pro version? =
 Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches-for-woocommerce/)
@@ -63,6 +63,10 @@ Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches
 5. Use the new type attributes (color, label and image) at your disposal
 
 == Changelog ==
+
+= 1.1.7 - 22/09/2023 =
+* WC tested up to: 8.1.
+* Tested up to: 6.3.
 
 = 1.1.6 - 18/06/2023 =
 * WC tested up to: 7.8.
