@@ -25,7 +25,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 		 * @var   string
 		 * @since 1.0.0
 		 */
-		public $version = '1.0.0';
+		public $version = '1.1.8';
 
 		/**
 		 * @var   Alg_WC_CIVS_Core The single instance of the class
