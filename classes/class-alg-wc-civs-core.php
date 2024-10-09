@@ -2,7 +2,7 @@
 /**
  * Color or Image Variation Swatches for WooCommerce - Core Class
  *
- * @version 1.0.0
+ * @version 1.1.9
  * @since   1.0.0
  * @author  WPFactory.
  */
@@ -25,7 +25,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 		 * @var   string
 		 * @since 1.0.0
 		 */
-		public $version = '1.1.8';
+		public $version = '1.1.9';
 
 		/**
 		 * @var   Alg_WC_CIVS_Core The single instance of the class
@@ -54,7 +54,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 		/**
 		 * Constructor.
 		 *
-		 * @version 1.0.0
+		 * @version 1.1.9
 		 * @since   1.0.0
 		 */
 		function __construct() {
@@ -70,6 +70,23 @@ if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 				if ( ! is_admin() ) {
 					$this->init_frontend();
 				}
+			}
+
+			// HPOS compatibility.
+			add_action( 'before_woocommerce_init', array( $this, 'declare_hpos_compatibility' ) );
+		}
+
+		/**
+		 * HPOS compatibility.
+		 *
+		 * @version 1.1.9
+		 * @since   1.1.9
+		 *
+		 * @return void
+		 */
+		function declare_hpos_compatibility() {
+			if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', ALG_WC_CIVS_FILE_PATH, true );
 			}
 		}
 

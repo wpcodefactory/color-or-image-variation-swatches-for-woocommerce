@@ -2,7 +2,7 @@
 /**
  * Color or Image Variation Swatches for WooCommerce - Section Settings
  *
- * @version 1.0.0
+ * @version 1.1.9
  * @since   1.0.0
  * @author  WPFactory.
  */
@@ -14,6 +14,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Alg_WC_CIVS_Settings_Section' ) ) :
 
 	class Alg_WC_CIVS_Settings_Section {
+
+		/**
+		 * ID.
+		 *
+		 * @since 1.1.9
+		 */
+		public $id;
+
+		/**
+		 * Description.
+		 *
+		 * @since 1.1.9
+		 */
+		public $desc;
 
 		protected $settings;
 		protected $handle_autoload = true;
