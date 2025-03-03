@@ -2,7 +2,7 @@
 /**
  * Color or Image Variation Swatches for WooCommerce - Core Class
  *
- * @version 1.1.9
+ * @version 1.2.0
  * @since   1.0.0
  * @author  WPFactory.
  */
@@ -25,7 +25,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 		 * @var   string
 		 * @since 1.0.0
 		 */
-		public $version = '1.1.9';
+		public $version = '1.2.0';
 
 		/**
 		 * @var   Alg_WC_CIVS_Core The single instance of the class
@@ -54,12 +54,12 @@ if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 		/**
 		 * Constructor.
 		 *
-		 * @version 1.1.9
+		 * @version 1.2.0
 		 * @since   1.0.0
 		 */
 		function __construct() {
 			// Set up localization
-			$this->handle_localization();
+			add_action( 'init', array( $this, 'handle_localization' ) );
 
 			// Init admin part
 			if ( is_admin() ) {
