@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "94562d757f3c04fe9753b7f35173a528",
+    "content-hash": "c3fef5b1f5383f8deeac124da75c1675",
     "packages": [
         {
             "name": "cmb2/cmb2",
@@ -12,22 +12,23 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/CMB2/CMB2.git",
-                "reference": "cacbc8cedbfdf8ffe0e840858e6860f9333c33f2"
+                "reference": "2847828b5cce1b48d09427ee13e6f7c752704468"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CMB2/CMB2/zipball/cacbc8cedbfdf8ffe0e840858e6860f9333c33f2",
-                "reference": "cacbc8cedbfdf8ffe0e840858e6860f9333c33f2",
+                "url": "https://api.github.com/repos/CMB2/CMB2/zipball/2847828b5cce1b48d09427ee13e6f7c752704468",
+                "reference": "2847828b5cce1b48d09427ee13e6f7c752704468",
                 "shasum": ""
             },
             "require": {
-                "php": ">5.2.4"
+                "php": ">7.4"
             },
             "require-dev": {
                 "apigen/apigen": "4.1.2",
-                "awesomemotive/am-cli-tools": ">=1.3.1",
+                "awesomemotive/am-cli-tools": ">=1.3.7",
                 "nette/utils": "2.5.3",
-                "phpunit/phpunit": "6.5.13"
+                "phpunit/phpunit": "^6.5",
+                "yoast/phpunit-polyfills": "^1.1"
             },
             "suggest": {
                 "composer/installers": "~1.0"
@@ -62,7 +63,7 @@
                 "issues": "https://github.com/CMB2/CMB2/issues",
                 "source": "http://wordpress.org/support/plugin/cmb2"
             },
-            "time": "2021-03-04T02:18:53+00:00"
+            "time": "2024-04-02T19:30:07+00:00"
         },
         {
             "name": "pablo-pacheco/wc-custom-settings-options",
@@ -127,5 +128,5 @@
         "php": ">=5.3.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.3.0"
 }
