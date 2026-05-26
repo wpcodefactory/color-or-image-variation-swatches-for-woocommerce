@@ -38,7 +38,7 @@ With these attributes you can turn your native WooCommerce variations into somet
 If you are interested in contributing - head over to the [Variation Swatches for WooCommerce – Color & Image Swatches](https://github.com/algoritmika/color-or-image-variation-swatches-for-woocommerce) github repository to find out how you can pitch in.
 
 = Is there a Pro version? =
-Yes, it's located [here](https://coder.fm/item/color-or-image-variation-swatches-for-woocommerce/)
+Yes, it's located [here](https://wpfactory.com/item/color-or-image-variation-swatches-for-woocommerce/)
 
 = What can I do in the Pro version? =
 * Display only the possible term combinations, so your visitors don't have to guess the right ones
