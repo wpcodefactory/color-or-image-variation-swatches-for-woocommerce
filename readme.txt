@@ -1,6 +1,6 @@
 === Variation Swatches for WooCommerce – Color & Image Swatches ===
 Contributors: wpcodefactory, omardabbas, karzin, anbinder, kousikmukherjeeli
-Tags: woocommerce,variation,swatches,color,image,attribute
+Tags: woocommerce,variation,swatches,color,image
 Requires at least: 4.4
 Tested up to: 7.0
 Stable tag: 1.2.2
@@ -63,6 +63,12 @@ Yes, it's located [here](https://wpfactory.com/item/color-or-image-variation-swa
 5. Use the new type attributes (color, label and image) at your disposal
 
 == Changelog ==
+
+= 1.2.3 - 16/10/2026 =
+* Fix - Translation loading was triggered too early on WordPress 6.7+.
+* Dev - Code clean up for WordPress Plugin Check (escaping, sanitization and nonce verification).
+* Dev - Moved WooCommerce settings tab to WPFactory admin menu.
+* Dev - Removed unused compressed archive from build assets.
 
 = 1.2.2 - 24/05/2026 =
 * Tested up to: 7.0.

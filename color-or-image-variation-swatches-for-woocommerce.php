@@ -3,7 +3,7 @@
 Plugin Name: Variation Swatches for WooCommerce – Color & Image Swatches
 Plugin URI: https://wordpress.org/plugins/color-or-image-variation-swatches-for-woocommerce/
 Description: Provides new WooCommerce type attributes (color,label,image) for creating beautiful variations.
-Version: 1.2.2
+Version: 1.2.3-dev
 WC requires at least: 3.0.0
 WC tested up to: 10.7
 Requires Plugins: woocommerce
@@ -17,12 +17,12 @@ Domain Path: /languages
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-// Check if WooCommerce is active
-$plugin = 'woocommerce/woocommerce.php';
-if (
-	! in_array( $plugin, apply_filters( 'active_plugins', get_option( 'active_plugins', array() ) ) ) &&
-	! ( is_multisite() && array_key_exists( $plugin, get_site_option( 'active_sitewide_plugins', array() ) ) )
-) {
+// Check if WooCommerce is active.
+if ( ! function_exists( 'is_plugin_active' ) ) {
+	require_once ABSPATH . 'wp-admin/includes/plugin.php';
+}
+
+if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 	return;
 }
 
@@ -85,10 +85,11 @@ if ( ! function_exists( 'color_or_image_variation_swatches_for_wc' ) ) {
 	/**
 	 * Returns the main instance of Alg_WC_CIVS_Core to prevent the need to use globals.
 	 *
-	 * @version 1.0.0
+	 * @version 1.2.3
 	 * @since   1.0.0
 	 * @return  Alg_WC_CIVS_Core
 	 */
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- Public accessor also used by the Pro version; renaming would break backwards compatibility.
 	function color_or_image_variation_swatches_for_wc() {
 		return Alg_WC_CIVS_Core::instance();
 	}

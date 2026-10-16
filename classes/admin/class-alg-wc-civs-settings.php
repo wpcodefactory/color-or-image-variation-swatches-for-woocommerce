@@ -2,7 +2,7 @@
 /**
  * Color or Image Variation Swatches for WooCommerce - Settings
  *
- * @version 1.0.0
+ * @version 1.2.3
  * @since   1.0.0
  * @author  WPFactory.
  */
@@ -30,12 +30,12 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 1.0.0
+		 * @version 1.2.3
 		 * @since   1.0.0
 		 */
 		function get_settings() {
 			global $current_section;
-			return apply_filters( 'woocommerce_get_settings_' . $this->id . '_' . $current_section, array() );
+			return apply_filters( 'alg_wc_civs_get_settings_' . $current_section, array() );
 		}
 
 	}

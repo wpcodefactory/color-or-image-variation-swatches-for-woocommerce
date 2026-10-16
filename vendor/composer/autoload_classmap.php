@@ -9,4 +9,8 @@ return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'WCCSO_Metabox' => $vendorDir . '/pablo-pacheco/wc-custom-settings-options/src/class-wccso-metabox.php',
     'WCCSO_Singleton' => $vendorDir . '/pablo-pacheco/wc-custom-settings-options/src/class-wccso-singleton.php',
+    'WPFactory\\WPFactory_Admin_Menu\\Plugin_Icon' => $vendorDir . '/wpfactory/wpfactory-admin-menu/src/php/class-plugin-icon.php',
+    'WPFactory\\WPFactory_Admin_Menu\\Singleton' => $vendorDir . '/wpfactory/wpfactory-admin-menu/src/php/trait-singleton.php',
+    'WPFactory\\WPFactory_Admin_Menu\\WC_Settings_Menu_Item_Swapper' => $vendorDir . '/wpfactory/wpfactory-admin-menu/src/php/class-wc-settings-menu-item-swapper.php',
+    'WPFactory\\WPFactory_Admin_Menu\\WPFactory_Admin_Menu' => $vendorDir . '/wpfactory/wpfactory-admin-menu/src/php/class-wpfactory-admin-menu.php',
 );

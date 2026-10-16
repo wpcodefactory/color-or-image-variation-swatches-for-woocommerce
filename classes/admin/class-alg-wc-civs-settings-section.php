@@ -2,7 +2,7 @@
 /**
  * Color or Image Variation Swatches for WooCommerce - Section Settings
  *
- * @version 1.1.9
+ * @version 1.2.3
  * @since   1.0.0
  * @author  WPFactory.
  */
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings_Section' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 1.0.0
+		 * @version 1.2.3
 		 * @since   1.0.0
 		 */
 		function __construct( $handle_autoload = true ) {
@@ -45,7 +45,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings_Section' ) ) :
 				$this->handle_autoload();
 			}
 			add_filter( 'woocommerce_get_sections_alg_wc_civs', array( $this, 'settings_section' ) );
-			add_filter( 'woocommerce_get_settings_alg_wc_civs_' . $this->id, array(
+			add_filter( 'alg_wc_civs_get_settings_' . $this->id, array(
 				$this,
 				'get_settings',
 			), PHP_INT_MAX );

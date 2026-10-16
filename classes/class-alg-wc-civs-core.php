@@ -2,7 +2,7 @@
 /**
  * Color or Image Variation Swatches for WooCommerce - Core Class
  *
- * @version 1.2.0
+ * @version 1.2.3
  * @since   1.0.0
  * @author  WPFactory.
  */
@@ -54,16 +54,17 @@ if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 		/**
 		 * Constructor.
 		 *
-		 * @version 1.2.0
+		 * @version 1.2.3
 		 * @since   1.0.0
 		 */
 		function __construct() {
 			// Set up localization
 			add_action( 'init', array( $this, 'handle_localization' ) );
 
-			// Init admin part
+			// Init admin part. Deferred to 'init' so translations are already loaded
+			// when the admin classes (which use __()) are instantiated.
 			if ( is_admin() ) {
-				$this->init_admin();
+				add_action( 'init', array( $this, 'init_admin' ) );
 			}
 
 			if ( true === filter_var( get_option( Alg_WC_CIVS_Settings_General::OPTION_ENABLE_PLUGIN, true ), FILTER_VALIDATE_BOOLEAN ) ) {
@@ -103,12 +104,10 @@ if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 		/**
 		 * Handle Localization
 		 *
-		 * @version 1.0.0
+		 * @version 1.2.3
 		 * @since   1.0.0
 		 */
 		public function handle_localization() {
-			$locale = apply_filters( 'plugin_locale', get_locale(), 'color-or-image-variation-swatches-for-woocommerce' );
-			load_textdomain( 'color-or-image-variation-swatches-for-woocommerce', WP_LANG_DIR . dirname( ALG_WC_CIVS_BASENAME ) . 'color-or-image-variation-swatches-for-woocommerce' . '-' . $locale . '.mo' );
 			load_plugin_textdomain( 'color-or-image-variation-swatches-for-woocommerce', false, dirname( ALG_WC_CIVS_BASENAME ) . '/languages/' );
 		}
 
@@ -135,6 +134,9 @@ if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 			// Creates action links on plugins page
 			add_filter( 'plugin_action_links_' . ALG_WC_CIVS_BASENAME, array( $this, 'action_links' ) );
 
+			// Move WC Settings tab to WPFactory menu.
+			add_action( 'init', array( $this, 'move_wc_settings_tab_to_wpfactory_menu' ) );
+
 			// Create custom settings fields
 			$this->create_custom_settings_fields();
 
@@ -149,6 +151,35 @@ if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 			// Handles the admin part of the new WooCommerce variation types
 			$this->admin = $this->get_admin();
 			$this->admin->init();
+		}
+
+		/**
+		 * move_wc_settings_tab_to_wpfactory_submenu.
+		 *
+		 * @version 1.2.3
+		 * @since   2.0.0
+		 *
+		 * @return  void
+		 */
+		function move_wc_settings_tab_to_wpfactory_menu() {
+			if ( ! class_exists( '\WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu' ) ) {
+				return;
+			}
+
+			$wpf_admin_menu = \WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu::get_instance();
+			if ( method_exists( $wpf_admin_menu, 'move_wc_settings_tab_to_wpfactory_menu' ) ) {
+				$wpf_admin_menu->move_wc_settings_tab_to_wpfactory_menu(
+					array(
+						'wc_settings_tab_id' => 'alg_wc_civs',
+						'menu_title'         => __( 'Variation Swatches', 'color-or-image-variation-swatches-for-woocommerce' ),
+						'page_title'         => __( 'Variation Swatches for WooCommerce – Color & Image Swatches', 'color-or-image-variation-swatches-for-woocommerce' ),
+						'plugin_icon'        => array(
+							'get_url_method'    => 'wporg_plugins_api',
+							'wporg_plugin_slug' => 'color-or-image-variation-swatches-for-woocommerce',
+						),
+					)
+				);
+			}
 		}
 
 		/**
@@ -206,7 +237,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 		/**
 		 * Show action links on the plugin screen
 		 *
-		 * @version 1.0.0
+		 * @version 1.2.3
 		 * @since   1.0.0
 		 *
 		 * @param   mixed $links
@@ -214,11 +245,9 @@ if ( ! class_exists( 'Alg_WC_CIVS_Core' ) ) {
 		 * @return  array
 		 */
 		function action_links( $links ) {
-			$custom_links = array( '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_civs' ) . '">' . __( 'Settings', 'woocommerce' ) . '</a>' );
+			$custom_links = array( '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_civs' ) . '">' . __( 'Settings', 'color-or-image-variation-swatches-for-woocommerce' ) . '</a>' );
 
 			return array_merge( $custom_links, $links );
 		}
-
-
 	}
 }

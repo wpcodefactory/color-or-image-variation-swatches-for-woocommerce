@@ -2,7 +2,7 @@
 /**
  * Color or Image Variation Swatches for WooCommerce - Custom Meta Box setting field
  *
- * @version 1.0.0
+ * @version 1.2.3
  * @since   1.0.0
  * @author  WPFactory.
  */
@@ -18,7 +18,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_CMB' ) ) {
 		/**
 		 * Creates meta box
 		 *
-		 * @version 1.0.0
+		 * @version 1.2.3
 		 * @since   1.0.0
 		 */
 		public static function add_meta_box( $value ) {
@@ -30,15 +30,15 @@ if ( ! class_exists( 'Alg_WC_CIVS_CMB' ) ) {
 			}
 
 			$option_description = $value['description'];
-			$option_title = $value['title'];
-			$option_id = esc_attr($value['id']);
+			$option_title       = $value['title'];
+			$option_id          = $value['id'];
 
 			echo'
 			<div id="poststuff">									
-				<div id="'.$option_id.'" class="postbox">
-					<h2 class="hndle"><span>'.$option_title.'</span></h2>
+				<div id="' . esc_attr( $option_id ) . '" class="postbox">
+					<h2 class="hndle"><span>' . esc_html( $option_title ) . '</span></h2>
 					<div class="inside">
-						'.$option_description.'
+						' . wp_kses_post( $option_description ) . '
 					</div>
 				</div>
 			</div>

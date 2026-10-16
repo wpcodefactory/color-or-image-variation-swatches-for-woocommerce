@@ -11,3 +11,4 @@ Makefile
 package.json
 package-lock.json
 readme.md
+git-tag.sh

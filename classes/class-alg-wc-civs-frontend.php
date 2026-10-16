@@ -4,7 +4,7 @@
  *
  * Handles the admin part of the new WooCommerce variation types
  *
- * @version 1.1.2
+ * @version 1.2.3
  * @since   1.0.0
  * @author  WPFactory.
  */
@@ -158,7 +158,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 		/**
 		 * Load scripts and styles
 		 *
-		 * @version 1.1.2
+		 * @version 1.2.3
 		 * @since   1.0.0
 		 */
 		function enqueue_scripts() {
@@ -172,13 +172,13 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 
 			// Main js file
 			$js_file = 'assets/dist/frontend/js/alg-wc-civs' . $suffix . '.js';
-			$js_ver  = date( "ymd-Gis", filemtime( ALG_WC_CIVS_DIR . $js_file ) );
+			$js_ver  = gmdate( 'ymd-Gis', filemtime( ALG_WC_CIVS_DIR . $js_file ) );
 			wp_register_script( 'alg-wc-civs', ALG_WC_CIVS_URL . $js_file, array( 'jquery' ), $js_ver, true );
 			wp_enqueue_script( 'alg-wc-civs' );
 
 			// Main css file
 			$css_file = 'assets/dist/frontend/css/alg-wc-civs' . $suffix . '.css';
-			$css_ver  = date( "ymd-Gis", filemtime( ALG_WC_CIVS_DIR . $css_file ) );
+			$css_ver  = gmdate( 'ymd-Gis', filemtime( ALG_WC_CIVS_DIR . $css_file ) );
 			wp_register_style( 'alg-wc-civs', ALG_WC_CIVS_URL . $css_file, array(), $css_ver );
 			wp_enqueue_style( 'alg-wc-civs' );
 		}

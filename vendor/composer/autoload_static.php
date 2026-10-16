@@ -14,6 +14,10 @@ class ComposerStaticInit4d79f308bec337e6097b38279d3f0c26
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'WCCSO_Metabox' => __DIR__ . '/..' . '/pablo-pacheco/wc-custom-settings-options/src/class-wccso-metabox.php',
         'WCCSO_Singleton' => __DIR__ . '/..' . '/pablo-pacheco/wc-custom-settings-options/src/class-wccso-singleton.php',
+        'WPFactory\\WPFactory_Admin_Menu\\Plugin_Icon' => __DIR__ . '/..' . '/wpfactory/wpfactory-admin-menu/src/php/class-plugin-icon.php',
+        'WPFactory\\WPFactory_Admin_Menu\\Singleton' => __DIR__ . '/..' . '/wpfactory/wpfactory-admin-menu/src/php/trait-singleton.php',
+        'WPFactory\\WPFactory_Admin_Menu\\WC_Settings_Menu_Item_Swapper' => __DIR__ . '/..' . '/wpfactory/wpfactory-admin-menu/src/php/class-wc-settings-menu-item-swapper.php',
+        'WPFactory\\WPFactory_Admin_Menu\\WPFactory_Admin_Menu' => __DIR__ . '/..' . '/wpfactory/wpfactory-admin-menu/src/php/class-wpfactory-admin-menu.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

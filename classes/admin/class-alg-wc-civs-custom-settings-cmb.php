@@ -2,7 +2,7 @@
 /**
  * Wish List for WooCommerce - Meta box about the Pro version
  *
- * @version 1.0.1
+ * @version 1.2.3
  * @since   1.0.1
  * @author  WPFactory.
  */
@@ -29,27 +29,27 @@ if ( ! class_exists( 'Alg_WC_CIVS_Custom_Settings_CMB' ) ) {
 		/**
 		 * Creates meta box
 		 *
-		 * @version 1.0.1
+		 * @version 1.2.3
 		 * @since   1.0.1
 		 */
 		public static function add_meta_box( $value ) {
 			// Doesn't show metabox if show_in_pro = false and it's loading from pro
 			if ( ! $value['show_in_pro'] ) {
-				if ( defined('ALG_WC_CIVS_PRO_DIR') ) {
+				if ( defined( 'ALG_WC_CIVS_PRO_DIR' ) ) {
 					return;
 				}
 			}
 
 			$option_description = $value['description'];
 			$option_title       = $value['title'];
-			$option_id          = esc_attr( $value['id'] );
+			$option_id          = $value['id'];
 
 			echo '
 			<div id="poststuff">									
-				<div id="' . $option_id . '" class="postbox">
-					<h2 class="hndle"><span>' . $option_title . '</span></h2>
+				<div id="' . esc_attr( $option_id ) . '" class="postbox">
+					<h2 class="hndle"><span>' . esc_html( $option_title ) . '</span></h2>
 					<div class="inside">
-						' . $option_description . '
+						' . wp_kses_post( $option_description ) . '
 					</div>
 				</div>
 			</div>';

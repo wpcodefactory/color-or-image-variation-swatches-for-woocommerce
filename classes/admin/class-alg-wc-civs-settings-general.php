@@ -2,7 +2,7 @@
 /**
  * Color or Image Variation Swatches for WooCommerce - General Section Settings
  *
- * @version 1.0.1
+ * @version 1.2.3
  * @since   1.0.0
  * @author  WPFactory.
  */
@@ -36,7 +36,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings_General' ) ) {
 		/**
 		 * get_settings.
 		 *
-		 * @version 1.0.1
+		 * @version 1.2.3
 		 * @since   1.0.0
 		 */
 		function get_settings( $settings = null ) {
@@ -65,7 +65,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings_General' ) ) {
 								'img_src'     => plugin_dir_url( __FILE__ ) . '../../assets/images/select2.gif',
 							),
 							array(
-								'trigger' => __( 'Add attribute images of a variable product on its own gallery', 'color-or-image-variation-swatches-for-woocommerce', 'color-or-image-variation-swatches-for-woocommerce' ),
+								'trigger' => __( 'Add attribute images of a variable product on its own gallery', 'color-or-image-variation-swatches-for-woocommerce' ),
 								'img_src' => plugin_dir_url( __FILE__ ) . '../../assets/images/images-on-gallery.gif',
 							),
 
@@ -75,7 +75,11 @@ if ( ! class_exists( 'Alg_WC_CIVS_Settings_General' ) ) {
 						'href'  => $this->pro_version_url,
 						'label' => 'Upgrade to Pro version now',
 					),
-					'description'    => __( 'Do you like the free version of this plugin? Imagine what the Pro version can do for you!', 'color-or-image-variation-swatches-for-woocommerce' ) . '<br />' . sprintf( __( 'Check it out <a target="_blank" href="%1$s">here</a> or on this link: <a target="_blank" href="%1$s">%1$s</a>', 'color-or-image-variation-swatches-for-woocommerce' ), esc_url( $this->pro_version_url ) ),
+					'description'    => __( 'Do you like the free version of this plugin? Imagine what the Pro version can do for you!', 'color-or-image-variation-swatches-for-woocommerce' ) . '<br />' . sprintf(
+						/* translators: %1$s: URL of the Pro version. */
+						__( 'Check it out <a target="_blank" href="%1$s">here</a> or on this link: <a target="_blank" href="%1$s">%1$s</a>', 'color-or-image-variation-swatches-for-woocommerce' ),
+						esc_url( $this->pro_version_url )
+					),
 					'id'             => self::OPTION_METABOX_PRO,
 				),
 				array(

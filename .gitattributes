@@ -1,6 +1,17 @@
-.wordpress-org/ export-ignore
+# Files
+.gitattributes export-ignore
 .gitignore export-ignore
-.github export-ignore
+composer.lock export-ignore
 README.md export-ignore
+/phpcs.xml export-ignore
+
+# Directories
+/.github export-ignore
+/ignore export-ignore
+
+# WPF Documentor
+vendor/wpfactory/wpf-settings-exporter export-ignore
+vendor/wpfactory/wpf-documentor export-ignore
+
 # GIT - Release version
 /git-tag.sh export-ignore

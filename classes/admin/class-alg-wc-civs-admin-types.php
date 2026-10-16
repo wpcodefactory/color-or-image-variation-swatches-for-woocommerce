@@ -4,7 +4,7 @@
  *
  * Handles the admin part of the new WooCommerce variation types
  *
- * @version 1.1.1
+ * @version 1.2.3
  * @since   1.0.0
  * @author  WPFactory.
  */
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 		/**
 		 * Adds attribute values on product attribute tab.
 		 *
-		 * @version 1.1.1
+		 * @version 1.2.3
 		 * @since   1.0.0
 		 *
 		 * @see   woocommerce/includes/admin/meta-boxes/views/html-product-attribute.php
@@ -63,30 +63,33 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 			$tax_name = wc_attribute_taxonomy_name( $attribute_taxonomy->attribute_name );
 			global $thepostid;
 			$product_id = ! empty( $thepostid ) ? $thepostid : false;
-			$product_id = empty( $product_id ) && isset( $_REQUEST['post_id'] ) ? $_REQUEST['post_id'] : $product_id;
-			$product_id = empty( $product_id ) && isset( $_REQUEST['post'] ) ? $_REQUEST['post'] : $product_id;
+			if ( empty( $product_id ) && isset( $_REQUEST['woocommerce_meta_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['woocommerce_meta_nonce'] ) ), 'woocommerce_save_data' ) ) {
+				$product_id = isset( $_REQUEST['post_id'] ) ? absint( wp_unslash( $_REQUEST['post_id'] ) ) : $product_id;
+				$product_id = empty( $product_id ) && isset( $_REQUEST['post'] ) ? absint( wp_unslash( $_REQUEST['post'] ) ) : $product_id;
+			}
 			if ( ! empty( $product_id ) ) {
 				$options = wc_get_product_terms( $product_id, 'pa_' . $attribute_taxonomy->attribute_name, array( 'fields' => 'ids' ) );
 			}
 			?>
-            <select multiple="multiple" data-placeholder="<?php esc_attr_e( 'Select terms', 'woocommerce' ); ?>" class="multiselect attribute_values wc-enhanced-select" name="attribute_values[<?php echo $i; ?>][]">
+            <select multiple="multiple" data-placeholder="<?php esc_attr_e( 'Select terms', 'color-or-image-variation-swatches-for-woocommerce' ); ?>" class="multiselect attribute_values wc-enhanced-select" name="attribute_values[<?php echo esc_attr( $i ); ?>][]">
 				<?php
 				$args      = array(
 					'orderby'    => 'name',
 					'hide_empty' => 0,
+					'taxonomy'   => $tax_name,
 				);
-				$all_terms = get_terms( $tax_name, apply_filters( 'woocommerce_product_attribute_terms', $args ) );
+				$all_terms = get_terms( $args );
 				if ( $all_terms ) {
 					foreach ( $all_terms as $term ) {
 						$options = ! empty( $options ) ? $options : array();
-						echo '<option value="' . esc_attr( $term->term_id ) . '"' . wc_selected( $term->term_id, $options ) . '>' . esc_attr( apply_filters( 'woocommerce_product_attribute_term_name', $term->name, $term ) ) . '</option>';
+						echo '<option value="' . esc_attr( $term->term_id ) . '"' . esc_attr( wc_selected( $term->term_id, $options ) ) . '>' . esc_attr( $term->name ) . '</option>';
 					}
 				}
 				?>
             </select>
-            <button class="button plus select_all_attributes"><?php _e( 'Select all', 'woocommerce' ); ?></button>
-            <button class="button minus select_no_attributes"><?php _e( 'Select none', 'woocommerce' ); ?></button>
-            <button class="button fr plus add_new_attribute"><?php _e( 'Add new', 'woocommerce' ); ?></button>
+            <button class="button plus select_all_attributes"><?php esc_html_e( 'Select all', 'color-or-image-variation-swatches-for-woocommerce' ); ?></button>
+            <button class="button minus select_no_attributes"><?php esc_html_e( 'Select none', 'color-or-image-variation-swatches-for-woocommerce' ); ?></button>
+            <button class="button fr plus add_new_attribute"><?php esc_html_e( 'Add new', 'color-or-image-variation-swatches-for-woocommerce' ); ?></button>
 
 			<?php
 		}
@@ -190,7 +193,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 		/**
 		 * Manually renders a image field column display.
 		 *
-		 * @version 1.0.0
+		 * @version 1.2.3
 		 * @since   1.0.0
 		 *
 		 * @param  array      $field_args Array of field arguments.
@@ -204,11 +207,12 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 
 			$img_size  = $field->args( 'preview_size' );
 			$image_src = wp_get_attachment_image_src( $id, $img_size );
+			$image_url = ! empty( $image_src[0] ) ? $image_src[0] : '';
 
 			?>
-            <div class="custom-column-display <?php echo $field->row_classes(); ?>">
+            <div class="custom-column-display <?php echo esc_attr( $field->row_classes() ); ?>">
                 <div class="alg-wc-civs-display alg-wc-civs-image-display"
-                     style="background-image: url(<?php echo $image_src[0]; ?>)"></div>
+                     style="background-image: url(<?php echo esc_url( $image_url ); ?>)"></div>
             </div>
 			<?php
 		}
@@ -216,17 +220,18 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 		/**
 		 * Manually renders a color field column display.
 		 *
-		 * @version 1.0.0
+		 * @version 1.2.3
 		 * @since   1.0.0
 		 *
 		 * @param  array      $field_args Array of field arguments.
 		 * @param  CMB2_Field $field      The field object
 		 */
 		public function cmb2_color_display( $field_args, CMB2_Field $field ) {
+			$value = $field->value;
 			?>
-            <div class="custom-column-display <?php echo $field->row_classes(); ?>">
+            <div class="custom-column-display <?php echo esc_attr( $field->row_classes() ); ?>">
                 <div class="alg-wc-civs-display alg-wc-civs-color-display"
-                     style="background:<?php echo $field->escaped_value(); ?>"></div>
+                     style="background:<?php echo esc_attr( $value ); ?>"></div>
             </div>
 			<?php
 		}
@@ -234,24 +239,43 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 		/**
 		 * Manually renders a color field column display.
 		 *
-		 * @version 1.0.0
+		 * @version 1.2.3
 		 * @since   1.0.0
 		 *
 		 * @param  array      $field_args Array of field arguments.
 		 * @param  CMB2_Field $field      The field object
 		 */
 		public function cmb2_label_display( $field_args, CMB2_Field $field ) {
+			$value = $field->value;
 			?>
-            <div class="custom-column-display <?php echo $field->row_classes(); ?>">
-                <div class="alg-wc-civs-display alg-wc-civs-label-display"><?php echo $field->escaped_value(); ?></div>
+            <div class="custom-column-display <?php echo esc_attr( $field->row_classes() ); ?>">
+                <div class="alg-wc-civs-display alg-wc-civs-label-display"><?php echo esc_html( $value ); ?></div>
             </div>
 			<?php
 		}
 
 		/**
+		 * Checks if the current admin screen is the term edit screen.
+		 *
+		 * @version 1.2.3
+		 * @since   1.2.3
+		 *
+		 * @return bool
+		 */
+		protected function is_term_edit_screen() {
+			if ( ! function_exists( 'get_current_screen' ) ) {
+				return false;
+			}
+
+			$screen = get_current_screen();
+
+			return $screen && 'term' === $screen->base;
+		}
+
+		/**
 		 * Handles Image admin field for woocommerce variation types
 		 *
-		 * @version 1.0.0
+		 * @version 1.2.3
 		 * @since   1.0.0
 		 *
 		 * @param $tax
@@ -260,7 +284,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 			$prefix   = 'alg_wc_civs_term_image_';
 			$cmb_term = new_cmb2_box( array(
 				'id'           => 'alg_wc_civs_term_image',
-				'cmb_styles'   => isset( $_GET['wp_http_referer'] ) ? true : false,
+				'cmb_styles'   => $this->is_term_edit_screen(),
 				'object_types' => array( 'term' ),
 				'taxonomies'   => $wc_taxes,
 			) );
@@ -284,7 +308,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 		/**
 		 * Handles Color admin field for woocommerce variation types
 		 *
-		 * @version 1.0.0
+		 * @version 1.2.3
 		 * @since   1.0.0
 		 *
 		 * @param $tax
@@ -297,7 +321,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 			 */
 			$cmb_term = new_cmb2_box( array(
 				'id'           => 'alg_wc_civs_term_color',
-				'cmb_styles'   => isset( $_GET['wp_http_referer'] ) ? true : false,
+				'cmb_styles'   => $this->is_term_edit_screen(),
 				'object_types' => array( 'term' ),
 				'taxonomies'   => $wc_taxes,
 			) );
@@ -320,7 +344,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 		/**
 		 * Handles Label admin field for woocommerce variation types
 		 *
-		 * @version 1.0.0
+		 * @version 1.2.3
 		 * @since   1.0.0
 		 *
 		 * @param $tax
@@ -333,7 +357,7 @@ if ( ! class_exists( 'Alg_WC_CIVS_Admin_Types' ) ) {
 			 */
 			$cmb_term = new_cmb2_box( array(
 				'id'           => 'alg_wc_civs_term_label',
-				'cmb_styles'   => isset( $_GET['wp_http_referer'] ) ? true : false,
+				'cmb_styles'   => $this->is_term_edit_screen(),
 				'object_types' => array( 'term' ),
 				'taxonomies'   => $wc_taxes,
 			) );
