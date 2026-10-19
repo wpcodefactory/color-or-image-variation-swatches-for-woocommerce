@@ -5,6 +5,10 @@ composer.lock export-ignore
 README.md export-ignore
 /phpcs.xml export-ignore
 
+# Build tools
+/build.mjs export-ignore
+/package.json export-ignore
+
 # Directories
 /.github export-ignore
 /ignore export-ignore

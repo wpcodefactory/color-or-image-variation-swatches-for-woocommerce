@@ -1,7 +1,7 @@
 /*!
  * Main style of Color or Image Variation Swatches for WooCommerce
  *
- * @version 1.0.0
+ * @version 1.2.3
  * @since   1.0.0
  * @author  Thanks to IT.
  */
@@ -32,21 +32,16 @@ table.variations tr:last-child .alg-wc-civs-attribute {
   background-size: cover;
   text-align: center;
 }
-
 .alg-wc-civs-term:not(.disabled):hover, .alg-wc-civs-term:not(.disabled).active {
   opacity: 1;
 }
-
 .alg-wc-civs-term:not(.disabled).active {
   border-color: #333;
   box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.35);
 }
-
 .alg-wc-civs-term.label {
   color: #333;
   font-size: 17px;
   text-align: center;
   padding: 0 8px;
 }
-
-/*# sourceMappingURL=../maps/alg-wc-civs.css.map */

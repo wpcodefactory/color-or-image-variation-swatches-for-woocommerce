@@ -6,9 +6,9 @@ ignore
 
 **/.sass-cache
 **/.sass-cache/*
-tasks/node_modules
-tasks/node_modules/*
-tasks/package-lock.json
+node_modules/
+node_modules/*
+package-lock.json
 
 vendor/cmb2/cmb2/languages
 vendor/cmb2/cmb2/tests

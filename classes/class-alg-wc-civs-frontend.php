@@ -171,13 +171,13 @@ if ( ! class_exists( 'Alg_WC_CIVS_Frontend' ) ) {
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 			// Main js file
-			$js_file = 'assets/dist/frontend/js/alg-wc-civs' . $suffix . '.js';
+			$js_file = 'assets/js/alg-wc-civs' . $suffix . '.js';
 			$js_ver  = gmdate( 'ymd-Gis', filemtime( ALG_WC_CIVS_DIR . $js_file ) );
 			wp_register_script( 'alg-wc-civs', ALG_WC_CIVS_URL . $js_file, array( 'jquery' ), $js_ver, true );
 			wp_enqueue_script( 'alg-wc-civs' );
 
 			// Main css file
-			$css_file = 'assets/dist/frontend/css/alg-wc-civs' . $suffix . '.css';
+			$css_file = 'assets/css/alg-wc-civs' . $suffix . '.css';
 			$css_ver  = gmdate( 'ymd-Gis', filemtime( ALG_WC_CIVS_DIR . $css_file ) );
 			wp_register_style( 'alg-wc-civs', ALG_WC_CIVS_URL . $css_file, array(), $css_ver );
 			wp_enqueue_style( 'alg-wc-civs' );
