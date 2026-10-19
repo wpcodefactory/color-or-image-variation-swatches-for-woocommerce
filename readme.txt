@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, omardabbas, karzin, anbinder, kousikmukherjeeli
 Tags: woocommerce,variation,swatches,color,image
 Requires at least: 4.4
-Tested up to: 7.0
-Stable tag: 1.2.2
+Tested up to: 7.1
+Stable tag: 1.2.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -64,11 +64,13 @@ Yes, it's located [here](https://wpfactory.com/item/color-or-image-variation-swa
 
 == Changelog ==
 
-= 1.2.3 - 16/10/2026 =
+= 1.2.3 - 19/10/2026 =
 * Fix - Translation loading was triggered too early on WordPress 6.7+.
 * Dev - Code clean up for WordPress Plugin Check (escaping, sanitization and nonce verification).
 * Dev - Moved WooCommerce settings tab to WPFactory admin menu.
 * Dev - Removed unused compressed archive from build assets.
+* WC tested up to: 11.2.
+* Tested up to: 7.1.
 
 = 1.2.2 - 24/05/2026 =
 * Tested up to: 7.0.
