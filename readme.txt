@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, kousikmukherjeeli
 Tags: woocommerce,variation,swatches,color,image
 Requires at least: 4.4
 Tested up to: 7.1
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -63,6 +63,9 @@ Yes, it's located [here](https://wpfactory.com/item/color-or-image-variation-swa
 5. Use the new type attributes (color, label and image) at your disposal
 
 == Changelog ==
+
+= 1.2.4 - 23/11/2026 =
+* WC tested up to: 11.3.
 
 = 1.2.3 - 19/10/2026 =
 * Fix - Translation loading was triggered too early on WordPress 6.7+.
